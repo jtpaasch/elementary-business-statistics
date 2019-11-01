@@ -1,0 +1,188 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Discrete random variables}
+
+
+Some concepts:
+
+\begin{itemize}
+
+  \item In probability, we say that the outcome of an experiment is \vocab{variable} if its value can \emph{vary}. That is, if you run the experiment multiple times, you can get a different number each time.
+
+  \item We say that the outcome of an experiment is \vocab{random} if you cannot determine ahead of time which value will turn up for a particular run of the experiment. If you perform the experiment even one time, it is random if it might come up with one value, or it might come up with another value, and you cannot tell ahead of time which value it will come up with.
+
+\end{itemize}
+
+\noindent
+So, we say that the outcome of an experiment is a \vocab{random variable} if it is random, and variable.
+
+The values of random variable can be discrete, or continuous. 
+
+\begin{itemize}
+
+  \item For example, the outcome of flipping a coin has discrete values, because you either get heads, or tails, but you cannot get some value in between heads or tails. Similarly, the outcome of rolling a dice has discrete values: you can either get a 1, a 2, and so on, but you cannot get (say) 1.5, or 2.78.
+
+  \item By contrast, the outcome of weighing high school students has continuous values, since a student might weigh 157lbs, or 157.257lbs, or 157.02357339483lbs (depending on how exact your measurements are). Weight is a continuous value because it can fall anywhere in a range. Similarly, the outcome of measuring how long a candle burns has continuous values, since times fall in a range too.
+
+\end{itemize}
+
+\noindent
+Some notation:
+
+\begin{itemize}
+
+  \item We typically use a an italicized uppercase letter, and we typically pick the letter ``X,'' as a symbol for a random variable. Like this: $\RandVar/$. If we ever need to work with more than one random variable at the same time, we typically use ``Y'' for the second one.
+
+  \item We typically use an italicized lowercase letter as a symbol for a random variable's' value. And we typically use the same letter that we used for the random variable, just lower cased. For example, if the random variable is $\RandVar/$, then $\RandVarVal/$ is a value of $\RandVar/$. 
+
+\end{itemize}
+
+\noindent
+Notice that a random variable $\RandVar/$ is described with \emph{words}. For example, in the case of flipping a coin, $\RandVar/$ is ``the outcome of flipping a fair coin.'' In the case of rolling a dice, $\RandVar/$ = ``the outcome of rolling a fair six-sided die.'' 
+
+Notice also that the value $\RandVarVal/$ of a random variable are typically \emph{numbers}, or they can be represented as numbers (for instance, heads and tails can be represented as ``0'' and ``1'' respectively, or any other two distinct numbers that we please).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 1}
+
+Let the experiment be flipping a fair coin. Flipping a fair coin can have two outcomes, heads or tails.
+
+Notice that the outcome of a coin flip is random. It can be either heads, or tails, but you cannot determine which one it will be for any given time that you run the experiment. 
+
+Notice also that the values of of the outcome can \emph{vary}. That is, you don't always get the same value for the outcome. You sometimes get heads, and you sometimes get tails.
+
+So, the outcome of a coin flip is (1) random, and (2) it is variable. Hence, the outcome of a coin flip is a \emph{random variable}. 
+
+Also, notice that the outcomes are discrete. You can't land anywhere in between heads or tails.
+You either get heads, or you get tails. Hence, the outcome of a coin flip is a \emph{discrete random variable}.
+
+So, the random variable $\RandVar/$ is:
+
+\begin{equation*}
+    \RandVar/ = \text{ the outcome of flipping a fair coin}
+\end{equation*}
+
+\noindent
+And the values $\RandVarVal/$ are:
+
+\begin{equation*}
+    \RandVarVal/ = \{ H, T \} \hskip 1cm \text{ or } \hskip 1cm \{ 1, 0 \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 2}
+
+Let the experiment be rolling a fair six-sided die. Rolling a die can have six outcomes: one through six. So the outcome can vary. It is variable.
+
+Also, the outcome is random, since it can be any of the six values, but you cannot determine ahead of time which value you will roll.
+
+Finally, the values are discrete, since you can get any of one through six, but you cannot get anything in between (you cannot roll 1.67 or 5.235973, for example).
+
+Hence, the outcome of rolling a die is a \emph{discrete random variable}:
+
+\begin{equation*}
+    \RandVar/ = \text{ the outcome of rolling a fair six-sided die}
+\end{equation*}
+
+\noindent
+And the values are:
+
+\begin{equation*}
+    \RandVarVal/ = \{ 1, 2, 3, 4, 5, 6 \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 3}
+
+Suppose we have a bag with 4 marbles in it: 2 are red, 1 blue, and 1 green. Let the experiment be reaching in blind-folded and pulling out one marble from the bag.
+
+The outcomes can vary: you can draw a red, a blue, or a green, so it is variable. Also, the outcome is random, since you cannot see ahead of time which color you will pull out.
+
+Finally, the values are discrete, since you can get one of the reds, a blue, or a green, but nothing in between (you cannot get a mix of red and blue, for example).
+
+Hence, the outcome of drawing a marble from the bag is a \emph{discrete random variable}:
+
+\begin{equation*}
+    \RandVar/ = \text{ the outcome of blindly drawing a marble from the bag }
+\end{equation*}
+
+\noindent
+And the values are ``$red_{1}$,'' ``$red_{2}$,'' ``$blue$,'' and ``$green$'' (or, if we want to use numbers, we could say ``1,'' ``2,'' ``3,'' and ``4'' respectively, or we could pick any other four distinct numbers that we please):
+
+\begin{equation*}
+    \RandVarVal/ = \{ red_{1}, red_{2}, blue, green \} \hskip 1cm \text{ or } \hskip 1cm \{ 1, 2, 3, 4 \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 4}
+
+Suppose we have a bag with 4 marbles in it: 2 are red, 1 blue, and 1 green. Let the experiment be reaching in blind-folded and pulling out \emph{two} marbles from the bag.
+
+The outcomes can vary: you can draw both reds, one of the reds and a blue, the other of the reds and a blue, one of the reds and a green, the other of the reds and a green, or a blue and a green. So the outcome is variable. Also, the outcome is random, since you cannot see ahead of time which colors you will pull out.
+
+Finally, the values are discrete, since you can get only one of the above combinations I mentioned a moment ago. 
+
+Hence, the outcome of drawing two marbles from the bag is a \emph{discrete random variable}:
+
+\begin{equation*}
+    \RandVar/ = \text{ the outcome of blindly drawing two marbles from the bag }
+\end{equation*}
+
+\noindent
+And the values ``$R_{1}R_{2}$,'' ``$R_{1}B$,'' ``$R_{2}B$,'' ``$R_{1}G$,'' ``$R_{2}G$,'' or ``$BG$'' (or, if we want to assign the numbers 1, 2, 3, and 4 respectively, we could say that the outcomes are ``12,'' ``13,'' ``23,'' ``14,'' ``24,'' or ``34''):
+
+\begin{equation*}
+    \RandVarVal/ = \{ RR, RB, RG, BG \} \hskip 1cm \text{ or } \hskip 1cm \{ 12, 13, 23, 14, 24, 34 \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 5}
+
+Suppose there is an artisan lollipop kiosk in a mall. One day the owner surveys customers, and each one rates the lollipop on a scale from 1 to 5, where 5 is the best. The frequency counts are these:
+
+\begin{center}
+  \begin{tabular}{| c | c |}
+    \hline
+    \textbf{Rating} & \textbf{Count} \\ \hline
+    1 & 2 \\ \hline
+    2 & 8 \\ \hline
+    3 & 6 \\ \hline
+    4 & 22 \\ \hline
+    5 & 12 \\ \hline
+    Total & 50 \\ \hline
+  \end{tabular}
+\end{center}
+
+\noindent
+The experiment here is asking a customer to assign a rating to the lollipop. The possible outcomes are 1 through 5 (so the values are discrete). Of course, nobody knows what any given customer will say, so the results are random. Hence, a customer assigning a rating to the lollipop is a discrete random variable.
+
+\begin{equation*}
+    \RandVar/ = \text{ the outcome of a customer assigning a rating to a lollipop }
+\end{equation*}
+
+\noindent
+And the values are:
+
+\begin{equation*}
+    \RandVarVal/ = \{ 1, 2, 3, 4, 5 \}
+\end{equation*}
+
+
+
+
+
+\end{document}

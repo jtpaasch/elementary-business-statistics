@@ -1,0 +1,398 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Calculating probabilities}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Simple probability}
+
+As we saw before, the probability of a particular set of outcomes $A$ is the ratio of the number of desired outcomes over the number of outcomes in the sample space:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)}
+\end{equation*}
+
+\noindent
+Suppose we have a bag with three marbles (one red, one blue, and one green). Suppose we pull one marble out. What is the probability that it will be red? 
+
+We can calculate this directly, if we like. There are three possible outcomes (I could pull out the red marble, the blue one, or the green one), so the size of the sample space $S$ is 3, and there is only one outcome I want (pulling out the red marble), so the size of my desired outcome set $A$ is 1. Hence, the probability of pulling out the red marble is 0.33:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)} = \frac{1}{3} = 0.33
+\end{equation*}
+
+\noindent
+This is easy to see in a tree. Recall the choice tree from before. When we start, we can pull out a red, a blue, or a green:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (13) [label=left:{R}] {};
+    \node (s1) [right=of 13] {};
+    \node (s2) [right=of s1] {};
+    \node[dot-point] (14) [right=of s2, label=below:{B}] {};
+    \node (s3) [right=of 14] {};
+    \node (s4) [right=of s3] {};
+    \node[dot-point] (15) [right=of s4, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+We can see that there are three total leaves here, each one representing one of the three possible outcomes: I can get the red marble (the node labeled with ``R''), or I can get the blue one (the node labeled with ``B''), or I can get the green one (the node labeled with ``G''). Here is the sample space, outlined:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (13) [label=left:{R}] {};
+    \node (s1) [right=of 13] {};
+    \node (s2) [right=of s1] {};
+    \node[dot-point] (14) [right=of s2, label=below:{B}] {};
+    \node (s3) [right=of 14] {};
+    \node (s4) [right=of s3] {};
+    \node[dot-point] (15) [right=of s4, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+   
+     \draw[dashed] (-1, 0.5) -- (8.5, 0.5) -- (8.5, -0.75) -- (-1, -0.75) -- (-1, 0.5);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So there are three possible outcomes in the sample space $S$.
+
+In this scenario, there is only one way to get the red marble. On the tree, we can see it: I have to travel down the far left branch, to get to the node labeled ``R.'' So there is only one way to get my desired outcome. Hence we have 1 out of 3, or $\frac{1}{3}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Replacement}
+
+Suppose that we go ahead and perfom the above experiment: I reach in the bag and pull out a marble, and suppose that lo and behold, I get the red one. Great. 
+
+Now suppose we set that marble aside, leaving just the blue and green marble in the bag. (This is important: we do not put the red marble back. We do not replace it.)
+
+Next, suppose that I want to repeat the experiment: I want to reach in the bag and pull out a new marble. But suppose now I want to pull out the blue marble. What is the probability of that happening? 
+
+Well, we know that there are two marbles left in the bag, so there are two possible outcomes (I could pull out the blue marble, or the green marble). Hence, the size of the sample space $S$ is 2. There is one outcome I desire, namely to pull out the blue marble. So the probability of this happening is 0.5:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)} = \frac{1}{2} = 0.5
+\end{equation*}
+
+\noindent
+Again, this is easy to see in the tree. After we pull out the red marble, there are two possibilities: we can draw the blue marble or the green marble. Here it is, with the sample space outlined:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (7) [, label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+
+    \draw[dashed] (-1, 0.5) -- (3, 0.5) -- (3, -0.5) -- (-1, -0.5) -- (-1, 0.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So there are two possible outcomes in the new sample space $S$.
+
+In this scenario now, there is only one way to get the blue marble. I have to travel down the far left branch again, to get to the node labeled ``B.'' Since there is only 1 way to get to my desired outcome, the probability is 1 out of 2, or $\frac{1}{2}$, which is 0.5.
+
+Notice that the sample space got smaller on the second round. This is because we did not replace the red marble after the first round. When we started, there were three marbles in the bag, so the sample space $S$ was 3. But after we pulled out the red marble and then did not replace it, there were only two marbles left in the bag, so the sample space $S$ got smaller, and became 2.
+
+The moral of the story: when you don't replace the things you pull out of the sample space, then your sample space gets smaller.
+
+Now consider what happens if we do put the red marble back. So we begin with a choice of pulling out three marbles, as before, which gives us a sample space of 3:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (13) [label=left:{R}] {};
+    \node (s1) [right=of 13] {};
+    \node (s2) [right=of s1] {};
+    \node[dot-point] (14) [right=of s2, label=below:{B}] {};
+    \node (s3) [right=of 14] {};
+    \node (s4) [right=of s3] {};
+    \node[dot-point] (15) [right=of s4, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+   
+     \draw[dashed] (-1, 0.5) -- (8.5, 0.5) -- (8.5, -0.75) -- (-1, -0.75) -- (-1, 0.5);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Suppose as before that we pull out the red marble, but (unlike before), this time we put the red marble back. Now we want to reach in and pull out a new marble again, and this time we want to get the blue marble. What is the probability of that?
+
+Well, since we put the red marble back in the back, we have three choices again. So the next round on our tree will have to look like this:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (7) [, label=left:{R}] {};
+    \node[dot-point] (7a) [right=of 7, label=left:{B}] {};
+    \node[dot-point] (8) [right=of 7a, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (7a);
+    \path (13) edge (8);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Notice that after we selected ``R'' (the red marble), the tree branches into \emph{three} new possibilities, rather than \emph{two}. This is because we put the red marble back in the back, so in this second round, we have the same set of outcomes available. Hence, the sample space $S$ has three items again:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (7) [, label=left:{R}] {};
+    \node[dot-point] (7a) [right=of 7, label=left:{B}] {};
+    \node[dot-point] (8) [right=of 7a, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (7a);
+    \path (13) edge (8);
+
+    \draw[dashed] (-1, 0.5) -- (3, 0.5) -- (3, -0.5) -- (-1, -0.5) -- (-1, 0.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+What is the probability of pulling out the blue marble in this second round? Well, now the size of the sample space $S$ is 3, and there is one outcome we want (the blue marble), so the probability is $\frac{1}{3}$, or 0.33. 
+
+Notice two things here:
+
+\begin{itemize}
+
+  \item When we replace the things we take out, the sample space does not get smaller in the next round.
+  
+  \item In fact, in the next round, the set of outcomes are completely restored to the way they were before.
+  
+  \item So, the probability of some particular outcome happening during the next round is \emph{exactly the same} as it was in the first round.
+
+\end{itemize}
+
+\noindent
+So, it is important to know if an experiment is performed \vocab{with replacement} or \vocab{without replacement}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example}
+
+Think of the following two experiments:
+
+\begin{itemize}
+
+  \item Suppose we have two rounds of drawing a marble from the bag, but we don't replace the first one we draw. What is the probability of pulling out the red marble in the first round? Then what is the probability of pulling out the red marble on the second round (assuming we drew it on the first round)? The probability of pulling out the red marble on the first round is $\frac{1}{3}$, and then the probability of pulling it out again is 0, because once the red marble has been removed from the bag, it cannot be pulled out again. 
+  
+  \item Suppose we have two rounds of drawing a marble from the bag, but we do replace the first one we draw. What is the probability of pulling out the red marble in the first round? Then what is the probability of pulling out the red marble in the second round? In both rounds, it is $\frac{1}{3}$, because after the first round, we put the red marble back, which effectively restores the bag back to its original state, so the probability the second time around is the same as it was the first time around.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Another example}
+
+Suppose I draw a card from a well-shuffled 52-card deck. What is the probability of drawing an Ace? There are 4 Aces in a 52 card deck, so the probability is $\frac{4}{52}$. 
+
+Suppose I put the card back in the deck, shuffle it again, and repeat the experiment. What is the probability of drawing an Ace again? It is again, $\frac{4}{52}$, because I replaced the card I drew first, which effectively restores the deck back to its original state.
+
+But suppose now that I pull out an Ace in the first round, and I don't put it back. I want to draw a second card. What is the probability that I will get an Ace a second time? Well, now there are only 3 Aces left, and there are only 51 cards in the deck. So the probability is $\frac{3}{51}$.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Independent events}
+
+Two events are \vocab{independent} if the outcome of one has no bearing on the outcome of the other. Here are some examples: 
+
+\begin{itemize}
+
+  \item I roll two six-sided dice. The outcomes of the two dice are independent, since the outcome of one does not affect the outcome of the other.
+  
+  \item I draw a marble out of a bag, then I replace it and draw again. Both draws are independent, since the marble I pull out on the first round is put back into the bag, so the second time I draw, I have the same chances of drawing any of the marbles as I did in the first round.
+  
+\end{itemize}
+
+Two events are \vocab{not independent} if the outcome of one is affected by the outcome of the other. Here is an example we have already seen:
+
+\begin{itemize}
+
+  \item I draw a marble out of a bag, but then I set it aside (I do not replace it). Then I draw a second marble out of the bag. In this case, the second draw is affected by the first draw. After I pull out one marble, the possible outcomes get smaller, so the probabilities of the next outcome are affected by the result of the first draw.
+  
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mutually exclusive events}
+
+Two events are \vocab{mutually exclusive} if both cannot happen at the same time. Here are some examples:
+
+\begin{itemize}
+
+  \item Suppose I want to roll a six-sided die. For any given roll, the dice cannot land with a three face up, and a six face up. When it lands, it can only have one number showing face up.
+
+  \item Suppose I want to roll a six-sided die. For any given roll, the dice cannot come up with an even and an odd number. It must be one or the other.
+
+  \item Suppose I play a round of roulette. For any given spin, the ball cannot land in a black slot and a red slot at the same time.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Testing if events are mutually exclusive}
+
+Let $A$ be one set of outcomes, and let $B$ be another set of outcomes. We can tell if $A$ and $B$ are mutually exclusive, by taking the \vocab{intersection} of the two sets. If the intersection of $A$ and $B$ is \vocab{empty}, then $A$ and $B$ are mutually exclusive. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 1}
+
+Suppose I want to roll a six-sided die. The sample space is this:
+
+\begin{equation*}
+  S = \{ 1, 2, 3, 4, 5, 6 \}
+\end{equation*}
+
+\noindent
+What is the probability of rolling an even number? Let $A$ be the possibility of rolling an even number. There are three possibilities here: I could roll a two, a four, or a six, any of which are even. So $A$ is this:
+
+\begin{equation*}
+  A = \{ 2, 4, 6 \}
+\end{equation*}
+
+\noindent
+What is the probability of rolling an odd number? Let $B$ be the possibility of rolling an odd number. There are three possibilities here too: I could roll a one, a three, or a five, any of which are odd. So $B$ is this:
+
+\begin{equation*}
+  A = \{ 1, 3, 5 \}
+\end{equation*}
+
+\noindent
+Now, what is the set intersection of $A$ and $B$, i.e., what is $A \cap B$? Recall that the intersection is the set we get when we take everything that is in \emph{both} $A$ and $B$. In this case, are there any elements shared by both $A$ and $B$? No. So the intersection is empty:
+
+\begin{equation*}
+  A \cap B = \varnothing
+\end{equation*}
+
+\noindent
+The intersection is empty, so $A$ and $B$ are mutually exclusive sets of outcomes. And this makes sense. Indeed, if I roll a six-sided die, I'm either going to get an even number, or an odd number, but I cannot get both in a single roll.  I must get one or the other.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 2}
+
+Suppose I want to roll a six-sided die again. The sample space is of course still the same:
+
+\begin{equation*}
+  S = \{ 1, 2, 3, 4, 5, 6 \}
+\end{equation*}
+
+\noindent
+What is the probability of rolling a 1, 2, or 3? Let $A$ be the possibility of rolling a 1, 2, or 3:
+
+\begin{equation*}
+  A = \{ 1, 2, 3 \}
+\end{equation*}
+
+\noindent
+What is the probability of rolling a 3, 4, 5, or 6? Let $B$ be the possibility of rolling a 3, 4, 5, or 6:
+
+\begin{equation*}
+  B = \{ 3, 4, 5, 6 \}
+\end{equation*}
+
+\noindent
+Now, what is the intersection of $A$ and $B$, i.e., what is $A \cap B$? There is one element that $A$ and $B$ have in common, namely 3:
+
+\begin{equation*}
+  A \cap B = \{ 3 \}
+\end{equation*}
+
+\noindent
+This time, the intersection is \emph{not} empty, so $A$ and $B$ are \emph{not} mutually exclusive sets of outcomes. 
+
+This also makes sense. If I roll a six-sided die, it is possible that I end up rolling something that is in both $A$ and $B$, namely a 3. So $A$ and $B$ are not mutually exclusive sets of outcomes. They are not two sets of possibilities that simply cannot happen together. On the contrary, if I roll a 3, then I do succeed at getting one of the desired outcomes from $A$, and at the same time, I also succeed at getting one of the desired outcomes from $B$.
+
+
+\end{document}

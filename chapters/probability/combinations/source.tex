@@ -1,0 +1,299 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Combinations}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The concept of combinations}
+
+A \vocab{permutation} is taking some objects from a collection and arranging them into a sequence. The order matters. Pulling a red marble out of a bag first followed by a blue marble is a different permutation than pulling the blue one out before the red one. That constitutes two different ways to go through the marbles in the bag.
+
+A \vocab{combination} is just like a permutation, except the order doesn't matter. A combination is just a group of objects that we take from the whole collection, and we don't care about the order of the objects we take out. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sequences and sets}
+
+Technically speaking, permutations are sequences, and combinations are sets. Suppose we have a collection with $n$ total objects in it.
+
+\begin{itemize}
+
+  \item When we want to know how many $k$-length permutations there are, we want to know how many $k$-length \vocab{sequences} we can take out of that $n$-sized collection. 
+  
+  \item When we want to know how many $k$-sized combinations there are, we want to know how many $k$-sized \vocab{sets} we can take out of that $n$-sized collection. 
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Notation}
+
+With permutations, we write ``$\perms{k}{n}$'' as a shorthand for ``the number of $k$-length permutations we can take from a collection with $n$ total objects in it.''
+
+Let us use a similar notation for combinations. Let us say that ``$\combs{k}{n}$'' is shorthand for ``the number of $k$-sized combinations we can take from a collection with $n$ total objects in it.''
+
+We will also say that ``$\combs{k}{n}$'' is shorthand for ``choose $k$ from $n$,'' and by that we mean just the same thing. We are simply selecting $k$ objects out of the $n$ total, and we want to know how many combinations we can make by doing that.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 1}
+
+Suppose we have three marbles in a bag (one red, one blue, and one green marble). How many combinations of two marbles can we take out of it?
+
+One option is that we can pull out a red marble and then a blue marble:
+
+\begin{center}
+  R-B
+\end{center}
+
+\noindent
+What if we pull out a blue marble first and then a red one?
+
+\begin{center}
+  B-R
+\end{center}
+
+\noindent
+Well, that is the \emph{same combination} as R-B, because the order doesn't matter. R-B and B-R are the same combination. Remember, combinations are sets. So we don't care about the order. What matters is just which objects there are. And in this case, there is one red marble and one blue marble, no matter which order we pull them out of the bag.
+
+Here is another option. We could pull out a red marble and then a green one:
+
+\begin{center}
+  R-G
+\end{center}
+
+\noindent
+What if we pull out the green one first:
+
+\begin{center}
+  G-R
+\end{center}
+
+\noindent
+Again, this is the same combination as the one before. Whether we pull out the red and then the green, or the green and the red, we still have the same combination (the same set): one red marble and one green marble.
+
+The final option is to pull out a blue marble and a green marble (regardless of whether we pull the blue one or the green one out first). 
+ 
+\begin{center}
+  R-B \\
+  R-G \\
+  B-G
+\end{center}
+
+\noindent
+So, there are only 3 possible combinations of 2 marbles that we can select out of the bag containing 3 marbles. To use our notation:
+
+\begin{equation*}
+  \combs{k}{n} = \combs{2}{3} = 3
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 2}
+
+Suppose we have a bag with four marbles in it: two are red, and two are blue. If we choose 2 from the bag, how many combinations can we make? To use our notation, what is $\combs{2}{4}$?
+
+We can disregard the colors, and just assign a number or letter to each of the marbles. Let us say that one red marble is $a$, the other red marble is $b$, one blue marble is $c$, and the other blue marble is $d$. So how many combinations can we make from this collection, if we choose 2 marbles in it?
+
+One way to do it is to list out all the permutations:
+
+\begin{align*}
+  a-b ~~~~~~ &b-a ~~~~~~ c-a ~~~~~~ d-a \\
+  a-c ~~~~~~ &b-c ~~~~~~ c-b ~~~~~~ d-b \\
+  a-d ~~~~~~ &b-d ~~~~~~ c-d ~~~~~~ d-c 
+\end{align*}
+
+\noindent
+Then we can cross out the permutations that are a duplicate combination. For example, we can cross out $b-a$, because it is the same combination as $a - b$, which already shows up on the list. Here is the list of permutations, with duplicate groups crossed out:
+
+\begin{align*}
+  a-b ~~~~~~ &\cancel{b-a} ~~~~~~ \cancel{c-a} ~~~~~~ \cancel{d-a} \\
+  a-c ~~~~~~ &b-c ~~~~~~ \cancel{c-b} ~~~~~~ \cancel{d-b} \\
+  a-d ~~~~~~ &b-d ~~~~~~ c-d ~~~~~~ \cancel{d-c} 
+\end{align*}
+
+\noindent
+You can see that there is a pattern to the crossing-out. You can try writing out other permutations and see if the crossing out pattern occurs in your other examples (hint: it does).
+
+From this, we can see that there are 6 possible combinations that can make by choosing 2 from our marbles. If we convert the $a$'s and $b$'s back to reds and blues, we can see that these are the combinations. Let $a$ and $b$ be $R_{1}$ and $R_{2}$ (the first and second red marbles, respectively), and let $c$ and $d$ be $B_{1}$ and $B_{2}$ (the first and second blue marbles, respectively):
+
+\begin{align*}
+  a-b = R_{1}-R_{2} ~~~~~~ &b-c = R_{2}-B_{1} \\
+  a-c = R_{1}-B_{1} ~~~~~~ &b-d = R_{2}-B_{2} \\
+  a-d = R_{1}-B_{2} ~~~~~~ &c-d = B_{1}-B_{2}
+\end{align*}
+
+\noindent
+Notice that, before we began, we converted the names of the marbles to distinct letters (namely, $a$, $b$, $c$, $d$). We didn't have to do this. We could have just used the names $R_{1}$, $R_{2}$, $B_{1}$, and $B_{2}$. But I find that it is easy to get confused when there are multiple $R$'s and $B$'s floating around, so distinct letters are slightly easier to work with.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calculating the number of combinations}
+
+How many ways can we select 2 objects from a collection of 3? 
+
+For example, suppose we have a bag containing a red marble, a blue marble, and a green marble. How many ways can we select 2 marbles from the bag? In other words, how many combinations of 2 can we take from 3? That is, what is the answer to $\combs{2}{3}$?
+
+Suppose we pick one red and one blue marble out of the bag. This combination of $\{ red, blue \}$ is one of the possible combinations of two marbles that we can pull out of the bag. 
+
+Now, how many permutations of just these two marbles are there? There are 2!, i.e., 2 * 1, which is 2. And indeed, if you think about it, there are two permutations of these two marbles: red first then blue, or blue first then red.
+
+What have we learned? We have learned that for one combination of 2 marbles, there are 2! permutations of just these two marbles.
+
+Now, let us pull out another combination. Suppose this time we pull out one blue and one green marble. This combination of $\{ blue, green \}$ is another of the possible combinations of two marbles we can pull out of the bag.
+
+How many permutations of just these two are there? Again, there are 2! permutations (so 2 * 1 = 2). What have we learned? Again, for this one combination of 2 marbles, there are 2! permutations just these two marbles.
+
+Finally, what if we select a different combination: $\{ red, green \}$. How many permutations of this combination are there? Again, 2!, i.e., 2 * 1 = 2. 
+
+So, notice what we have just seen: for \emph{each} combination of 2 marbles, there are 2! permutations. In other words, we can multiply the number of combinations by 2!. We can write that like this:
+
+\begin{equation*}
+  \combs{2}{3} * 2!
+\end{equation*}
+
+\noindent
+There is one more point to notice here. We have just gone through every combination of 2 marbles that one can pick from a bag of 3 marbles, and we have computed the total number of permutations for each of those combinations. 
+
+Have we computed the total number of permutations of 2 marbles that can be made from the 3 marbles? Yes! Remember that the number of permutations of 2 marbles taken from a 3 marble bag is the total number of ways to put 2 marbles into a sequence. And we just computed for this case all the ways to take 2 marbles out of a bag, and then we figured out how many permutations there are for each selection of 2 marbles. And taken all together, that adds up to the total number of permutations possible for 2 marbles taken from a 3-marble bag. 
+
+So, we can say that whatever ``$\combs{2}{3} * 2!$'' evaluates to, that is going to be the same number as the total number of permutations, i.e., it will be the same as ``$\perms{2}{3}$.'' In other words:
+
+ \begin{equation*}
+  \perms{2}{3} = \combs{2}{3} * 2!
+\end{equation*}
+
+\noindent
+The left hand of this equation will evaluate to the number of 2-marble permutations we can make by selecting 2 marbles from a bag of 3. The right hand side of the equation will take each combination of 2 marbles, and multiply it by 2!. And the equals sign in the middle says that the number on the left (whatever it is) and the number on the right (whatever it is) will be the same number.
+
+Can we solve this equation? Yes we can. First of all, we can divide by 2! on both sides, and cancel it out on the right:
+
+\begin{equation*}
+  \frac{\perms{2}{3}}{2!} = \combs{2}{3} * \frac{\cancel{2!}}{\cancel{2!}}
+\end{equation*}
+
+\noindent
+And that leaves us with this:
+
+\begin{equation*}
+  \frac{\perms{2}{3}}{2!} = \combs{2}{3}
+\end{equation*}
+
+\noindent
+Or, to flip it around so that ``$\combs{2}{3}$'' is on the left hand side:
+
+\begin{equation*}
+  \combs{2}{3} = \frac{\perms{2}{3}}{2!}
+\end{equation*}
+
+\noindent
+We know how to calculate ``$\perms{2}{3}$,'' so we can do that:
+
+\begin{equation*}
+  \perms{2}{3} = \frac{3!}{(3 - 2)!} = \frac{3!}{1!} = \frac{6}{1} = 6
+\end{equation*}
+
+\noindent
+And if we put that into our original equation in place of ``$\perms{2}{3}$,'' we get:
+
+\begin{equation*}
+  \combs{2}{3} = \frac{6}{2!}
+\end{equation*}
+
+\noindent
+And if we compute that, we get 3:
+
+\begin{equation*}
+  \combs{2}{3} = \frac{6}{2!} = \frac{6}{2 * 1} = \frac{6}{2} = 3
+\end{equation*}
+
+\noindent
+This is correct. There are three possible combinations of 2 marbles that we can take out of the bag:
+
+\begin{center}
+  red-blue \\
+  red-green \\
+  blue-green
+\end{center}
+
+\noindent
+What if we want to find the number of combinations we can get if we take 3 marbles out of a bag full of 5 marbles? We can use the same recipe to get the answer. For each combination of 3, there will be 3! permutations of just that set of 3. So, we can use the same formula, adjusted for 3 and 5:
+
+\begin{equation*}
+  \combs{3}{5} = \frac{\perms{3}{5}}{3!}
+\end{equation*}
+
+\noindent
+If we compute that, we get:
+
+\begin{equation*}
+  \combs{3}{5} = \frac{\perms{3}{5}}{3!} = \frac{60}{3!} = \frac{60}{6} = 10
+\end{equation*}
+
+\noindent
+So there we have it. There are 10 combinations of 3 marbles that you can pull out of a bag full of 5 marbles. All together, we have calculated these two combinations:
+
+\begin{align*}
+  \combs{2}{3} = 3 \\
+  \combs{3}{5} = 10
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The formula}
+
+To make it fully general, let's write the equation out using $n$ for the total number of objects in the collection and $k$ for the number of objects we want to pull out. The full equation to calculate the number of $k$-sized combinations taken from an $n-$sized collection is this:
+
+\begin{equation*}
+  \combs{k}{n} = \frac{\perms{k}{n}}{k!}
+\end{equation*}
+
+\noindent
+If we like, we can replace ``$\perms{k}{n}$'' with the formula to compute just that. Recall that it is this:
+
+\begin{equation*}
+  \perms{k}{n} = \frac{n!}{(n - r)!}
+\end{equation*}
+
+\noindent
+So, if we substitute that in to our formula for ``$\combs{k}{n}$,'' we get this:
+
+\begin{equation*}
+  \combs{k}{n} = \frac{\frac{n!}{(n - r)!}}{k!}
+\end{equation*}
+
+\noindent
+Another way to write that is this:
+
+\begin{equation*}
+  \combs{k}{n} = \frac{n!}{(n - r)!} * \frac{1}{k!}
+\end{equation*}
+
+\noindent
+And another way to write that is this:
+
+\begin{equation*}
+  \combs{k}{n} = \frac{n!}{(n - r)! * k!}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notation}
+
+Here, we are writing ``$\perms{k}{n}$'' and ``$\combs{k}{n}$'' as shorthand for the number of $k$-sized permutations and combinations taken from an $n$-sized collection. Other textbooks use alternative notations. You might see variants such as these:
+
+\begin{align*}
+    \perms{k}{n} \hskip 0.5cm = \hskip 0.5cm \mathbf{P}^{k}_{n} \hskip 0.5cm = \hskip 0.5cm k\mathbf{P}n \\
+    \combs{k}{n} \hskip 0.5cm = \hskip 0.5cm \mathbf{C}^{k}_{n} \hskip 0.5cm = \hskip 0.5cm k\mathbf{C}n
+\end{align*}
+
+
+\end{document}

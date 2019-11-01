@@ -1,0 +1,605 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Combined probabilities}
+
+
+Suppose I want to know the probability of outcome $A$, AND outcome $B$ happening together. That is, suppose I want to know the probability of getting a \vocab{combined} set of outcomes. 
+
+There are two ways to calculate combined sets of outcomes. The first is to use permutation trees. The second is to multiply the probability of $A$ by the probability of $B$, given $A$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Using permutation trees}
+
+Suppose I want to flip two fair coins, one after the other. We can build a permutation tree to see all possible sequences of outcomes when I first flip one coin, then I flip the second coin:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+We can see that there are a total of 4 possible outcomes here (i.e., there are 4 permutations or paths through through this tree). Hence, the sample space $S$ is this:
+
+\begin{equation*}
+  S = \{ HH, HT, TH, TT \}
+\end{equation*}
+
+\noindent
+Now that we have this tree, it is easy to count up probabilities. Let's do some examples.
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 1}
+
+What is the probability of getting two heads? So, let $A$ be $HH$:
+
+\begin{equation*}
+  A = \{ HH \}
+\end{equation*}
+
+\noindent
+We can see in the tree that there is one path that gets us this. Here it is, marked as a dotted path:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows, dotted] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+We can calculate it using the formula for simple probability. The probability of $A$ is the number of outcomes in $A$ divided by the number of outcomes in $S$:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)}
+\end{equation*}
+
+\noindent
+In this case, that comes out to 1 over 4, because there is one item in $A$, and 4 items in $S$:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)} = \frac{1}{4} = .25 = 25\%
+\end{equation*}
+
+\noindent
+So there is a 25\% chance that we will flip two heads in a row.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 2}
+
+What is the probability of flipping heads exactly once? Well, there are two cases where we flip heads only once:
+
+\begin{equation*}
+  A = \{ HT, TH \}
+\end{equation*}
+
+\noindent
+We can see in the tree that there are two paths that gets us our desired outcome. Here they are, marked as dotted paths:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows, dotted] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So the probability of flipping heads exactly once is 1 over 2, since there are two ways to get $A$ out of four possibilities in the sample space $S$:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)} = \frac{2}{4} = .5 = 50\%
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 3}
+
+What is the probability of flipping heads at most one time? Well, there are two cases where we flip heads only once:
+
+\begin{equation*}
+  A = \{ HT, TH \}
+\end{equation*}
+
+\noindent
+But we are asking about getting heads \emph{at most} once. So, we could also get heads zero times. And there is one option where we get no heads, namely if we get both tails (i.e., $TT$). Hence $A$ is this:
+
+\begin{equation*}
+  A = \{ HT, TH, TT \}
+\end{equation*}
+
+\noindent
+And indeed, we can see in the tree that there are three paths that gets us our desired outcome:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows, dotted] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So the probability of flipping heads at most once is 3 over 4:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)} = \frac{3}{4} = .75 = 75\%
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multiplying probabilities}
+
+There is another way to compute combined probabilities. We can treat $A$ and $B$ as two separate events, calculate their probabilities independently, and then multiply them together. More exactly, we can get the probability of both $A$ and $B$ happening by multiplying the probability of $A$ by the probability of $B$, given $A$:
+
+\begin{equation*}
+  P(A \text{ and } B) = P(A) * P(B | A)
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 1}
+
+Suppose we want to flip two fair coins. What is the probability of flipping heads twice? Well, let $A$ be flipping heads on the first round. There are two paths on the tree that have heads first:
+
+\begin{equation*}
+  A = \{ HT, HH \}
+\end{equation*}
+
+\noindent
+Now let $B$ be flipping heads on the second flip. There are only two paths on the tree where H shows up second:
+
+\begin{equation*}
+  B = \{ TH, HH \}
+\end{equation*}
+
+\noindent
+Now, what is the probability of $A$ and $B$ both happening? We can find this by multiplying the probability of $A$ by the probability of $B$, given $A$, as we said above:
+
+\begin{equation*}
+  P(A \text{ and } B) = P(A) * P(B | A)
+\end{equation*}
+
+\noindent
+So what is the probability of $A$? It is one over two, since there are two branches out of the four where heads comes up first:
+
+\begin{equation*}
+  P(A) = \frac{2}{4} = \frac{1}{2}
+\end{equation*}
+
+\noindent
+What is the probability of $B$, given $A$? Well, suppose that $A$ happens. That is, suppose that $H$ comes up first. On the tree, that means we are considering the case where we cross off the option where the first flip comes up tails:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+    \draw[dashed] (1, 0) -- (4, -3);
+    \draw[dashed] (1, -3) -- (4, 0);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Remember that there are two outcomes in $B$, namely $TH$ or $HH$. Well, $TH$ is now crossed out, because we assumed that $A$ happened, and if $A$ happened, then $T$ cannot be first. So, of the two branches left on the tree that aren't crossed out, only one of them ends with heads, namely $HH$. So the probability of $B$, given $A$, is $\frac{1}{2}$:
+
+\begin{equation*}
+  P(B | A) = \frac{1}{2}
+\end{equation*}
+
+\noindent
+Now, if we multiply these together, we get the probability of $A$ and $B$ together:
+
+\begin{equation*}
+  P(A \text{ and } B) = P(A) * P(B | A) = \frac{1}{2} * \frac{1}{2} = \frac{1}{4} = .25
+\end{equation*}
+
+\noindent
+And this is exactly what we saw before, in the permutation tree. Of the four branches we could go down, on only one of those branches do we end up with heads twice.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 2}
+
+Suppose we want to know the probability of getting one heads, and one tails. So, let $A$ be the result of getting heads. There are two ways we can get exactly one heads:
+
+\begin{equation*}
+  A = \{ HT, TH \}
+\end{equation*}
+
+\noindent
+And let $B$ be getting tails, which also leaves us with two possibilities:
+
+\begin{equation*}
+  B = \{ TH, HT \}
+\end{equation*}
+
+\noindent
+What is the probability of getting both $A$ and $B$? Well, what is the probability of $A$?
+
+\begin{equation*}
+  P(A) = \frac{2}{4} = \frac{1}{2}
+\end{equation*}
+
+\noindent
+What is the probability of $B$, given $A$? Well, let's assume that $A$ happened. That is, let's assume that the path is either $HT$, or $TH$. Here are those two paths for $A$, marked with dotted lines:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows, dotted] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Let's cross off the other branches that can't follow $A$:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows, dotted] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+    \draw[dashed] (3.5, 3) -- (4.75, 2);
+    \draw[dashed] (3.5, 2) -- (4.75, 3);
+
+    \draw[dashed] (3.5, -3) -- (4.75, -2);
+    \draw[dashed] (3.5, -2) -- (4.75, -3);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now, given the remaining branches, what is the probability of getting $B$? Well, there are two outcomes in $B$ that we want: $HT$ or $TH$. In the remaining branches, how many of those match one of the outcomes of $B$? 
+
+The answer is: all of them. $B$ matches exactly the remaining branches. So, if $A$ happens, leaving only the two branches we see here, then there is no chance that an outcome in $B$ couldn't be realized. If $A$ is realized, then $B$ must be too. So here, the probability of $B$ is 2 out of 2, or 1:
+
+\begin{equation*}
+  P(B | A) = \frac{2}{2} = 1
+\end{equation*}
+
+\noindent
+Now, if we multiply $P(A)$ and $P(B | A)$ together, we get the probability of $A$ and $B$ together:
+
+\begin{equation*}
+  P(A \text{ and } B) = P(A) * P(B | A) = \frac{1}{2} * \frac{2}{2} = \frac{1}{2} = .5
+\end{equation*}
+
+\noindent
+This makes sense, since there are exactly two (out of the four) branches on the permutation tree that give us exactly one heads.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example 3}
+
+Suppose we want to know the probability of $A$ and $B$, where $A$ is getting at most one heads, and $B$ is getting no heads. 
+
+Before going further, think about this combination. The probability of $A$ is the probability of flipping \emph{at most} one heads, which means we can get heads on the first flip, on the second flip, or not at all. That is, one way to satisfy $A$ is to flip zero heads.
+
+Now, in order to achieve $B$, we need to get no heads. So, the only outcome of $A$ that is compatible with this is the version of $A$ where we get zero heads. If we satisfy $A$ by getting a heads on the first or second flip, then we cannot satisfy $B$, since $B$ requires that we get zero heads. 
+
+If you take this and imagine this on the permutation tree, you can see that there is only one branch where $A$ and $B$ are both satisfied, and that is the branch where you flip zero heads (i.e., you get tails on both flips). 
+
+If we do the computation as we have been, we will get exactly this result. So first, let's write out the outcomes that can satisfy $A$. For $A$, there are three ways we can get at most one heads:
+
+\begin{equation*}
+  A = \{ HT, TH, TT \}
+\end{equation*}
+
+\noindent
+For $B$, there is only one way we can get no heads:
+
+\begin{equation*}
+  B = \{ TT \}
+\end{equation*}
+
+\noindent
+So what is the probability of getting both $A$ and $B$? Well, what is the probability of $A$? It is three out of four, since there are three out of the four total branches on the permutation tree where we get at most one heads:
+
+\begin{equation*}
+  P(A) = \frac{3}{4}
+\end{equation*}
+
+\noindent
+What is the probability of $B$, given $A$? Well, let's assume that $A$ happened. There are three branches where $A$ can happen, marked as dotted lines:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows, dotted] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So, let's cross off the one option that can't follow $A$:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows, dotted] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows, dotted] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows, dotted] (2, -1.5) -- (4, -2.5);
+
+    \draw[dashed] (3.5, 3) -- (4.75, 2);
+    \draw[dashed] (3.5, 2) -- (4.75, 3);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now, of the three remaining branches, which one matches $B$? There is only one remaining path that matches $B$, which is $TT$, so the chances of getting $B$, assuming that $A$ has happened, is 1 out of 3:
+
+\begin{equation*}
+  P(B | A) = \frac{1}{3}
+\end{equation*}
+
+\noindent
+Now, if we multiply $P(A)$ and $P(B | A)$ together, we get the probability of $A$ and $B$ together:
+
+\begin{equation*}
+  P(A \text{ and } B) = P(A) * P(B | A) = \frac{3}{4} * \frac{1}{3} = \frac{3}{12} = \frac{1}{4} = .25
+\end{equation*}
+
+\noindent
+This makes sense, since there is exactly one (out of the four) branches on the permutation tree where \emph{both} of $A$ and $B$ are satisfied, and that is the path where we flip tails both times (i.e., $TT$).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intersection and AND}
+
+When we say we want to know the probability of $A$ AND $B$ happening together, we are asking about the probability of getting one of the outcomes in $A$, \emph{and} one of the outcomes in $B$. Hence, we can write the probability of $A$ and $B$ like this:
+
+\begin{equation*}
+  P(A \text{ and } B)
+\end{equation*}
+
+\noindent
+Now think about sets. Which set operation matches this idea? It is \vocab{set intersection}. Recall that to take the intersection of two sets $A$ and $B$, we take all the elements that exist in both $A$ and $B$, and we put them into a new set. So the intersection is just the elements that exist in both $A$ and $B$. 
+
+And that is exactly what we mean when we say ``$A$ and $B$.'' To satisfy both outcomes $A$ and $B$, we must get an outcome that is common to BOTH $A$ and $B$. 
+
+So, when we want to know the probability of $A$ and $B$, we can also say that we want to know the probability of $A \cap B$, like this:
+
+\begin{equation*}
+  P(A \cap B)
+\end{equation*}
+
+\noindent
+And of course, ``and'' and ``$\cap$'' are equivalent here:
+
+\begin{equation*}
+  P(A \text{ and } B) \hskip 1cm = \hskip 1cm P(A \cap B)
+\end{equation*}
+
+\noindent
+Read $P(A \cap B)$ as ``the probability of the intersection of $A$ and $B$,'' or simply as ``the probability of $A$ and $B$.''
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The multiplication rule}
+
+We have now seen the multiplication rule for probabilities:
+
+\begin{equation*}
+  P(A \text{ and } B) = P(A) * P(B | A)
+\end{equation*}
+
+\noindent
+Or, equivalently:
+
+\begin{equation*}
+  P(A \cap B) = P(A) * P(B | A)
+\end{equation*}
+
+\noindent
+We use the multiplication rule when we want to know the probability of combined sets of outcomes, which is signaled by our use of the word ``and'' (as in, what is the probability of $A$ AND $B$). If you want to know the probability of $A$ AND $B$, then use the multiplication rule.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{A formula for conditional probability}
+
+So far, we have worked out the conditional probability $P(A | B)$ in each case by drawing a permutation tree, and then crossing off everything that does not satisfy $B$ before finding the probability of $A$.
+
+We can use the multiplication rule equation to get an equation for the conditional probability. Here is the multiplication rule:
+
+\begin{equation*}
+  P(A \cap B) = P(A) * P(B | A)
+\end{equation*}
+
+\noindent
+We can divide by $P(A)$ on both sides:
+
+\begin{equation*}
+  \frac{P(A \cap B)}{P(A)} = \frac{P(A)}{P(A)} * P(B | A)
+\end{equation*}
+
+\noindent
+And then we can cancel out $P(A)$ on the right hand side:
+
+\begin{equation*}
+  \frac{P(A \cap B)}{P(A)} = \cancel{\frac{P(A)}{P(A)}} * P(B | A)
+\end{equation*}
+
+\noindent
+Which leaves us with $P(B | A)$ all by itself on the right hand side:
+
+\begin{equation*}
+  \frac{P(A \cap B)}{P(A)} = P(B | A)
+\end{equation*}
+
+\noindent
+We can flip it around, so that $P(B | A)$ is on the left hand side:
+
+\begin{equation*}
+  P(B | A) = \frac{P(A \cap B)}{P(A)}
+\end{equation*}
+
+\noindent
+And there we have a formula to compute the conditional probability of $P(B | A)$. Of course, we can do the same for $P(A |B)$:
+
+\begin{equation*}
+  P(A | B) = \frac{P(A \cap B)}{P(B)}
+\end{equation*}
+
+\noindent
+Either way, the formula works the same. To find the conditional probability for $A$, given $B$ (i.e., $P(A | B)$, do the following:
+
+\begin{itemize}
+
+  \item First compute the total number of permutations for $A$ and $B$ together, just as we did in the examples above. Recall that the notation we use to symbolize the permutations of $A$ and $B$ is $\perms{A}{B}$. The number of permutations is the size of the sample space, as we saw in the examples above: 
+  
+    \begin{equation*}
+      num(S) = \perms{A}{B}
+    \end{equation*}
+  
+  \item Then, take the intersection of the outcomes in $A$ and $B$ (i.e., make a set of the outcomes that both $A$ and $B$ share). Then compute the probability of that, like this:
+  
+    \begin{equation*}
+      P(A \cap B) = \frac{num(A \cap B)}{num(S)}
+    \end{equation*}
+  
+  \item Then, find the probability of $B$, like this:
+  
+    \begin{equation*}
+      P(B) = \frac{num(B)}{num(S)}
+    \end{equation*}
+  
+  \item Finally, divide the probability of $P(A \cap B)$ by $P(B)$, like this:
+  
+    \begin{equation*}
+      P(A | B) = \frac{P(A \cap B)}{P(B)}
+    \end{equation*}
+
+\end{itemize}
+
+\end{document}

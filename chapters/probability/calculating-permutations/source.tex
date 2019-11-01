@@ -1,0 +1,876 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Calculating permutations}
+
+
+Recall the tree of choices we built earlier:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+By building this tree, we modeled every possible choice one could make while pulling three marbles from a bag, one by one. This lets us see all possible permutations of the marbles. 
+
+Now we want to study this tree a little bit, and see if we can figure out a general formula that we can use to calculate the number of permutations for any sized collection of objects.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Generalizing}
+
+Let's make a note of some of the general features about that tree. First of all, we can see that there are three different levels to this tree. The first level is the first set of branches that come out of the root.
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+This represents the first round of selecting marbles from the bag. When we make our first selection, there are three marbles we can select from, and indeed, we see in level 1 of the tree that there are three branches. 
+
+Let us get a bit more general here. Instead of speaking about exactly 3 marbles and 3 choices, let us say that $n$ is the number of marbles in the bag. If there are $n$ marbles in the bag, how many choices do we have on this first level? Well, we have $n$ choices. Since it is the first selection, we haven't pulled any marbles out yet, so all of the marbles are in the bag for our first selection. Hence, there are $n$ choices. Let's state this as a kind of general rule about permutations:
+
+\begin{quote}
+  At level 1 (i.e., for the first selection from $n$ objects), there are $n$ choices.
+\end{quote}
+
+\noindent
+After level 1, there is another level:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+    
+    \draw[dashed] (-1, 1.5) -- (10, 1.5) -- (10, 0.75) -- (-1, 0.75) -- (-1, 1.5);
+    \node at (-1.5, 1.15) {\boxed{2}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+This represents the second round of selections. When we select our second marble, one of the marbles has already been removed, so there are only two marbles left to choose from.
+
+However, there are three different timelines in level 2, because there were 3 possible choices from the previous level. Indeed, we see in the tree that on level two, under each of the first three choices, we have two more choices. 
+
+So, let us get a bit more general again. If we say that there are $n$ choices in the first round, then how many choices do we have in this (the next) round of selections? Since we pulled one marble out in the previous round, we'll have $n - 1$ choices (i.e., we will have one less choice at this level). 
+
+However, there are $n$ different ways to get $n - 1$ choices, because there are $n$ different timelines from the previous level. So the number of choices we have at this level is $n$ multiplied by $n - 1$, i.e., $n * (n - 1)$. That is to say, the previous level branched into $n$ timelines, and at this level, each one of those timelines will branch into $n - 1$ timelines. So the total number of branches at this point is $n - 1$ more branches for each of the original $n$ (i.e., $n$ multiplied by $n$).
+
+We can imagine that this will be true for any further levels down, until we get to the bottom level. If there were another level below this level before we hit the bottom, then we could say that, for each of the $n$ branches we have at this level, the next level will split into one less branch ($n - 1$) branches.
+
+So, if we had another level below this one, we would have $n - 2$ choices (multiplied by the number of choices $n - 1$ from the last round, which in turn is multiplied by the number of choices $n$ from the round before that). If there were yet another level, we would have $n - 3$ choices (multiplied by  the number of choices $n - 2$ from the last round, multiplied by the number of choices $n$ from the round before that), and so on. And this is because at each level, there is one fewer of $n$ to select.
+
+Let us state this as a general principle:
+
+\begin{quote}
+  If there are $n$ number of choices at any level, then at the next level below (except for the bottom level), there will be $n -1$ new choices for each of the $n$ in the previous level.
+\end{quote}
+
+\noindent
+Finally, there is the bottom level:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+    
+    \draw[dashed] (-1, 1.5) -- (10, 1.5) -- (10, 0.75) -- (-1, 0.75) -- (-1, 1.5);
+    \node at (-1.5, 1.15) {\boxed{2}};
+    
+    \draw[dashed] (-1, 0.25) -- (10, 0.25) -- (10, -0.75) -- (-1, -0.75) -- (-1, 0.25);
+    \node at (-1.5, -0.25) {\boxed{3}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+This represents the final round of choices. When we select the final marble, there is only one marble left to choose, and indeed we can see in the tree that in the final level, there is only one choice under each of the previous choices.
+
+So we see the same behavior at this level as we saw at the last level. In the last level, each timeline split into one fewer branches than the number of branches in the previous level. And that is true here too. So what we said before covers this bottom level as well.
+
+If we calculate the number of choices here, we can see that at the top level, we have 3 choices, then on the next level we have 2 choices per branch, then at the last level we have 1 choice per branch. As a formula:
+
+\begin{equation*}
+  \text{permutations of 3 objects}~=~3 * 2 * 1 = 6
+\end{equation*}
+
+\noindent
+Or, we can speak of $n$ instead. At the top level, we have $n$ choices, then on the next level we have $n - 1$ choices per branch, then $n - 2$ choices per branch, and so on.
+
+\begin{equation*}
+  \text{permutations of $n$ objects} = n * (n - 1) * (n - 2) * \ldots
+\end{equation*}
+
+\noindent
+Notice that we start with $n$, then we multiply it by one less of that ($n - 1$), then one less of that ($n - 2$), and so on. As you can see in the tree, this is exactly what happens at each branch. In the first branch we have three choices (because we start with 3 objects), then under each of those branches, we have one less choice (2 choices), then under each of those we have one less choice (1 choice).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Factorial}
+
+In mathematics, when we multiply a number by each number that is one less until we get to one, we call that a \vocab{factorial}. And we have a special symbol for it. If we put an explanation point (also called a ``bang'') after a number, that means you should multiply that number by each successively smaller number until you get to 1. 
+
+For example, the factorial of 3 is this:
+
+\begin{equation*}
+  3! = 3 * 2 * 1
+\end{equation*}
+
+\noindent
+The factorial of 5 is this:
+
+\begin{equation*}
+  5! = 5 * 4 * 3 * 2 * 1
+\end{equation*}
+
+\noindent
+And the factorial of 100 is this:
+
+\begin{equation*}
+  100! = 100 * 99 * 98 * 97 * \ldots * 5 * 4 * 3 * 2 * 1
+\end{equation*}
+
+\noindent
+The \vocab{factorial of 0} is defined to be 1. So, whenever you see ``0!,'' just replace it with ``1'':
+
+\begin{equation*}
+  0! = 1
+\end{equation*}
+
+\noindent
+So we can define how to compute the number of permutations of $n$ objects quite simply:
+
+\begin{equation*}
+  \text{permutations of $n$ objects}~=~n!
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Selecting fewer objects}
+
+Above, we had 3 objects, but when we formed our permutations, we took \emph{all 3} of those objects and arranged them into every possible sequence. That told us how many possible ways there are to permute all 3 objects from a collection of 3.
+
+Let us put this more generally: we have $n$ objects, and we found the number of permutations of all $n$ of those objects. 
+
+What if we have a collection of 3 objects, but we only want to take 2 of those objects. How many permutations are there of just 2 objects taken out of the 3?
+
+We can find this by looking at the tree again. But we only need to count down to the first two levels:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+    
+    \draw[dashed] (-1, 1.5) -- (10, 1.5) -- (10, 0.75) -- (-1, 0.75) -- (-1, 1.5);
+    \node at (-1.5, 1.15) {\boxed{2}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+We can see that there are six possible sequences of colors if we take 2 marbles only from the bag. One option is that, if we pull out a red marble first, then the next one we pull out might be a blue marble. We can see this in far left branch, highlighted here:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path[->, spaced-arrows, dotted] (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path[->, spaced-arrows, dotted] (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+    
+    \draw[dashed] (-1, 1.5) -- (10, 1.5) -- (10, 0.75) -- (-1, 0.75) -- (-1, 1.5);
+    \node at (-1.5, 1.15) {\boxed{2}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Or we can pull a red marble out first, then a green one:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path[->, spaced-arrows, dotted] (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path[->, spaced-arrows, dotted] (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+    
+    \draw[dashed] (-1, 1.5) -- (10, 1.5) -- (10, 0.75) -- (-1, 0.75) -- (-1, 1.5);
+    \node at (-1.5, 1.15) {\boxed{2}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+If we pull out a blue one first, then the next one might be a red one:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path[->, spaced-arrows, dotted] (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path[->, spaced-arrows, dotted] (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+    
+    \draw[dashed] (-1, 1.5) -- (10, 1.5) -- (10, 0.75) -- (-1, 0.75) -- (-1, 1.5);
+    \node at (-1.5, 1.15) {\boxed{2}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Or, if we pull a blue one out first, the next one might be a green one:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path[->, spaced-arrows, dotted] (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path[->, spaced-arrows, dotted] (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+    
+    \draw[dashed] (-1, 1.5) -- (10, 1.5) -- (10, 0.75) -- (-1, 0.75) -- (-1, 1.5);
+    \node at (-1.5, 1.15) {\boxed{2}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+The same goes for the last two permutations. If we pull out a green marble first, then we might pull out a red one next, or we might pull out a blue one next.
+
+All of these paths can be seen in the tree. But, we only need to trace the path down the number of levels that matches the number of objects we are selecting. In this case, we are selecting 2 out of the 3, so we only need to go down 2 levels. 
+
+Now, to calculate the permutations for all 3 of the marbles, we did this:
+
+\begin{equation*}
+  \text{permutations} = 3 * 2 * 1
+\end{equation*}
+
+\noindent
+To calculate the permutations for just 2 of the 3 marbles, we want to cross out that last ``1,'' like this:
+
+\begin{equation*}
+  \text{permutations} = 3 * 2 * \cancel{1}
+\end{equation*}
+
+\noindent
+One way to do cancel out a number is to divide by it. For example, suppose we have this:
+
+\begin{equation*}
+  5 * 3 = 15
+\end{equation*}
+
+\noindent
+What happens if we divide by 3?
+
+\begin{equation*}
+  \frac{5 * 3}{3} = 5
+\end{equation*}
+
+\noindent
+What happened there? The 3 on the top and the 3 on the bottom essentially have no effect on the answer. They effectively cancel each other out:
+
+\begin{equation*}
+  \frac{5 * \cancel{3}}{\cancel{3}} = 5
+\end{equation*}
+
+\noindent
+Consider this equation:
+
+\begin{equation*}
+  5 * 3 * 2 = 30
+\end{equation*}
+
+\noindent
+What happens if we divide by $3 * 2$?
+
+\begin{equation*}
+  \frac{5 * 3 * 2}{3 * 2} = 5
+\end{equation*}
+
+\noindent
+Again, the ``$3 * 2$'' on the top and the ``$3 * 2$'' on the bottom again have no effect on the result (the answer is still 5). They cancel each other out:
+
+\begin{equation*}
+  \frac{5 * \cancel{3} * \cancel{2}}{\cancel{3} * \cancel{2}} = 5
+\end{equation*}
+
+\noindent
+Let's go back to our permutations computation. What we have is this:
+
+\begin{equation*}
+  \text{permutations} = 3 * 2 * 1
+\end{equation*}
+
+\noindent
+But what we want is this:
+
+\begin{equation*}
+  \text{permutations} = 3 * 2 * \cancel{1}
+\end{equation*}
+
+\noindent
+So, to cancel out that ``1,'' we divide by $1$:
+
+\begin{equation*}
+  \text{permutations} = \frac{3 * 2 * 1}{1}
+\end{equation*}
+
+\noindent
+And that will cancel out the ``1'' on top and on bottom:
+
+\begin{equation*}
+  \text{permutations} = \frac{3 * 2 * \cancel{1}}{\cancel{1}}
+\end{equation*}
+
+\noindent
+Think about that bottom number. Is there a way that ``1'' is related to the other numbers we're working with? Well, the total number of marbles we are selecting from is 3, and then we want to take out only 2 of those marbles. So if we start with 3, and take out 2, we are left with 1. Indeed, then, it looks like the number on the bottom is the number we are left with after we take out the number we want to select.
+
+Let's use some symbols here to make this more general. Let us say (as we have been saying) that $n$ is the total number of objects in our collection. In this case, $n$ is 3. Let us then say that $k$ is the number of objects we want to take out and permute. In this case, $k$ is 2. So, we can get the bottom number like this: $n - k$.
+
+Now let's consider another situation. Suppose we want to select only 1 marble from the bag of 3. How many permutations are there?
+
+We can look at the tree again, but this time we only have to go down one level:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path (12) edge (6);
+
+    \draw[dashed] (-1, 2.75) -- (10, 2.75) -- (10, 1.75) -- (-1, 1.75) -- (-1, 2.75);
+    \node at (-1.5, 2.25) {\boxed{1}};
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+In this picture, it's clear that there are only 3 possible permutations, if we select just 1 marble out of the bag. Either we pull out the red marble, or we pull out the blue one, or we pull out the green one. 
+
+But let's think about this in terms of our equations. To compute the number of permutations for all 3 of the 3 marbles, we did this:
+
+\begin{equation*}
+  \text{permutations} = 3 * 2 * 1
+\end{equation*}
+
+\noindent
+But what we want is to cancel out the ``2'' and the ``1,'' like this:
+
+\begin{equation*}
+  \text{permutations} = 3 * \cancel{2} * \cancel{1}
+\end{equation*}
+
+\noindent
+How do we get that? Again, we want to divide by the bits we want to cancel out:
+
+\begin{equation*}
+  \text{permutations} = \frac{3 * 2 * 1}{2 * 1}
+\end{equation*}
+
+\noindent
+And that will cancel out the numbers we want to cancel out:
+
+\begin{equation*}
+  \text{permutations} = \frac{3 * \cancel{2} * \cancel{1}}{\cancel{2} * \cancel{1}} = 3
+\end{equation*}
+
+\noindent
+How do we get ``$2 * 1$''? Well, again we see the same relationship between the bottom and the top. If we have 3 objects in total (3 marbles), and we pull out only 1 of them, then we have 2 left. Again, when $n$ = 3 and $k$ = 1, then $n - k$ is 2. 
+
+But it's not just 2. We need 2, and then also 1. So we need the \emph{factorial} of 2. The full equation looks like this:
+
+\begin{equation*}
+  \text{num permutations if we take $k$ of $n$ objects}~=~\frac{n!}{(n - r)!}
+\end{equation*}
+
+\noindent
+For another example, suppose we have 5 different marbles, and we want to select 2 of those objects and find the number of permutations we can make. Well, $n$ is 5 and $k$ is 2, so:
+
+\begin{equation*}
+  \text{perms $k$ of $n$}~=~\frac{n!}{(n - r)!} = \frac{5!}{(5 - 2)!} = \frac{5!}{3!} = \frac{5 * 4 * 3 * 2 * 1}{3 * 2 * 1}
+\end{equation*}
+
+\noindent
+And of course, the ``$3 * 2 * 1$'' cancels out on the top and bottom:
+
+\begin{equation*}
+  \frac{5 * 4 * 3 * 2 * 1}{3 * 2 * 1} = \frac{5 * 4 * \cancel{3} * \cancel{2} * \cancel{1}}{\cancel{3} * \cancel{2} * \cancel{1}} = 5 * 4 = 20
+\end{equation*}
+
+\noindent
+If you draw a tree of choices for 5 marbles, and you go down 2 levels (2 rounds of selections), you will see that this calculation is correct.
+
+What if we have 5 objects, and we want to select 3 of them, how many permutations can we make by selecting just 3 of them?
+
+\begin{align*}
+  \text{perms $k$ of $n$}~=~\frac{n!}{(n - r)!} \\
+  = \frac{5!}{(5 - 3)!} = \frac{5!}{2!} \\
+  = \frac{5 * 4 * 3 * 2 * 1}{3 * 2 * 1} = \frac{5 * 4 * 3 * \cancel{2} * \cancel{1}}{\cancel{2} * \cancel{1}} \\
+  = 60
+\end{align*}
+
+\noindent
+What if we have 5 objects, and we want to select 4 of them? How many permutations can we make by selecting just 4 of them?
+
+\begin{align*}
+  \text{perms $k$ of $n$}~=~\frac{n!}{(n - r)!} \\
+  = \frac{5!}{(5 - 4)!} = \frac{5!}{1!} \\
+  = \frac{5 * 4 * 3 * 2 * 1}{1} = \frac{5 * 4 * 3 * 2 * \cancel{1}}{\cancel{1}} \\
+  = 120
+\end{align*}
+
+\noindent
+And finally, what if we have 5 objects, and we want to select all 5 of them? How many permutations can we make by selecting all 5 of them?
+
+\begin{align*}
+  \text{perms $k$ of $n$}~=~\frac{n!}{(n - r)!} \\
+  = \frac{5!}{(5 - 5)!} = \frac{5!}{0!} \\
+  = \frac{5 * 4 * 3 * 2 * 1}{1} = \frac{5 * 4 * 3 * 2 * \cancel{1}}{\cancel{1}} \\
+  = 120
+\end{align*}
+
+\noindent
+Why do you think that selecting 5 out of 5 has the same number of permutations as selecting 4 out of 5? The reason is as follows. When we get to the last object, there is only one object left to select. So there are no choices at that point. So we've fully determined the sequence that we can put together in the round before our last selection. Hence, we don't get any new permutations in that last round.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The final formula and notation}
+
+We have arrived at a general formula to compute the number of permutations if we take $k$ objects from a collection of $n$ objects. It is this:
+
+\begin{equation*}
+  \text{perms $k$ of $n$}~=~\frac{n!}{(n - r)!}
+\end{equation*}
+
+\noindent
+It is tedious to write ``the number of permutations if we take $k$ objects from a collection of $n$ objects.'' Let us abbreviate this like so:
+
+\begin{equation*}
+  \perms{k}{n}
+\end{equation*}
+
+\noindent
+So we can write the formula like this:
+
+\begin{equation*}
+  \perms{k}{n} = \frac{n!}{(n - r)!}
+\end{equation*}
+
+
+\end{document}

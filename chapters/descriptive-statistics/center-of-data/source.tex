@@ -1,0 +1,331 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The center of the data}
+
+Here we will look at another \vocab{statistic} (i.e., a summary number). Here we will look at the \vocab{average} (which we call the \vocab{mean} in statistical contexts). The average of a set of values is the amount that all of them would have if they all shared equally.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The average (mean)}
+
+The \vocab{average} is the \vocab{arithmetic mean}, or just ``the mean'' for short. There is another kind of mean, called the geometric mean, but when we say ``the mean,'' we usually just intend to speak of the arithmetic mean, unless we say otherwise.
+
+The concept behind the mean is the idea of sharing the same amount with everybody. The amount that everyone gets if you divide up something equally, so that everybody gets the same amount --- that is the mean.
+
+The mean is an ideal number though. Most of the time, not everybody gets the same amount. Think of a pie. Suppose there are 9 friends, and they cut up the pie into 9 unequal slices. Some get bigger slices, some get smaller slices. 
+
+Still, if we want to know how much pie everybody gets, we could just imagine that they all get the same sized piece, and say that, \emph{ideally}, if everybody got the same amount, they would all get a piece of such-and-such a size. That ideal amount is the mean.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Calculating the mean}
+
+To calculate the mean, you simply divide the total up equally. So, find the total amount that can be shared (i.e., add up all the values in your data set), and then divide that up equally (i.e., divide it by the total number of observations in your data set). 
+
+So, if $n$ is the number of observations, and $v_{1}$, $v_{2}$, \ldots, $v_{n}$ are the values of observations 1 through $n$, then the formula is this:
+
+\begin{equation*}
+  mean = \frac{v_{1} + v_{2} + \ldots + v_{n}}{n}
+\end{equation*}
+
+
+\subsubsection{Example 1}
+
+For example, suppose we are at a child's birthday party, and eight children are in attendance. We observe how many pieces of candy each child eats, which comes out to this:
+
+\begin{center}
+  1, 4, 2, 7, 9, 2, 4, 1
+\end{center}
+
+\noindent
+To calculate the mean of these observations (the ``average number of candy pieces each child ate''), we would add all those values up, and divide by the total number of observations (which is 8, since there are 8 observations):
+
+\begin{equation*}
+  mean = \frac{1 + 4 + 2 + 7 + 9 + 2 + 4 + 1}{8} = \frac{30}{8} = 3.75
+\end{equation*}
+
+
+\subsubsection{Example 2}
+
+Suppose we weigh the 7th graders in a particular class (suppose there are 23 students in the class). The weights are these:
+
+\begin{center}
+  95, 98, 103, 125, 88, 143, 96, 101, 92, 97, 96, \\
+  99, 100, 132, 79, 104, 95, 90, 107, 99, 98, 156, 94
+\end{center}
+
+\noindent
+To calculate the mean, add up all these values: 
+
+\begin{multline*}
+  95 + 98 + 103 + 125 + 88 + 143 + 96 + 101 + 92 + 97 + 96~+ \\
+  99 + 100 + 132 + 79 + 104 + 95 + 90 + 107 + 99 + 98 + 156 + 94 \\
+  = 2387
+\end{multline*}
+
+\noindent
+Then divide by 23:
+
+\begin{equation*}
+  mean = \frac{2387}{23} = 103.8
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sigma notation}
+
+Suppose we want to sum up the numbers 1 through 5. We could say that like this:
+
+\begin{center}
+  Take a number, call it $i$, and increment it from 1 to 5.  \\
+  Then add all the resulting values together. 
+\end{center}
+
+\noindent
+So, if we follow those instructions, we first set $i$ to 1, then we set $i$ to 2, then we set $i$ to 3, then we set $i$ to 4, and finally we set $i$ to 5. Then we add up each of those numbers. We start with 1, then we add 2, then we add 3, then we add 4, and finally we add 5. 
+
+Since it is tedious to write all those numbers out, we have a compact way to write this. We write it like this:
+
+\begin{equation*}
+  \sum_{i=1}^{5} i
+\end{equation*}
+
+\noindent
+That says just what we said a moment ago: add up $i$ from $i = 1$ to $5$.
+
+The big symbol that looks like a backwards ``3'' is the capital Greek letter sigma. Here it stands for ``sum.'' It tells us that we should start with $i = 1$, and then go up to $i = 5$. The starting number is specified on the bottom of the sigma, and the stopping number is specified at the top of the sigma. Then to the right of the sigma is $i$, which is the expression we should substitute each value of $i$ into, while we add up all the results. So this sigma expression expands like this:
+
+\begin{multline*}
+  \sum_{i=1}^{5} i = \\
+  i\text{ (where i = 1)}~+ \\
+  i\text{ (where i = 2)}~+ \\
+  i\text{ (where i = 3)}~+  \\
+  i\text{ (where i = 4)}~+ \\
+  i\text{ (where i = 5)} = \\
+  1 + 2 + 3 + 4 + 5 = 15
+\end{multline*}
+
+\noindent
+Here is another example:
+
+\begin{equation*}
+  \sum_{i=1}^{5} 2i
+\end{equation*}
+
+\noindent
+This says add up $2i$ (i.e., $2 * i$), from $i = 1$ to $5$. 
+
+So, we first set $i = 1$, and substitute that into $2i$. That is: 2 * 1, which is 2. Next, we set $i = 2$, and substitute that into $2i$. That is: 2 * 2, which is 4. Next we set $i = 3$, and we substitute that into $2i$. That is, 2 * 3, which is 6. We keep doing this, until we have done it up through $i = 5$. Then we add up all those numbers. Like this:
+
+\begin{multline*}
+  \sum_{i=1}^{5} 2i = \\
+  2i\text{ (where i = 1)}~+ \\
+  2i\text{ (where i = 2)}~+ \\
+  2i\text{ (where i = 3)}~+  \\
+  2i\text{ (where i = 4)}~+ \\
+  2i\text{ (where i = 5)} = \\
+  (2 * 1) + (2 * 2) + (2 * 3) + (2 * 4) + (2 * 5) = \\
+  2 + 4 + 6 + 8 + 10 = 30
+\end{multline*}
+
+\noindent
+Here is one more example:
+
+\begin{equation*}
+  \sum_{k=2}^{4} k^{2} + 3
+\end{equation*}
+
+\noindent
+This says add up $k^{2} + 3$, from $k = 2$ to $k = 4$. So we first set $k$ to 2, and substitute that into $k^{2} + 3$, then we do it again for $k = 3$, then again for $k = 4$. Then we add up all those values. Here it is, expanded:
+
+\begin{multline*}
+  \sum_{k=2}^{4} k^{2} + 3 = \\
+  k^{2} + 3 \text{ (where k = 2)}~+ \\
+  k^{2} + 3 \text{ (where k = 3)}~+ \\
+  k^{2} + 3 \text{ (where k = 4)}~+  \\
+  (2^{2} + 3) + (3^{2} + 3) + (4^{2} + 3) = \\
+  7 + 12 + 19 = 38
+\end{multline*}
+
+\noindent
+Above, we said that the formula to calculate the mean is this:
+
+\begin{equation*}
+  mean = \frac{v_{1} + v_{2} + \ldots + v_{n}}{n}
+\end{equation*}
+
+\noindent
+We can use sigma notation to write this even more concisely. The following says we calculate the mean by summing each value $v_{i}$ from $i = 1$ to $n$:
+
+\begin{equation*}
+  mean = \sum_{i=1}^{n} v_{i}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Symbols}
+
+We often speak about two different means: (i) the mean of the entire population, and (ii) the mean of just a sample. We speak about these two kinds of means so frequently that we have special symbols to refer to them, for convenience.
+
+\begin{itemize}
+
+  \item The \vocab{population mean} is typically written as the lowercase Greek letter mu (pronounced ``mew,'' with a ``yeh'' sound right after the ``m,'' like this: ``mmm-you''). It looks like this:
+  
+  \begin{equation*}
+    \populationmean{}
+  \end{equation*}
+  
+  \item The \vocab{sample mean} is typically written as a lower case $x$ with a bar over it (pronounced ``$x$ bar''). It looks like this:
+  
+  \begin{equation*}
+    \samplemean{x}
+  \end{equation*}
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Estimating the mean from a histogram}
+
+Suppose we only have a histogram, or a table with the same information. That is, we know how many observations fall inside some intervals.
+
+For example, suppose we have this table of final exam scores:
+
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+    \textbf{Score} & \textbf{Number of students} \\ \hline
+    60--69.9\% & 3\\ \hline
+    70--79.9\% &  5 \\ \hline
+    80--89.9\% &  12 \\ \hline
+    90--100\% & 6 \\ \hline
+  \end{tabular}
+\end{center}
+
+\noindent
+We can see that 3 students scored somewhere between 60 and 69.9\%, 5 scored between 70 and 79.9\%, 12 between 80 and 89.9\%, and 6 between 90 and 100\%. We don't know the actual scores of each student here, so we can't compute the exact mean.
+
+However, we can estimate it. We can take each interval, and just assume that every student fell exactly in the middle point of that interval.
+
+Take the first bucket: the scores from 60--69.9\%. The middle point of this interval is 65\%. So let's assume that the 3 students got 65\%. Now for the next bucket: 70--79.9\%. The middle point is 75\%, so let's assume 5 students got 75\%. Likewise, the middle point of 80--89.9\% is 85\%, so let's assume 12 students got 85\%, and similarly, let's assume that 6 students got 95\%. So, we're assuming that the scores were this:
+
+\begin{center}
+  65, 65, 65, \\
+  75, 75, 75, 75, 75, \\
+  85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85, \\
+  95, 95, 95, 95, 95, 95
+\end{center}
+
+\noindent
+Now we can calculate the mean of this, just as we would normally. We first add up all the values:
+
+\begin{center}
+  65 + 65 + 65 =  195 \\
+  75 + 75 + 75 + 75 + 75 = 375 \\
+  85 + 85 + 85 + 85 + 85 + 85 + 85 + 85 + 85 + 85 + 85 + 85 = 1020 \\
+  95 + 95 + 95 + 95 + 95 + 95 = 570
+\end{center}
+
+\noindent
+Another way to compute the same thing is to multiply the frequency of each interval by the midpoint. For example, we know there are 3 students with the estimated score of 65. So we don't need to add 65 together three times, like this:
+
+\begin{equation*}
+  65 + 65 + 65 = 195
+\end{equation*}
+
+\noindent
+Instead, we can just multiply 65 by 3 (since multiplying $n$ by $m$ means precisely that one should add $n$ to itself $m$ times):
+
+\begin{equation*}
+  65 * 3 = 195
+\end{equation*}
+
+\noindent
+We can do the same for all the intervals in our table, to make the calculation simpler:
+
+\begin{center}
+  65 * 3 =  195 \\
+  75 * 5 = 375 \\
+  85 * 12 = 1020 \\
+  95 * 6 = 570
+\end{center}
+
+\noindent
+However we do it, we need to sum the values up:
+
+\begin{equation*}
+  195 + 375 + 1020 + 570 = 2160
+\end{equation*}
+
+\noindent
+And once we have the sum, we can divide it by the total number of scores, which is 26, to estimate the mean final exam score:
+
+\begin{equation*}
+  mean = \frac{2160)}{26} = 83.08
+\end{equation*}
+
+\noindent
+This is just an estimate, as we said, but it is not a bad estimate.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The mean vs the median}
+
+\subsubsection{The mean as the center of the data}
+
+As we said, the \vocab{mean} tells us how much of an equal share of all the values each observation gets. But we can think of it as a way of telling us where the ``center'' of the data values are. There reason is this: the mean is always going to be somewhere in between the smallest and the biggest values. 
+
+With 2 values, the mean is exactly the middle. What's the mean of 5 and 10? It's 7.5, which is exactly in the middle between 5 and 10:
+
+\begin{equation*}
+  mean = \frac{5 + 10}{2} = {15}{2} = 7.5
+\end{equation*}
+
+\noindent
+What's the mean of 5, 10, and 15? It's 10, which again is right in the middle of the lowest value (5) and the highest value (15):
+
+\begin{equation*}
+  mean = \frac{5 + 10 + 15}{3} = {30}{3} = 10
+\end{equation*}
+
+\noindent
+In a sense, the mean levels out the high and low ends, and gives us a value somewhere in the middle. So in this sense, it is a \vocab{statistic} that tells us where the ``center'' of the data is.
+
+However, the mean can be affected by really big outliers. Suppose we observe how many pieces of candy 8 children at a birthday party eat, and suppose this is what we see:
+
+\begin{equation*}
+  1, 1, 1, 1, 1, 1, 1, 24
+\end{equation*}
+
+\noindent
+We see that most of the children only had one piece, but one child ate a whopping 24 pieces. I mean, you should have seen her. She just kept stuffing as many pieces of candy into that little mouth as she could.
+
+The mean? It's 3.875:
+
+\begin{equation*}
+  mean = \frac{1 + 1 + 1 + 1 + 1 + 1 + 1 + 24}{8} = 3.875
+\end{equation*}
+
+\noindent
+If we saw the mean alone, and we saw none of the observations, we could be led to think that each child had almost 4 pieces of candy each. But this is not correct. Most children had only 1 piece each.
+
+Of course, the mean \emph{is} a kind of middle point for these values. 3.875 is between the lowest value (1) and the biggest value (24). And it falls closer to the smaller value than the higher value, because there are more of the smaller values (ones) than there are bigger values. So it is still telling us something about where the center of the data is. Nevertheless, it is hard to understand this without looking at the mean \emph{and} the full set of observations themselves.
+
+
+\subsubsection{The median as the center of the data}
+
+The \vocab{median} is also a \vocab{statistic} that tells us where the ``center'' of the data is, in a different sense. What is the median here? The median is found between the 4th and 5th observations, where the value is 1. This observation point is the median because it divides the set of 8 observations up into two chunks, with 4 observations contained in each chunk. 
+
+But does this tell us clearly what the ``middle'' value is? Imagine if you saw only that the median was 1, and you did not see any of the observations. You could easily be misled into thinking that half of the children had 1 or fewer pieces, and half the children had 1 or more pieces. 
+
+Of course, this is true. Indeed, half of the children \emph{did} have 1 or fewer pieces, and the other half of the children \emph{did} have 1 or more pieces. But you really would not have a good picture of the data merely from the median in this way. If you could see all of the observations, you would get a better picture of what is happening.
+
+All of this is to illustrate that the median and mean both tell us a ``center'' or ``middle point'' for the data, but they do not always tell us the whole story. Often, it is important to look at the observations themselves to really understand better. The moral of the story: use good judgment and try to understand the data honestly.
+
+
+\end{document}

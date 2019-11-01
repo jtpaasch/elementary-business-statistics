@@ -1,0 +1,109 @@
+\documentclass{book} % {amsbook}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{subfiles}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{cancel}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,math}
+\tikzset{
+  o-point/.style={circle,draw,inner sep=0.45mm,fill=white},
+  dot-point/.style={circle,draw,inner sep=0.45mm,fill=black},
+  box-node/.style={draw,inner sep=2mm,fill=white},
+  spaced-arrows/.style={>=stealth',shorten >=1pt, shorten <=1pt}
+}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+% \usepgfplotslibrary{external}
+% \tikzexternalize
+
+\newtheorem{example}{Example}
+\numberwithin{example}{section}
+\newtheorem{remark}{Remark}
+\numberwithin{remark}{section}
+\newtheorem{note}{Note}
+\numberwithin{note}{section}
+
+\newcommand\vocab[1]{\textbf{#1}}
+\newcommand\popnum{N}
+\newcommand\samplenum{n}
+\newcommand\samplemean[1]{\overline{#1}}
+\newcommand\populationmean{\mu}
+\newcommand\samplevariance{s^{2}}
+\newcommand\populationvariance{\sigma^{2}}
+\newcommand\samplestdev{s}
+\newcommand\populationstdev{\sigma}
+\newcommand\perms[2]{\mathbf{P}(#1, #2)}
+\newcommand\combs[2]{\mathbf{C}(#1, #2)}
+\def\RandVar/{X}
+\def\RandVarVal/{x}
+\def\numTrials/{n}
+\def\success/{p}
+\def\failure/{q}
+\def\PDF/{\mathsf{Pdf}}
+\def\PDFtext/{$\PDF/$}
+\newcommand\Pdf[1]{\mathsf{Pdf(#1)}}
+\newcommand\Probability[1]{P(#1)}
+\newcommand\Binom[1]{b(#1)}
+\def\CDF/{\mathsf{Cdf}}
+\def\CDFtext/{$\CDF/$}
+\newcommand\Cdf[1]{\mathsf{Cdf(#1)}}
+
+
+\begin{document}
+
+\frontmatter 
+
+\title{Business Statistics Notes}
+\author{JT Paasch}
+
+\maketitle
+\newpage
+
+\thispagestyle{empty}
+\mbox{}\vfill
+
+\begin{center}
+Last updated \today.
+\end{center}
+
+\tableofcontents
+
+\mainmatter
+
+\subfile{chapters/introduction/source}
+
+\part{Descriptive statistics}
+
+\subfile{chapters/descriptive-statistics/data-and-sampling/source}
+\subfile{chapters/descriptive-statistics/visualizing-data/source}
+\subfile{chapters/descriptive-statistics/location-of-data/source}
+\subfile{chapters/descriptive-statistics/center-of-data/source}
+\subfile{chapters/descriptive-statistics/spread-of-data/source}
+
+\part{Probability}
+
+\subfile{chapters/probability/set-theory/source}
+\subfile{chapters/probability/graphs-and-trees/source}
+\subfile{chapters/probability/permutations/source}
+\subfile{chapters/probability/calculating-permutations/source}
+\subfile{chapters/probability/combinations/source}
+\subfile{chapters/probability/probability-basics/source}
+
+\subfile{chapters/probability/calculating-probabilities/source}
+\subfile{chapters/probability/alternatives/source}
+\subfile{chapters/probability/conditional-probability/source}
+\subfile{chapters/probability/combined-probabilities/source}
+
+\subfile{chapters/probability/discrete-random-variables/source}
+\subfile{chapters/probability/discrete-pdfs/source}
+\subfile{chapters/probability/binomial/source}
+
+\subfile{chapters/probability/from-discrete-to-continuous/source}
+\subfile{chapters/probability/probability-as-area/source}
+\subfile{chapters/probability/continuous-uniform-distributions/source}
+
+\end{document}

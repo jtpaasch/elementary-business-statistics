@@ -1,0 +1,174 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Alternatives}
+
+Suppose I want to know the probability of outcome $A$, OR outcome $B$. That is, suppose I want to know the probability of getting one out of a set of \vocab{alternatives}. We can calculate this by \vocab{adding} up the probabilities of $A$ and $B$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 1}
+
+Suppose I want to roll a six-sided die, and suppose I want to know the probability of rolling a one OR a six. The sample space is thus:
+
+\begin{equation*}
+  S = \{ 1, 2, 3, 4, 5, 6 \}
+\end{equation*}
+
+\noindent
+Outcome $A$ is rolling a one, so:
+
+\begin{equation*}
+  A = \{ 1 \}
+\end{equation*}
+
+\noindent
+And outcome $B$ is rolling a six:
+
+\begin{equation*}
+  B = \{ 6 \}
+\end{equation*}
+
+\noindent
+What is the probability of getting $A$ or $B$, that is, of rolling a 1 or a 6? If you think about it, there are two ways I can get my desired outcome here. I can roll a 1, or I can roll a 6. Either way, I get what I want. So there are 2 ways to get what I want, out of 6 possible outcomes, hence the probability is $\frac{2}{6}$.
+
+Notice that to get this number, we simply need to add up the probabilities of $A$ and $B$. The probability of $A$ is $\frac{1}{6}$, and the probability of $B$ is $\frac{1}{6}$. If you add them together, you get $\frac{2}{6}$, which is indeed the probability of getting $A$ or $B$:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 2}
+
+Suppose I want to roll a six-sided die, and suppose I want to know the probability of rolling an even number OR an odd number. The sample space is as before, $A$ is a 2, 4, or 6, and $B$ is a 1, 3, or 5:
+
+\begin{align*}
+  S &= \{ 1, 2, 3, 4, 5, 6 \} \\
+  A &= \{ 2, 4, 6 \} \\
+  B &= \{ 1, 3, 5 \}
+\end{align*}
+
+\noindent
+What is the probability of getting $A$ or $B$? If you think about it, there are three ways to get an even number (I can roll a 2, 4, or 6), and there are three ways to get an odd number (I can roll a 1, 3, or 5), so there are a total of six ways to get one of my desired outcomes. Hence, the probability is $\frac{6}{6}$ (in other words, I will definitely roll one of my desired outcomes).
+
+Again, though, notice that we can get this answer simply by adding the probabilities of $A$ and $B$:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) = \frac{3}{6} + \frac{3}{6} = \frac{6}{6}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 2}
+
+Suppose I want to roll a six-sided die, and suppose I want to know the probability of rolling an even number OR an odd number. The sample space is as before, $A$ is a 2, 4, or 6, and $B$ is a 1, 3, or 5:
+
+\begin{align*}
+  S &= \{ 1, 2, 3, 4, 5, 6 \} \\
+  A &= \{ 2, 4, 6 \} \\
+  B &= \{ 1, 3, 5 \}
+\end{align*}
+
+\noindent
+What is the probability of getting $A$ or $B$? If you think about it, there are three ways to get an even number (I can roll a 2, 4, or 6), and there are three ways to get an odd number (I can roll a 1, 3, or 5), so there are a total of six ways to get one of my desired outcomes. Hence, the probability is $\frac{6}{6}$ (in other words, I will definitely roll one of my desired outcomes).
+
+Again, though, notice that we can get this answer simply by adding the probabilities of $A$ and $B$:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) = \frac{3}{6} + \frac{3}{6} = \frac{6}{6}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 3}
+
+Suppose I want to roll a six-sided die, and suppose I want to know the probability of rolling a 1, 2, 3, OR a 3, 4, 5. So the sample space is as before, $A$ is a 1, 2, 3, and $B$ is a 3, 4, 5:
+
+\begin{align*}
+  S &= \{ 1, 2, 3, 4, 5, 6 \} \\
+  A &= \{ 1, 2, 3 \} \\
+  B &= \{ 3, 4, 5 \}
+\end{align*}
+
+\noindent
+What is the probability of getting $A$ or $B$? If you think about it, there are three ways to get $A$ (I can roll a 1, 2, or 3), and there are three ways to get $B$ (I can roll a 3, 4, or 5). So I can roll a 1, 2, or 3, or I can roll a 3, 4, or 5, to get one of the desired outcomes in $A$ and $B$. However, one of those outcomes is duplicated (rolling a 3), so we remove the extra duplicate. Hence, there are 5 ways I can get one of my desired outcomes: I can roll a 1, 2, 3, 4, or 5.
+
+How do we compute this using the basic adding technique we did in the last two examples? Well, if we just add up the probabilities of $A$ and $B$ directly, we get $\frac{6}{6}$, since the probability of $A$ is $\frac{3}{6}$ and the probability of $B$ is $\frac{3}{6}$:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) = \frac{3}{6} + \frac{3}{6} = \frac{6}{6}
+\end{equation*}
+
+\noindent
+But that's not correct. A probability of 6 out of 6 means I will \emph{definitely} get one of my desired outcomes. But that does not hold in this case. What if I roll a 6? A six is in neither of the outcome sets $A$ or $B$. 
+
+So merely adding the probabilities must not tell the whole story. And indeed that's right. Can you see what the problem is? The problem is that there is a duplicate in $A$ and $B$. The number 3 is an outcome in \emph{both} $A$ and $B$. But when we added the probabilities of $A$ and $B$, we counted it twice, which we shouldn't have. We really only want to count it once. 
+
+So in fact, what we need to do is add the probabilities of $A$ and $B$, but then take away extra counts for duplicates. Like this:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) - \text{ duplicates }
+\end{equation*}
+
+\noindent
+How do we find the duplicates? Well, we find the elements that are in both $A$ and $B$. And we can use the set \vocab{intersection} for that. Recall that the intersection of two sets $A$ and $B$ is all the elements they have in common. We write the intersection of $A$ and $B$ like this: $A \cap B$. So we can put this into our equation:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) - P(A \cap B)
+\end{equation*}
+
+\noindent
+Let's redo our example, using this equation. First, let's compute $P(A)$, $P(B)$, and $P(A \cap B)$ independently:
+
+\begin{itemize}
+
+  \item The probability of $A$ --- that is, $P(A)$ --- is $\frac{3}{6}$, because there are three ways I can get an outcome in $A$ (I can roll a 1, 2, or 3).
+  
+  \item The probability of $B$  --- that is, $P(B)$ --- is also $\frac{3}{6}$, because there are three ways I can get an outcome in $B$ too (I can roll a 3, a 4, or a 5).
+  
+  \item How many outcomes do $A$ and $B$ have in common? Well $A \cap B$ is $\{ 3 \}$, so there is one outcome that $A$ and $B$ have in common. And what is the probability of that? That is, what is the probability of $P(A \cap B)$? Well, it is $\frac{1}{6}$, since there is one way (out of six possible outcomes) to get a 3. Hence, $P(A \cap B) = \frac{1}{6}$.
+  
+\end{itemize} 
+
+\noindent
+Now let's put those numbers together in our equation:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) - P(A \cap B) = \frac{3}{6} + \frac{3}{6} - \frac{1}{6} = \frac{5}{6}
+\end{equation*}
+
+\noindent
+And now we have the right answer. There are indeed 5 total ways to get one of the outcomes in $A$ or $B$: we can roll a one, a two, a three, a four, or a five. Hence, the probability is $\frac{5}{6}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The addition rule}
+
+With that, we have come up with the addition rule for probabilities:
+
+\begin{equation*}
+  P(A \text{ or } B) = P(A) + P(B) - P(A \cap B)
+\end{equation*}
+
+\noindent
+This also works for more than just two alternatives. We can make these equations even more general to handle cases where we want to know the probability of $A$, OR $B$, OR $C$, OR $\ldots$~:
+
+\begin{equation*}
+  P(A \text{ or } B \text{ or } \ldots~) = P(A) + P(B) + \ldots - P(A \cap B \cap \ldots~)
+\end{equation*}
+
+\noindent
+We use the addition rule when we want to know the probability of alternatives, which is signaled by our use of the word ``or'' (as in, what is the probability of $A$ OR $B$ OR $\ldots$~). If you want to know the probability of $A$ OR $B$ OR $\ldots$~, then use the addition rule.
+
+
+\end{document}

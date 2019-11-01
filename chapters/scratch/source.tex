@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Collecting data}
+
+Take a collection of objects --- say, all the Audi R8s that were purchased last year in your home town. Now take some particular feature that each of those objects has --- say, their color. 
+
+Now write down the color of each car next to its purchase date. Suppose the resulting table looks like this:
+
+\begin{table}[!htbp]
+  \begin{tabular}{| c | c || c | c || c | c || c | c |}
+    \hline
+    \textbf{Date} & \textbf{Color} & \textbf{Date} & \textbf{Color} & \textbf{Date} & \textbf{Color} & \textbf{Date} & \textbf{Color} \\ \hline
+    Jan 01 & White & Apr 24 & Yellow & July 06 & Black & Nov 07 & Black \\ \hline
+    Jan 14 & Red & Apr 26 & Black & July 19 & Yellow & Nov 14 & Black \\ \hline
+    Jan 28 & Black & May 03 & Black & Aug 23 & White & Nov 17 & White \\ \hline
+    Feb 14 & White & May 09 & White & Aug 24 & Red & Nov 19 & Yellow \\ \hline
+    Feb 21 & White & May 21 & White & Sep 11 & Yellow & Nov 27 & Black \\ \hline
+    Feb 27 & Red & June 14 & Black & Sep 17 & Black & Dec 22 & White \\ \hline
+    Mar 03 & Black & June 21 & Yellow & Sep 23 & Brown & Dec 23 & White \\ \hline
+    Mar 11 & White & June 27 & Black & Sep 28 & Black & Dec 24 & Red \\ \hline
+    Apr 10 & White & July 01 & White & Oct 24 & White & Dec 25 & White \\ \hline
+    Apr 11 & Yellow & July 04 & White & Nov 04 & Yellow & Dec 26 & White \\ \hline
+    Apr 20 & Black & July 05 & Brown & Nov 05 & White & Dec 30 & Yellow \\ \hline
+  \end{tabular}
+  \caption{\label{table:R8 raw data} Colors of Audi R8s sold last year in your home town}
+\end{table}
+
+What we have just done is collected some data from a sample. We took a collection of objects (in this case, the R8s purchased in your home town last year), and we wrote down some particular feature or features of those objects (in this case, we noted their color and purchase date).
+
+Now we can study this data, and maybe even discover something of interest. For example, by counting up the totals for each color, we can discover whether more white or brown R8s were sold. (Exercise: How many white R8s were sold? How many brown ones?)
+
+Descriptive statistics begins with just this idea. We have a collection of objects, and we record some feature or features that each of those objects has. What we write down is called a data set. \vocab{Descriptive statistics} is a set of concepts and techniques that help us \emph{describe} data sets. It helps us understand and summarize the information contained in a data set.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plots}
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \draw[->] (0, 0) -- (0, 4);
+    \draw (-0.1, 1) -- (0.1, 1);
+    \node (ytick1) at (0, 1) [label=left:{1}] {};
+    \draw (-0.1, 2) -- (0.1, 2);
+    \node (ytick2) at (0, 2) [label=left:{2}] {};
+    \draw (-0.1, 3) -- (0.1, 3);
+    \node (ytick3) at (0, 3) [label=left:{3}] {};
+
+    \draw[->] (0, 0) -- (6, 0);
+    \draw (1, -0.1) -- (1, 0.1);
+    \node (xtick1) at (1, 0) [label=below:{1}] {};
+    \draw (3, -0.1) -- (3, 0.1);
+    \node (xtick3) at (3, 0) [label=below:{3}] {};
+    \draw (5, -0.1) -- (5, 0.1);
+    \node (xtick5) at (5, 0) [label=below:{5}] {};
+    
+  \end{tikzpicture}
+\end{center}
+

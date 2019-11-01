@@ -1,0 +1,151 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Probability basics}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experiments, outcomes, and events}
+
+Some vocabulary:
+
+\begin{itemize}
+
+  \item An \vocab{experiment} is a particular operation that we perform. For example, we might flip a coin, or we might roll some dice. 
+  
+  \item A \vocab{chance experiment} is an experiment with a result that is not predetermined. For example, when flipping a coin, it is up to chance whether it comes up heads or tails.
+
+  \item The \vocab{outcomes} of an experiment is how the experiment turns out. For example, if I flip a coin, then the outcome might be heads, or it might be tails. 
+  
+  \item The \vocab{sample space} is the total set of possible outcomes that an experiment can have. We often write $S$ as a shorthand for the sample space. For example, if I flip a coin, the sample space $S$ is the set $\{ H, T \}$ (where $H$ and $T$ stand for heads and tails, respectively). 
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Probability}
+
+\vocab{Probability} is the likelihood of a particular outcome occurring in an experiment. 
+
+For example, suppose I want to know the probability of rolling a three with a six sided die. Here are two equivalent ways of asking the same thing:
+
+\begin{itemize}
+  \item What is the likelihood of rolling a three (with a six sided die)?
+  \item What is the probability of rolling a three (with a six sided die)? 
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equally likely outcomes}
+
+The outcomes of an experiment can all be equally likely, or some can be more likely than others. Consider the following.
+
+\begin{itemize}
+
+  \item If I have a coin that is specially weighted on one side (the heads side), then it is more likely that the coin will come up heads during a coin flip. 
+
+  \item If I have coin that is \vocab{fair} (meaning it is equally weighted on both sides), then it is just as likely that it will come up heads as it will tails.
+  
+\end{itemize}
+
+\noindent
+For now, we will always focus on experiments with outcomes that are equally likely. Here are some examples of experiments whose outcomes are equally likely:
+
+\begin{itemize}
+  \item Flipping a fair coin (getting heads or tails is equally likely).
+  \item Rolling a fair six-sided die (getting any of the six numbers is equally likely).
+  \item Drawing a card from a well shuffled deck (getting any of the cards is equally likely).
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calculating the probability}
+
+The probability of a particular outcome (or outcomes) of an experiment is computed by dividing the number of outcomes you want to know the likelihood of occurring by the total number of possible outcomes. 
+
+More exactly, let $A$ be the set of particular outcomes you want to know the likelihood of occurring, and let $S$ be the sample space (i.e., all possible outcomes). Then the probability is computed by dividing the number of items in $A$ by the number of items in $S$, which we will write like this:
+
+\begin{equation*}
+  probability~of~A = \frac{num(A)}{num(S)}
+\end{equation*}
+
+\noindent
+Instead of saying ``the probability of $A$,'' we will just write ``$P(A)$.'' So the formula is better written like this:
+
+\begin{equation*}
+  P(A) = \frac{num(A)}{num(S)}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 1}
+
+What is the probability of rolling a 3 with a six sided die? What is the sample space? There are 6 possible outcomes: you can roll a one, a two, a three, and so on up to six. So the sample space $S$ is the following set of outcomes: 
+
+\begin{equation*}
+  S = \{ 1, 2, 3, 4, 5, 6 \}
+\end{equation*}
+
+\noindent
+What is the outcome we want to know the likelihood of? It is rolling a 3. So our desired outcome $A$ is the following set:
+
+\begin{equation*}
+  A = \{ 3 \}
+\end{equation*}
+
+\noindent
+So, what is the probability of $A$? That is to say, what is the probability of rolling a 3? Well, we have 1 item in $A$, and 6 items in $S$. So the probability of $A$ is one out of six:
+
+\begin{equation*}
+  P(A) = \frac{1}{6} = 1.667
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 2}
+
+If I have a standard 52-card deck of cards, and I can draw one card, what is the probability of drawing an Ace? What is the sample space $S$? All 52 cards:
+
+\begin{equation*}
+  S = \{ \mathsf{A, A, A, A, K, K, K, K,} \ldots, 10, 10, 10, 10, \ldots, 2, 2, 2, 2 \}
+\end{equation*}
+
+\noindent
+What is the outcome we want? An Ace, and there are 4 Aces in the sample space. So our desired outcome $A$ is the following set:
+
+\begin{equation*}
+  A = \{ \mathsf{A, A, A, A} \}
+\end{equation*}
+
+\noindent
+What is the probability of drawing an Ace? There are 4 items in $A$, and 52 items in $S$. So the probability of $A$ is four out of fifty-two:
+
+\begin{equation*}
+  P(A) = \frac{4}{52} = 0.77
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Long-run probability}
+
+Sometimes people will talk about probability as the ``long-run probability.'' This just means that the probability of an event occurring is the frequency of it happening if we repeat the outcome an infinite number of times. 
+
+For instance, what is the probability of getting heads when you flip a coin? Well, suppose we flipped a coin a whole lot of times. Thousands and thousands of times. And suppose that each time we flipped it, we recorded if we got heads or tails. 
+
+Over a very large number of coin flips, we would find that the number of times we got heads gets very close to 0.5. Maybe the actual number is 0.499873929. But the idea is just that the more times we flip the coin, the closer we get to 0.5. And so, this 0.5 limit, which we get very close to as we flip the coin over and over and over lots and lots of times, is the probability of getting heads.
+
+But when we talk about limits or numbers that we get very close to by repeating an experiment lots and lots of times is a matter of calculus, and we don't need to think about that too much here. Most of the time, we can just calculate the probability in the way we said earlier, simply by dividing the number of outcomes by the number of items in the sample space. 
+
+
+\end{document}

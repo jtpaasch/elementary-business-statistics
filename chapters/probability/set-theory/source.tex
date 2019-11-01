@@ -1,0 +1,565 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Set theory}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sets}
+
+A \vocab{set} is any collection of objects. We designate a set by listing the items, separated by commas, and surrounding the list with curly braces. Here is a set:
+
+\begin{center}
+$\{$ Samantha, Tomasso, Eugene $\}$
+\end{center}
+
+\noindent
+To save space, we typically use single characters instead of long names. For instance, instead of writing ``Samatha,'' ``Tomasso,'' and ``Eugene,'' we could just write:
+
+\begin{center}
+$\{$ a, b, c $\}$
+\end{center}
+
+\noindent
+We can assign names to sets. For example, we might pick a capital roman latter as a name for a set, like $A$, $B$, or $C$. This assigns the name $A$ to the set $\{ a, b, c \}$:
+
+\begin{equation*}
+A = \{ a, b, c \}
+\end{equation*}
+
+\noindent
+We say the objects in the set are \vocab{members} of the set. We also say they are \vocab{elements} of the set. Members and elements are synonyms.
+
+We can say that an element $a$ is a member of a set $A$ by using the membership symbol $\in$, which is supposed to be a fancy capital ``E'' (for ``element''). This says $b$ is in the set $A$:
+
+\begin{equation*}
+b \in A
+\end{equation*}
+
+\noindent
+We can say multiple elements are in a set by listing them before the membership symbol. This says $a$ and $b$ are in the set $A$:
+
+\begin{equation*}
+a, b \in A
+\end{equation*}
+
+\noindent
+Sometimes we use ellipses to indicate that a set has more members than we want to write. For example, this specifies the set of numbers 1 through 7:
+
+\begin{equation*}
+B = \{ 1, \ldots, 7 \}
+\end{equation*}
+
+\noindent
+Instead of listing every member in a set, you can instead specify a rule that tells us how to construct the set. For instance, we can say: ``the set of all $x$s such that each $x$ is greater than $0$.'' We write that like so:
+
+\begin{equation*}
+C = \{ x \mid x > 0 \}
+\end{equation*}
+
+\noindent
+A \vocab{subset} of a set is a selection of elements from the set. A set $A$ is a subset of $B$ if every element in $A$ is in $B$. We use a horseshoe with a line under it to symbolize that $A$ is a subset of $B$:
+
+\begin{equation*}
+A \subseteq B
+\end{equation*}
+
+\noindent
+A subset may be identical to the parent set. If it is smaller, so that there is at least one element in the parent set that is not in the subset, we say it is a \vocab{proper subset}. We write that with a horseshoe, minus the line underneath it:
+
+\begin{equation*}
+A \subset B
+\end{equation*}
+
+\noindent
+Two sets are the same if they have exactly the same members. More exactly, set $A$ is the same as $B$ iff (if and only if) every element of $A$ is in $B$, and every element of $B$ is in $A$. That is, iff $A \subset B$ and $B \subset A$. We call this the \vocab{extensionality} of sets.
+
+Order does not matter. This is a consequence of extensionality. These are the same sets, because they have the same members:
+
+\begin{equation*}
+\{ a, b, c \} = \{ b, a, c \}
+\end{equation*}
+
+\noindent
+Repeats do not matter in sets either. This too is a consequence of extensionality. These are the same sets, because they each have the same members:
+
+\begin{equation*}
+\{ a, b \} = \{ a, b, b, a \}
+\end{equation*}
+
+\noindent
+The \vocab{union} of two sets is the combination of both sets into one big set. We write the union of $A$ and $B$ like this:
+
+\begin{equation*}
+A \cup B
+\end{equation*}
+
+\noindent
+For example, suppose $A$ and $B$ are these two sets:
+
+\begin{align*}
+  A = \{ a, b, c, d \} \\
+  B = \{ c, d, e \}
+\end{align*}
+
+\noindent
+Then the union of the two --- i.e., $A \cup B$ --- would include all the elements in $A$ and all the elements in $B$:
+
+\begin{equation*}
+  A \cup B = \{ a, b, c, d, e \}
+\end{equation*}
+
+\noindent
+The \vocab{intersection} of two sets is the set that includes only the elements that are in both. We symbolize the intersection of $A$ and $B$ like this:
+
+\begin{equation*}
+A \cap B
+\end{equation*}
+
+\noindent
+For example, if we take the same sets $A$ and $B$ from before, then the intersection of them will include only those items that are in both sets:
+
+\begin{equation*}
+  A \cap B = \{ c, d \}
+\end{equation*}
+
+\noindent
+The \vocab{difference} of two sets is the first set with all the elements of the second set removed. We write $A$ minus $B$ like this:
+
+\begin{equation*}
+A - B
+\end{equation*}
+
+\noindent
+For example, if we take the same sets $A$ and $B$ from before, then $A$ minus $B$ will include everything in $A$, with anything in $B$ taken out:
+
+\begin{equation*}
+  A - B = \{ a, b \}
+\end{equation*}
+
+\noindent
+Similarly, $B$ minus $A$ will include everything in $B$, with anything in $A$ taken out:
+
+\begin{equation*}
+  B - A = \{ e \}
+\end{equation*}
+
+\noindent
+The \vocab{complement} of a set includes all items that are not in the set. We write the complement of a set $A$ like this:
+
+\begin{equation*}
+  \overline{A}
+\end{equation*}
+
+\noindent
+For example, suppose the total available items are $a$, $b$, $c$, $d$, $e$, $f$, and $g$, and suppose that $A$ is the set defined before:
+
+\begin{equation*}
+  A = \{ a, b, c, d \}
+\end{equation*}
+
+\noindent
+The complement of $A$ is everything from the total items that is not in $A$:
+
+\begin{equation*}
+  \overline{A} = \{ e, f, g \}
+\end{equation*}
+
+\noindent
+A set can have no members. If it is empty, it is called the \vocab{empty set}. We write it like this:
+
+\begin{equation*}
+\{ \}
+\end{equation*}
+
+\noindent
+Or this:
+
+\begin{equation*}
+\varnothing
+\end{equation*}
+
+\noindent
+There is only \vocab{one empty set}. This is due to extensionality. Sets with the same members are the same set. The empty set has no members, so every occurrence of it is just an occurrence of the same, empty set.
+
+Sets can be members of other sets. This is a set:
+
+\begin{equation*}
+\{ a, b, \{ 1, 2, 3 \}, \{ a, b \}, c \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multisets}
+
+A \vocab{multiset} is a set that does allow multiple repeats of an element. For instance, this is a multiset, because $a$ occurs three times:
+
+\begin{equation*}
+\{ a, a, b, c, a \}
+\end{equation*}
+
+\noindent
+We can represent a multiset as a list of counts or tallies of the elements. For instance, the previous multiset can be represented like this:
+
+\begin{equation*}
+a: 3, b: 1, c: 1
+\end{equation*}
+
+\noindent
+Two multisets are the same if they have the same members, and the same counts. 
+
+Order does not matter in a multiset. These are the same multsets:
+
+\begin{equation*}
+\{ a, a, b, a \} = \{ a, b, a, a \}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sequences and Tuples}
+
+A \vocab{sequence} is a multiset where repeats and order does matter. We typically write sequences as an ordered list, surrounded by round braces:
+
+\begin{equation*}
+( a, b, c, d )
+\end{equation*}
+
+\noindent
+Sometimes people write them with angled braces:
+
+\begin{equation*}
+\langle a, b, c, d \rangle
+\end{equation*}
+
+\noindent
+Two sequences are the same if they have the same members, and the same counts, in the same order. These are the same sequences:
+
+\begin{equation*}
+\{ a, b, a, a \} = \{ a, b, a, a \}
+\end{equation*}
+
+\noindent
+But these are not:
+
+\begin{equation*}
+\{ a, b, a, a \} = \{ a, a, b, a \}
+\end{equation*}
+
+\noindent
+A \vocab{tuple} is a sequence with a fixed number of elements. 
+
+A 1-tuple is a sequence with one item. A 2-tuple (also called a \vocab{pair}) is a sequence of two items. A 3-tuple (triple) is a sequence of 3-items, and so on. 
+
+For example, here are some pairs:
+
+\begin{center}
+$(2, 4)$ \\
+$(3, 4)$ \\ 
+$(a, b)$ \\
+(Jonas, Jennifer)
+\end{center}
+
+\noindent
+Here are some triples:
+
+\begin{center}
+$(2, 4, 4)$ \\
+$(3, a, 6)$ \\ 
+$(a, b, 2)$ \\
+(Jonas, Jennifer, Sally)
+\end{center}
+
+\noindent
+Here are some 4-tuples:
+
+\begin{center}
+$(2, 4, 4, 2)$ \\
+$(3, a, 6, b)$ \\ 
+$(a, b, 2, b)$ \\
+(Jonas, Jennifer, Sally, Ginezone, Inc.)
+\end{center}
+
+\noindent
+The number of items in a tuple is called its \vocab{arity}. The arity of a pair is 2, the arity of a triple is 3, and the arity of a 4-tuple is 4.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Relations}
+
+A \vocab{relation} is a set of tuples, where the first item from each tuple is taken from one set, the second item is taken from another set, and so on.
+
+For instance, if you have the sets $A = \{ a, b, c \}$ and $B = \{ 1, 2 \}$, a relation would be $\{ (a, 1), (a, 2), (c, 2) \}$.
+
+You can draw simple relations as follows. Put all the items from the first set on the left side of the page and all the items from the second set on the right side of the page, then draw lines from items on the left to items on the right to show which ones are paired up. 
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a) [] {$a$};
+  \node[] (b) [below=of a] {$b$};
+  \node[] (c) [below=of b] {$c$};
+  \node[] (one) [right=6cm of a] {$1$};
+  \node[] (two) [right=6cm of b] {$2$};
+
+  \path[->] (a) edge (one);
+  \path[->] (a) edge (two);
+  \path[->] (c) edge (two);
+
+\end{tikzpicture}\end{center}
+
+\noindent
+The above example is a 2-place relation, meaning that it is a set of pairs (2-tuples).
+
+A relation needn't be a 2-place relation. There can be more items that are related. Here is a 3-place relation. Suppose we have three sets: 
+
+\begin{center}
+$A = \{ a, b, c \}$ \\
+$B = \{ 1, 2 \}$ \\
+$C = \{ x, y, z \}$
+\end{center}
+
+\noindent
+A relation on these three sets might be this:
+
+\begin{equation*}
+\{ (a, 1, y), (a, 2, y), (a, 2, z), (c, 2, y), (c, 2, z ) \}
+\end{equation*}
+
+\noindent
+We can diagram that relation like this:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a) [] {$a$};
+  \node[] (b) [below=of a] {$b$};
+  \node[] (c) [below=of b] {$c$};
+  \node[] (one) [right=3cm of a] {$1$};
+  \node[] (two) [right=3cm of b] {$2$};
+  \node[] (x) [right=3cm of one] {$x$};
+  \node[] (y) [right=3cm of two] {$y$};
+  \node[] (z) [below=of y] {$z$};
+
+  \path[->] (a) edge (one);
+  \path[->] (a) edge (two);
+  \path[->] (c) edge (two);
+  \path[->] (one) edge (y);
+  \path[->] (two) edge (y);
+  \path[->] (two) edge (z);
+
+\end{tikzpicture}\end{center}
+
+\noindent
+A relation between 2 sets a 2-place relation. It is also called a \vocab{binary relation}. A relation between 3 sets is a 3-place relation. 
+
+The number of places in a relation is called the \vocab{arity} or \vocab{places} of the relation. The arity of a binary relation (a 2-place relation) is 2. The arity of a 3-place relation is 3. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Self-Relations}
+
+A relation connects objects from one set to objects from one or more other sets. However, those sets don't always need to be different sets. They can be the same set.
+
+Suppose we have a set $A = \{ 1, 2, 3, 4 \}$. Here is a relation from $A$ to $A$:
+
+\begin{center}
+\begin{tikzpicture}[]
+
+  \node[] (a1) [] {$1$};
+  \node[] (a2) [below=of a1] {$2$};
+  \node[] (a3) [below=of a2] {$3$};
+  \node[] (a4) [below=of a3] {$4$};
+
+  \node[] (b1) [right=6cm of a1] {$1$};
+  \node[] (b2) [right=6cm of a2] {$2$};
+  \node[] (b3) [right=6cm of a3] {$3$};
+  \node[] (b4) [right=6cm of a4] {$4$};
+
+  \path[->] (a1) edge (b1);
+  \path[->] (a2) edge (b2);
+  \path[->] (a3) edge (b3);
+  \path[->] (a4) edge (b4);
+
+\end{tikzpicture}
+\end{center}
+
+\noindent
+That is:
+
+\begin{equation*}
+R = \{ (1, 1), (2, 2), (3, 3), (4, 4) \}
+\end{equation*}
+
+\noindent
+This relation connects every object in $A$ to itself. 
+
+In this diagram, we \textit{draw} the set twice: we draw it once on the left side of the diagram, and we draw it another time on the right side of the diagram, then we draw arrows between them.
+
+But there are not really two sets here. There is just one. We could draw the picture differently, like this:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a1) [] {$1$};
+  \node[] (a2) [below=of a1] {$2$};
+  \node[] (a3) [below=of a2] {$3$};
+  \node[] (a4) [below=of a3] {$4$};
+
+  \path[->] (a1) edge[loop, looseness=5, out=-45, in=-135] (a1);
+  \path[->] (a2) edge[loop, looseness=5, out=-45, in=-135] (a2);
+  \path[->] (a3) edge[loop, looseness=5, out=-45, in=-135] (a3);
+  \path[->] (a4) edge[loop, looseness=5, out=-45, in=-135] (a4);
+
+\end{tikzpicture}\end{center}
+
+Here is another relation from $A$ to $A$:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a1) [] {$1$};
+  \node[] (a2) [below=of a1] {$2$};
+  \node[] (a3) [below=of a2] {$3$};
+  \node[] (a4) [below=of a3] {$4$};
+
+  \node[] (b1) [right=6cm of a1] {$1$};
+  \node[] (b2) [right=6cm of a2] {$2$};
+  \node[] (b3) [right=6cm of a3] {$3$};
+  \node[] (b4) [right=6cm of a4] {$4$};
+
+  \path[->] (a1) edge (b2);
+  \path[->] (a2) edge (b3);
+  \path[->] (a3) edge (b4);
+
+\end{tikzpicture}\end{center}
+
+\noindent
+That is:
+
+\begin{equation*}
+R = \{ (1, 2), (2, 3), (3, 4) \}
+\end{equation*}
+
+\noindent
+This relation connects every object in $A$ to the next larger object.
+
+In that diagram, we \textit{drew} the set $A$ twice, but there are not really two sets here. There is just the one set, $A$. We could draw it differently, like this:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a1) [] {$1$};
+  \node[] (a2) [below=of a1] {$2$};
+  \node[] (a3) [below=of a2] {$3$};
+  \node[] (a4) [below=of a3] {$4$};
+
+  \path[->] (a1) edge[loop, looseness=2, out=0, in=45] (a2);
+  \path[->] (a2) edge[loop, looseness=2, out=0, in=45] (a3);
+  \path[->] (a3) edge[loop, looseness=2, out=0, in=45] (a4);
+
+\end{tikzpicture}\end{center}
+
+There are many ways to diagram relations. A common technique is what we did here: the objects get represented at different points on the page, and the connections get represented by lines connecting the objects.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Functions}
+
+A \vocab{function} is a special binary relation. A function is a binary relation where each element in the first set is connected to one element in the second set. The following is not a function, because $b$ is not connected to anything:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a) [] {$a$};
+  \node[] (b) [below=of a] {$b$};
+  \node[] (c) [below=of b] {$c$};
+  \node[] (one) [right=6cm of a] {$1$};
+  \node[] (two) [right=6cm of b] {$2$};
+
+  \path[->] (a) edge (two);
+  \path[->] (c) edge (two);
+
+\end{tikzpicture}\end{center}
+
+\noindent
+But this is a function, because each element on the left is associated with an element on the right:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a) [] {$a$};
+  \node[] (b) [below=of a] {$b$};
+  \node[] (c) [below=of b] {$c$};
+  \node[] (one) [right=6cm of a] {$1$};
+  \node[] (two) [right=6cm of b] {$2$};
+
+  \path[->] (a) edge (two);
+  \path[->] (b) edge (one);
+  \path[->] (c) edge (two);
+
+\end{tikzpicture}\end{center}
+
+\noindent
+Every element on the right does not need to have an arrow connected to it, and more than one arrow can point to the same element on the right. The key point for a function has to do with the left side of the picture: each item on the left has to be connected to some item (any item) on the right.
+
+We can write out the above function as a set of pairs, like this:
+
+\begin{equation*}
+F = \{ (a, 2), (b, 1), (c, 2) \}
+\end{equation*}
+
+\noindent
+We can use the notation $F(x) = y$ to refer to a particular value in a function. For instance, in the above function, $F(a) = 2$, $F(b) = 1$, and $F(c) = 2$.
+
+The set we draw on the left in a function diagram is called the \vocab{domain} of the function, and the set we draw on the right is called the \vocab{codomain} of the function.
+
+A function can be seen as a lookup table. For example, here is a table that associates employees with phone numbers:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a) [] {Samantha};
+  \node[] (b) [below=of a] {Tomasso};
+  \node[] (c) [below=of b] {Harold};
+  \node[] (one) [right=6cm of a] {877-652-2365};
+  \node[] (two) [right=6cm of b] {877-652-2366};
+
+  \path[->] (a) edge (two);
+  \path[->] (b) edge (one);
+  \path[->] (c) edge (two);
+
+\end{tikzpicture}\end{center}
+
+\noindent
+This is a function because it assigns to each item on the left one item on the right. We can then refer to (or ``look up'') the phone number for Samantha with this notation:
+
+\begin{equation}
+  phone(\text{Samantha})
+\end{equation}
+
+\noindent
+And since the value of that is ``877-652-2366,'' we can write this:
+
+\begin{equation}
+  phone(\text{Samantha}) = \text{877-652-2366}
+\end{equation}
+
+\noindent
+We can also think of a function as an assignment table. The following function assigns to each employee an office number:
+
+\begin{center}\begin{tikzpicture}
+
+  \node[] (a) [] {Samantha};
+  \node[] (b) [below=of a] {Tomasso};
+  \node[] (c) [below=of b] {Harold};
+  \node[] (one) [right=6cm of a] {2.110A};
+  \node[] (two) [right=6cm of b] {2.120B};
+
+  \path[->] (a) edge (two);
+  \path[->] (b) edge (one);
+  \path[->] (c) edge (two);
+
+\end{tikzpicture}\end{center}
+
+
+\end{document}

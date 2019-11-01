@@ -1,0 +1,613 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Permutations}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The concept of permutations}
+
+Take a collection of objects, and arrange the objects into a sequence. We call this sequence a \vocab{permutation} of the objects. To permute roughly means ``to go through,'' so we can think of a sequence of the objects as one way to go through all the objects in a collection. If you arrange the objects into a different sequence, well that is a different permutation: it is a different way to go through the objects.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example}
+
+Here is an example. Suppose you have three candies: a piece of peanut brittle, a piece of chocolate, and a piece of taffy. Suppose you want to eat them one at at time. How many different sequences are there?
+
+Let $P$ stand for the peanut brittle, let $C$ stand for the chocolate, and let $T$ stand for the taffy. Here is one option:
+
+\begin{center}
+  Eat $P$ first, then $C$, then $T$.
+\end{center}
+
+\noindent
+That is one permutation. It is one way to go through each object in the collection, one by one, in sequence.
+
+Here is another option:
+
+\begin{center}
+  Eat $C$ first, then $P$, then $T$.
+\end{center}
+
+\noindent
+This is another permutation. It is another way to go through each object in the collection, one by one. It is different from the first way, because you go through the candies in a different order. You do go through the same candies, but not in the same order, and order matters for permutations.
+
+What are the other possible ways to go through the candies? There are 6 different sequences here, i.e., 6 different ways you can go through the candies. Here are all of the possible permutations:
+
+\begin{center}
+  $P$-$C$-$T$ \\
+  $P$-$T$-$C$ \\
+  $C$-$P$-$T$ \\
+  $C$-$T$-$P$ \\
+  $T$-$C$-$P$ \\
+  $T$-$P$-$C$
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Choice trees}
+
+Certain events can have various different outcomes. For example, flipping a coin can have two outcomes: it can come up heads, or it can come up tails. So for this particular kind of event (flipping a coin), there are two possibilities (heads, or tails).
+
+Let us represent this as a tree. The coin flip will be the root node, and then it will branch into two directions: on one branch, it comes up heads, on the other branch, it comes up tails. Like this:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=above:{coin flip}] {};
+    \node[dot-point] (2) [below left=of 1, label=below:{heads}] {};
+    \node[dot-point] (3) [below right=of 1, label=below:{tails}] {};
+
+    \path (1) edge (2);
+    \path (1) edge (3);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+If you like, you can think of this as showing two alternative timelines. At the root node, there is the moment when we flip the coin. But then, our timeline splits into two alternative timelines. In one timeline, the coin comes up heads, while in the other parallel timeline, it comes up tails. 
+
+\paragraph{Rolling dice.}
+
+We can model rolling a six-sided die as a tree too. At the root node, we roll the die, but then we split into six different timelines or alternatives: in the first we roll a one, in another we roll a two, and so on.
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=above:{roll die}] {};
+    \node[dot-point] (2) [below left=of 1, label=below:{3}] {};
+    \node[dot-point] (3) [left=of 2, label=below:{2}] {};
+    \node[dot-point] (4) [left=of 3, label=below:{1}] {};
+    \node[dot-point] (5) [below right=of 1, label=below:{4}] {};
+    \node[dot-point] (6) [right=of 5, label=below:{5}] {};
+    \node[dot-point] (7) [right=of 6, label=below:{6}] {};
+    
+    \path (1) edge (2);
+    \path (1) edge (3);
+    \path (1) edge (4);
+    \path (1) edge (5);
+    \path (1) edge (6);
+    \path (1) edge (7);
+
+  \end{tikzpicture}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modeling permutations}
+
+We can model permutations with choice trees.
+
+Suppose there is a bag that contains three marbles: a red one, a blue one, and a green one. Suppose we reach into the bag and pull one marble out (and set it aside), then we reach in and pull another one out (and set it aside too), and then finally reach in and pull the last marble out. What are all the possible sequences of colors we could pull out?
+
+Let us begin with the first selection. When we reach into the bag and pull out our first marble, there are three possibilities: we can pull out a red marble, a blue marble, or a green marble. Let ``R'' stand for red, ``B'' for blue, and ``G'' for green. Here it is, as a choice tree:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (13) [label=left:{R}] {};
+    \node (s1) [right=of 13] {};
+    \node (s2) [right=of s1] {};
+    \node[dot-point] (14) [right=of s2, label=below:{B}] {};
+    \node (s3) [right=of 14] {};
+    \node (s4) [right=of s3] {};
+    \node[dot-point] (15) [right=of s4, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now, let us model our next selection. First, let us take the case where we pulled out the red marble first. We can do this by going to the far left branch of the choice tree, which is labeled ``R,'' and imagining that we are sitting there, on that timeline (where we have pulled out the red marble). 
+
+Having pulled the red marble out already, there are only two marbles left in the bag: a blue one, and a green one. So at this point, when we reach in and pull out our next marble, we can only pull out one of those two. Let us add these choices underneath the ``R'' node on the tree:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (7) [, label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+We can see in this tree how the choices are playing out. At the start, we can choose any of the three colors: we can pick the red marble, or the blue one, or the green one (hence we have three branches coming out of the root node). Suppose we pull out the red one (that is to say, suppose we go down the left branch marked ``R''). Then we have two choices left: we can pick a blue one, or a green one (hence we have two branches coming out of the ``R'' node).
+
+Suppose now that we pull out a blue marble. So first we pulled out the red marble, then we pulled out the blue marble. We can do this by going down the far left branch (the one with a leaf marked ``B''), and imagining that we are sitting there, on that timeline. So, we are sitting on the timeline where we first pulled out a red marble, and then a blue marble. 
+
+At this point on the timeline, there is only one marble left that we can pull out, and that is the green one. So let's add that as a leaf below ``B'':
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+
+    \path (7) edge (1);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+This completes one permutation: first we pulled out a red marble, then a blue one, and finally a green one. We can see this by highlighting the path from the root node to the leaf labeled ``G'':
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+
+    \path[->, spaced-arrows, dotted] (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path[->, spaced-arrows, dotted] (13) edge (7);
+    \path (13) edge (8);
+
+    \path[->, spaced-arrows, dotted] (7) edge (1);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Let us now move to the next incomplete branch to the right, with a leaf labeled ``G,'' and imagine that we are sitting on the timeline at that point. On that timeline, we first pulled out a red marble, then we pulled out a green marble. 
+
+For our next selection, there is only one marble we can pull out, and that is the blue one. So we can add that as a leaf node too:
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+    \node[dot-point] (2) [below=of 8, label=below:{B}] {};
+    
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+
+    \path (7) edge (1);
+    \path (8) edge (2);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+At this point we have modeled another permutation: namely, one where first we pulled out a red marble, then we pulled out a green marble, and finally we pulled out a blue marble. Again, we can see this particular timeline by highlighting the path we just took:
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node (9) [right=of 8] {};
+    \node (s2) [right=of 9] {};
+    \node (10) [right=of s2] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+    \node[dot-point] (2) [below=of 8, label=below:{B}] {};
+    
+    \path[->, spaced-arrows, dotted] (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path[->, spaced-arrows, dotted] (13) edge (8);
+
+    \path (7) edge (1);
+    \path[->, spaced-arrows, dotted] (8) edge (2);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now let us turn to the next incomplete branch to the right, with a leaf labeled ``B``. This is the timeline where we pulled out a blue marble on our first selection. 
+
+For our next selection, what are our choices? Well, since we've pulled the blue marble out of the bag, there are only two others left in the bag, namely the red one and the green one. So we can add those two options as branches:
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node[dot-point] (9) [right=of 8, label=left:{R}] {};
+    \node (s2) [right=of 9] {};
+    \node[dot-point] (10) [right=of s2, label=right:{G}] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+    \node[dot-point] (2) [below=of 8, label=below:{B}] {};
+    
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+
+    \path (7) edge (1);
+    \path (8) edge (2);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Under each of these choices, there is only one option left. After we have pulled out the blue marble and then the red marble, there is only the green marble left:
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node[dot-point] (9) [right=of 8, label=left:{R}] {};
+    \node (s2) [right=of 9] {};
+    \node[dot-point] (10) [right=of s2, label=right:{G}] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+    \node[dot-point] (2) [below=of 8, label=below:{B}] {};
+    \node[dot-point] (3) [below=of 9, label=below:{G}] {};
+    
+    \path (16) edge (13);
+    \path[->, spaced-arrows, dotted] (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path[->, spaced-arrows, dotted] (14) edge (9);
+    \path (14) edge (10);
+
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path[->, spaced-arrows, dotted] (9) edge (3);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+And similarly, after we have pulled out the blue marble and then the green marble, there is only the red marble left:
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node[dot-point] (9) [right=of 8, label=left:{R}] {};
+    \node (s2) [right=of 9] {};
+    \node[dot-point] (10) [right=of s2, label=right:{G}] {};
+    \node (11) [right=of 10] {};
+    \node (s3) [right=of 11] {}; 
+    \node (12) [right=of s3] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+    \node[dot-point] (2) [below=of 8, label=below:{B}] {};
+    \node[dot-point] (3) [below=of 9, label=below:{G}] {};
+    \node[dot-point] (4) [below=of 10, label=below:{R}] {};
+    
+    \path (16) edge (13);
+    \path[->, spaced-arrows, dotted] (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path[->, spaced-arrows, dotted] (14) edge (10);
+
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path[->, spaced-arrows, dotted] (10) edge (4);
+    
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now we have gone through two more permutations: one where we pull out blue, then red, then green; and the other where we pull out blue, then green, then red.
+
+Now for our last alternative: the far right branch where we first pull out a green marble. Once we have pulled out a green marble, there are two choices left, namely a red one and a blue one:
+
+\begin{center}
+  \begin{tikzpicture}
+    
+    \node[dot-point] (7) [label=left:{B}] {};
+    \node (s1) [right=of 7] {};
+    \node[dot-point] (8) [right=of s1, label=left:{G}] {};
+    \node[dot-point] (9) [right=of 8, label=left:{R}] {};
+    \node (s2) [right=of 9] {};
+    \node[dot-point] (10) [right=of s2, label=right:{G}] {};
+    \node[dot-point] (11) [right=of 10, label=left:{R}] {};
+    \node (s3) [right=of 11] {}; 
+    \node[dot-point] (12) [right=of s3, label=left:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \node[dot-point] (1) [below=of 7, label=below:{G}] {};
+    \node[dot-point] (2) [below=of 8, label=below:{B}] {};
+    \node[dot-point] (3) [below=of 9, label=below:{G}] {};
+    \node[dot-point] (4) [below=of 10, label=below:{R}] {};
+    
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path (15) edge (12);
+
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+After each of these choices, there is only one marble left that can be pulled out. After we pull out a green and then a red marble, there is only a blue one left:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path[->, spaced-arrows, dotted] (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path[->, spaced-arrows, dotted] (15) edge (11);
+    \path (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path[->, spaced-arrows, dotted] (11) edge (5);
+    \path (12) edge (6);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+And similarly, after we have pulled out a green marble and then a blue marble, there is only the red marble left:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) [label=below:{G}] {};
+    \node (s1) [right=of 1] {};
+    \node[dot-point] (2) [right=of s1, label=below:{B}] {};
+    \node[dot-point] (3) [right=of 2, label=below:{G}] {};
+    \node (s2) [right=of 3] {};
+    \node[dot-point] (4) [right=of s2, label=below:{R}] {};
+    \node[dot-point] (5) [right=of 4, label=below:{B}] {};    
+    \node (s3) [right=of 5] {};
+    \node[dot-point] (6) [right=of s3, label=below:{R}] {};    
+
+    \node[dot-point] (7) [above=of 1, label=left:{B}] {};
+    \node[dot-point] (8) [above=of 2, label=left:{G}] {};
+    \node[dot-point] (9) [above=of 3, label=left:{R}] {};
+    \node[dot-point] (10) [above=of 4, label=right:{G}] {};
+    \node[dot-point] (11) [above=of 5, label=right:{R}] {};
+    \node[dot-point] (12) [above=of 6, label=right:{B}] {};
+
+    \node[dot-point] (13) [above left=of 8, label=left:{R}] {};
+    \node[dot-point] (14) [above right=of 9, label=below:{B}] {};
+    \node[dot-point] (15) [above right=of 11, label=right:{G}] {};
+
+    \node[dot-point] (16) [above=of 14, label=above:{start}] {};
+
+    \path (16) edge (13);
+    \path (16) edge (14);
+    \path[->, spaced-arrows, dotted] (16) edge (15);
+    
+    \path (13) edge (7);
+    \path (13) edge (8);
+    \path (14) edge (9);
+    \path (14) edge (10);
+    \path (15) edge (11);
+    \path[->, spaced-arrows, dotted] (15) edge (12);
+    
+    \path (7) edge (1);
+    \path (8) edge (2);
+    \path (9) edge (3);
+    \path (10) edge (4);
+    \path (11) edge (5);
+    \path[->, spaced-arrows, dotted] (12) edge (6);
+   
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now we have completed our last two permutations: one where we pull out green, then red, then blue; and the other where we pull out green, then blue, then red.
+
+With that, our tree is complete. We have now drawn a tree that models every single selection we could possibly make while pulling the marbles out of the bag one after the other. In doing so, we have identified all possible permutations (i.e., all possible sequences of colors that we could pull out). Each permutation is a path from the root of the tree to a leaf. 
+
+So how many such permutations (i.e., paths through the tree) are there? We can see that there are six. Here the are, written out (see if you can read these off as paths through the tree):
+
+\begin{center}
+  R-B-G \\
+  R-G-B \\
+  B-R-G \\
+  B-G-R \\
+  G-R-B \\
+  G-B-R
+\end{center}
+
+
+\end{document}

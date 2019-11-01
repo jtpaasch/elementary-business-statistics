@@ -1,0 +1,836 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conditional probability}
+
+Sometimes I want to know the probability of some outcome $A$, given that outcome $B$ has already happened. We write that like this:
+
+\begin{equation*}
+  P(A | B)
+\end{equation*}
+
+\noindent
+Read that in any of these ways:
+
+\begin{itemize}
+  \item The probability of $A$, given $B$.
+  \item The probability of $A$ happening, assuming that $B$ has happened.
+  \item The probability of $A$ happening, on the condition that $B$ has happened.
+\end{itemize}
+
+\noindent
+Intuitively, we can figure this out by looking at permutation trees.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 1}
+
+Suppose I toss a fair coin twice, and I want to know the probability of getting heads on my second flip, given that I got heads on the first flip. 
+
+We can draw a permutation tree to represent the first round. In the first round, I can get heads or tails (let heads be ``H'' and tails be ``T''). Here is the tree (the same sort of tree as before, but I will draw it sideways now):
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now we can draw the next round. If we got heads in the first round, then in the second round we can get heads or tails:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+And if we got tails in the first round, then in the second round we can get heads or tails:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now that we have drawn both rounds, we can see that there are a total of 4 possible outcomes here, which corresponds exactly to the four permutations or paths through through this tree:
+
+\begin{enumerate}
+  \item We flip H in the first round, then H in the second round.
+  \item We flip H in the first round, then T in the second round.
+  \item We flip T in the first round, then H in the second round.
+  \item We flip T in the first round, then T in the second round.
+\end{enumerate}
+
+\noindent
+In other words, here is the total sample space $S$:
+
+\begin{equation*}
+  S = \{ HH, HT, TH, TT \}
+\end{equation*}
+
+\noindent
+Now, let $A$ be flipping heads in the second round, and let $B$ be flipping heads in the first round. What is the probability of getting tails (T) on the second round, given that we get heads in the first round. In other words, what is this probability:
+
+\begin{equation*}
+  P(A | B)
+\end{equation*} 
+
+\noindent
+To find the answer on the tree, we first assume that we succeed at getting $B$. What is $B$? It is getting heads on the first round. So we can look at the tree, and assume we get $H$. Here it is, highlighted:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+    \draw[dashed] (1.5, 2.25) -- (2.5, 2.25) -- (2.5, 1) -- (1.5, 1) -- (1.5, 2.25);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Then we can cross off all alternative branches that don't involve $H$ in the first round:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+    \draw[dashed] (1, 0) -- (4, -3);
+    \draw[dashed] (1, -3) -- (4, 0);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now, we can look at all the options that come after H in the first round. How many options do we have after H? There are two. Here they are, highlighted:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+    \draw[dashed] (1, 0) -- (4, -3);
+    \draw[dashed] (1, -3) -- (4, 0);
+
+    \draw[dashed] (3.5, 3) -- (5, 3) -- (5, 0) -- (3.5, 0) -- (3.5, 3);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now remember that we want to know about the probability of getting $A$ (which is flipping heads in the second round), given that $B$ has already happened (which is flipping heads in the first round). On this tree, we have assumed that we have already flipped heads in the first round, so our options are now cut down to half. But of these two options, how many of them match our desired outcome of flipping heads? There is just one of the two, namely the top branch, where we get $H$ the second time:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=above:{H}] {};
+    \node[dot-point] (3) at (2, -1.5) [label=below:{T}] {};
+    \node[dot-point] (4) at (4, 2.5) [label=right:{H}] {};
+    \node[dot-point] (5) at (4, 0.5) [label=right:{T}] {};
+    \node[dot-point] (6) at (4, -0.5) [label=right:{H}] {};
+    \node[dot-point] (7) at (4, -2.5) [label=right:{T}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 1.5) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -0.5);
+    \draw[->, spaced-arrows] (2, -1.5) -- (4, -2.5);
+
+    \draw[dashed] (1, 0) -- (4, -3);
+    \draw[dashed] (1, -3) -- (4, 0);
+
+    \draw[dashed] (3.5, 3) -- (5, 3) -- (5, 2) -- (3.5, 2) -- (3.5, 3);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+At this point, we have found the conditional probability of $P(A | B)$. It is 1 out of 2, or $\frac{1}{2}$:
+
+\begin{equation*}
+  P(A | B) = \frac{1}{2}
+\end{equation*}
+
+\noindent
+This makes intuitive sense, if you think about it. If we assume that $B$ has already happened --- that is to say, if we assume that we got heads in the first round --- then we are looking only at the part of the tree that comes after the first $H$. There are two possible branches there, which represent that we could get heads on that second flip, or we could get tails. So, on the second flip, there is a 1 out of 2 chance of getting heads, assuming that we already got heads in the first round.
+
+Notice that by assuming that $B$ happened, we narrow down the possible set of options. In other words, we filter down the sample space, so that we are left only with options that follow after we get $B$. And after we have filtered down the sample space, only \emph{then} do we look at the probability of getting $A$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 2}
+
+Suppose I have three marbles in a bag (a red marble, a blue marble, and a green marble). Suppose I want to pull a marble out, replace it, and then draw another marble out. Here is the set of possibilities:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{B}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{G}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (6) at (4, 2) [label=right:{B}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{G}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (9) at (4, 0) [label=right:{B}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{G}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (12) at (4, -2) [label=right:{B}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{G}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Let $A$ be drawing a red marble out, and let $B$ be drawing a blue marble. What is the probability that I dra a red marble in the second round, given that I draw a blue marble in the first round? That is, what is this probability:
+
+\begin{equation*}
+  P(A | B)
+\end{equation*}
+
+\noindent
+Again, let us assume that $B$ has happened. So, we draw a blue marble:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{B}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{G}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (6) at (4, 2) [label=right:{B}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{G}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (9) at (4, 0) [label=right:{B}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{G}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (12) at (4, -2) [label=right:{B}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{G}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+    \draw[dashed] (1.5, 0.75) -- (2.5, 0.75) -- (2.5, -0.75) -- (1.5, -0.75) -- (1.5, 0.75);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So, we filter down the sample space, by crossing off the other alternatives in that first round:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{B}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{G}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (6) at (4, 2) [label=right:{B}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{G}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (9) at (4, 0) [label=right:{B}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{G}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (12) at (4, -2) [label=right:{B}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{G}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+    \draw[dashed] (1.5, 1) -- (5, 3);
+    \draw[dashed] (1.5, 3) -- (5, 1);
+
+    \draw[dashed] (1.5, -1) -- (5, -3);
+    \draw[dashed] (1.5, -3) -- (5, -1);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now we can see that, if we've drawn a blue marble in the first round, there are only three outcomes that can happen after that. In the second round, we can draw a red marble, a blue marble, or a green marble. 
+
+We are interested in the probability of $A$ --- that is, drawing a red marble. What is the probability of that, given our restricted sample space? Only one of the three options ends up with a red marble, so the chances of drawing a red marble now is 1 out of 3, or $\frac{1}{3}$. Hence:
+
+\begin{equation*}
+  P(A | B) = \frac{1}{3}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 3}
+
+Suppose I have three marbles in a bag, but two are red and one is blue.. Suppose I want to pull a marble out, replace it, and then draw another marble out. Here is the set of possibilities:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{R}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{B}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (6) at (4, 2) [label=right:{R}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{B}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (9) at (4, 0) [label=right:{R}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{B}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (12) at (4, -2) [label=right:{R}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{B}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Let $A$ be drawing a blue marble, and let $B$ be drawing a red marble. What is the probability that I draw a blue marble in the second round, given that I draw a red marble in the first round? That is, what is this probability:
+
+\begin{equation*}
+  P(A | B)
+\end{equation*}
+
+\noindent
+Again, let us assume that $B$ has happened. That is to say, let us assume that we have drawn a red marble. There are two red marbles in the bag, so there are two outcomes where we satisfy $A$. Here they are, highlighted:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{R}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{B}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (6) at (4, 2) [label=right:{R}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{B}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (9) at (4, 0) [label=right:{R}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{B}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (12) at (4, -2) [label=right:{R}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{B}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+    \draw[dashed] (1.5, 3) -- (2.5, 3) -- (2.5, -0.75) -- (1.5, -0.75) -- (1.5, 3);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So, we filter down the sample space, by crossing off the other alternatives in that first round:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{R}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{B}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (6) at (4, 2) [label=right:{R}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{B}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (9) at (4, 0) [label=right:{R}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{B}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (12) at (4, -2) [label=right:{R}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{B}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+    \draw[dashed] (1.5, -1) -- (5, -3);
+    \draw[dashed] (1.5, -3) -- (5, -1);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now we can see that, if we've drawn a red marble in the first round, there are six outcomes that can happen after that. In the first round, we drew one of the two red marbles, and for each case, In the second round, we can then draw either of the two red marbles or the blue marble. So there are a total of six outcomes now, after we assume that $B$ has happened.
+
+We are interested in the probability of $A$ --- that is, drawing a blue marble. So what is the probability of that, given our restricted sample space? We can see that two of the six remaining options ends up with a blue marble, so the chances of drawing a blue marble now is 2 out of 6, or $\frac{1}{3}$. Hence:
+
+\begin{equation*}
+  P(A | B) = \frac{1}{3}
+\end{equation*}
+
+What if $A$ is drawing a red marble? So, $P(A | B)$ means what is the probability of drawing a red marble in the second round, given that we've drawn a red marble in the first round? Well, in the restricted sample space, there are 4 ways to get a red marble in the second round, out of six possible outcomes, so there is a 4 out of 6 chance, or $\frac{2}{3}$. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 4}
+
+Let us repeat the above experiment, but let us say that we do not replace the marble we pull out in the first round. So we draw a marble, set it aside, and draw again. Here is the set of possibilities:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{R}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{B}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{B}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{B}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{R}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Let $A$ be drawing a blue marble, and let $B$ be drawing a red marble. What is the probability that I draw a blue marble in the second round, given that I drew a red marble in the first round? That is, what is this probability:
+
+\begin{equation*}
+  P(A | B)
+\end{equation*}
+
+\noindent
+Again, let us assume that $B$ has happened. That is to say, let us assume that we have drawn a red marble. There are two red marbles in the bag, so there are two outcomes where we satisfy $A$. Here they are, highlighted:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{R}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{B}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{B}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{B}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{R}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+    \draw[dashed] (1.5, 3) -- (2.5, 3) -- (2.5, -0.75) -- (1.5, -0.75) -- (1.5, 3);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So, we filter down the sample space, by crossing off the other alternatives in that first round:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (1) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (2) at (2, 2) [label=above:{R}] {};
+    \node[dot-point] (3) at (2, 0) [label=above:{R}] {};
+    \node[dot-point] (4) at (2, -2) [label=below:{B}] {};
+
+    \node[dot-point] (5) at (4, 2.5) [label=right:{R}] {};
+    \node[dot-point] (7) at (4, 1.5) [label=right:{B}] {};
+    
+    \node[dot-point] (8) at (4, 0.5) [label=right:{R}] {};
+    \node[dot-point] (10) at (4, -0.5) [label=right:{B}] {};
+
+    \node[dot-point] (11) at (4, -1.5) [label=right:{R}] {};
+    \node[dot-point] (13) at (4, -2.5) [label=right:{R}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2);
+    
+    \draw[->, spaced-arrows] (2, 2) -- (4, 2.5);
+    \draw[->, spaced-arrows] (2, 2) -- (4, 1.5);
+
+    \draw[->, spaced-arrows] (2, 0) -- (4, 0.5);
+    \draw[->, spaced-arrows] (2, 0) -- (4, -0.5);
+
+    \draw[->, spaced-arrows] (2, -2) -- (4, -1.5);
+    \draw[->, spaced-arrows] (2, -2) -- (4, -2.5);
+
+    \draw[dashed] (1.5, -1) -- (5, -3);
+    \draw[dashed] (1.5, -3) -- (5, -1);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Now we can see that, if we've drawn a red marble in the first round, there are four outcomes that can happen after that. In the first round, we drew one of the two red marbles, and for each case, In the second round, we can then draw either of the two remaining marbles (one red, the other blue). So there are a total of four outcomes now, after we assume that $B$ has happened.
+
+We are interested in the probability of $A$ --- that is, drawing a blue marble. So what is the probability of that, given our restricted sample space? 
+
+Well, we can see that two of the four remaining options ends up with a blue marble, so the chances of drawing a blue marble now is 2 out of 4, or $\frac{1}{2}$. Hence:
+
+\begin{equation*}
+  P(A | B) = \frac{1}{2}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 5}
+
+Suppose I want to roll a single six-sided die one time. Let $A$ be rolling a 2 or 3, and let $B$ be rolling an even number. What is the probability of getting $A$, given that $B$ happens? That is, what is the probability of $P(A | B)$?
+
+This question is slightly odd, because $A$ and $B$ are not happening in different rounds of the experiment. In this experiment, we roll the dice just one time, and we want to know about the probability of $A$ given $B$, in the same round.
+
+Fortunately, we can use the same ideas from before to work this out. First, we can draw a tree. When we roll the die, we can get any of the six numbers:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (s) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (1) at (2, 2.5) [label=right:{1}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=right:{2}] {};
+    \node[dot-point] (3) at (2, 0.5) [label=right:{3}] {};
+    \node[dot-point] (4) at (2, -0.5) [label=right:{4}] {};
+    \node[dot-point] (5) at (2, -1.5) [label=right:{5}] {};
+    \node[dot-point] (6) at (2, -2.5) [label=right:{6}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -0.5);      
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2.5);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Next, we highlight all the outcomes in $B$ (which is rolling an even number, so 2, 4, and 6):
+
+\begin{center}
+  \begin{tikzpicture}
+ 
+    \node[dot-point] (s) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (1) at (2, 2.5) [label=right:{1}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=right:{2}] {};
+    \node[dot-point] (3) at (2, 0.5) [label=right:{3}] {};
+    \node[dot-point] (4) at (2, -0.5) [label=right:{4}] {};
+    \node[dot-point] (5) at (2, -1.5) [label=right:{5}] {};
+    \node[dot-point] (6) at (2, -2.5) [label=right:{6}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -0.5);      
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2.5);
+
+    \draw[dashed] (1.5, 2) -- (2.5, 2) -- (2.5, 1) -- (1.5, 1) -- (1.5, 2);
+    \draw[dashed] (1.5, 0) -- (2.5, 0) -- (2.5, -1) -- (1.5, -1) -- (1.5, 0);
+    \draw[dashed] (1.5, -2) -- (2.5, -2) -- (2.5, -3) -- (1.5, -3) -- (1.5, -2);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+And then we cross out the alternatives:
+
+\begin{center}
+  \begin{tikzpicture}
+ 
+    \node[dot-point] (s) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (1) at (2, 2.5) [label=right:{1}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=right:{2}] {};
+    \node[dot-point] (3) at (2, 0.5) [label=right:{3}] {};
+    \node[dot-point] (4) at (2, -0.5) [label=right:{4}] {};
+    \node[dot-point] (5) at (2, -1.5) [label=right:{5}] {};
+    \node[dot-point] (6) at (2, -2.5) [label=right:{6}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -0.5);      
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2.5);
+
+    \draw[dashed] (1.5, 2) -- (2.5, 3);
+    \draw[dashed] (1.5, 3) -- (2.5, 2);
+    
+    \draw[dashed] (1.5, 0) -- (2.5, 1);
+    \draw[dashed] (1.5, 1) -- (2.5, 0);
+        
+    \draw[dashed] (1.5, -2) -- (2.5, -1);
+    \draw[dashed] (1.5, -1) -- (2.5, -2);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So, we have filtered down the sample space, so that it reflects only the outcomes of $B$ (namely, an even number). 
+
+Next, we look in the options that are left for $A$. What is $A$? We are interested in rolling a 2 or a 3. So, out of the three options left (a two, a four, or a six), with how many of those options can we realize $A$? 
+
+Well, we can't realize 3, since it is not one of the options still left. So that leaves 2. Of the options left, how many of them are 2? There is just one: 
+
+\begin{center}
+  \begin{tikzpicture}
+ 
+    \node[dot-point] (s) at (0, 0) [label=left:{start}] {};
+    \node[dot-point] (1) at (2, 2.5) [label=right:{1}] {};
+    \node[dot-point] (2) at (2, 1.5) [label=right:{2}] {};
+    \node[dot-point] (3) at (2, 0.5) [label=right:{3}] {};
+    \node[dot-point] (4) at (2, -0.5) [label=right:{4}] {};
+    \node[dot-point] (5) at (2, -1.5) [label=right:{5}] {};
+    \node[dot-point] (6) at (2, -2.5) [label=right:{6}] {};
+
+    \draw[->, spaced-arrows] (0, 0) -- (2, 2.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, 0.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -0.5);      
+    \draw[->, spaced-arrows] (0, 0) -- (2, -1.5);
+    \draw[->, spaced-arrows] (0, 0) -- (2, -2.5);
+
+    \draw[dashed] (1.5, 2) -- (2.5, 3);
+    \draw[dashed] (1.5, 3) -- (2.5, 2);
+    
+    \draw[dashed] (1.5, 0) -- (2.5, 1);
+    \draw[dashed] (1.5, 1) -- (2.5, 0);
+        
+    \draw[dashed] (1.5, -2) -- (2.5, -1);
+    \draw[dashed] (1.5, -1) -- (2.5, -2);
+
+    \draw[dashed] (1.5, 2) -- (2.5, 2) -- (2.5, 1) -- (1.5, 1) -- (1.5, 2);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+So, the chances of rolling a two or three, given that we have rolled an even number, is 1 out of 3, or $\frac{1}{3}$. That is:
+
+\begin{equation*}
+  P(A | B) = \frac{1}{3}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Independent events}
+
+You can tell that outcome $A$ is independent of outcome $B$ by checking if the conditional probability of $A$ given $B$ (i.e., $P(A | B)$) is the same as the probability of $A$ (i.e., $P(A)$), or vice versa. That is to say, $A$ and $B$ are independent if:
+
+\begin{equation*}
+  P(A  | B) = P(A) \hskip 1cm \text{ or } \hskip 1cm P(B | A) = P(B)
+\end{equation*}
+
+\noindent
+This makes sense. If the probability of $A$ happening all by itself (i.e., $P(A)$) is the same as the probability of it happening assuming that $B$ happened (i.e., $P(A | B)$), then surely $B$ has no affect on $A$.
+
+
+\end{document}

@@ -1,0 +1,341 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Graphs and trees}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Graphs}
+
+In mathematics, a graph is basically a set of dots with lines connecting them. We call the dots the \vocab{nodes} or \vocab{vertices} (just one is called a ``a vertex''), and we call the lines connecting them the \vocab{edges}. Here is a picture of a graph:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (a) at (-1, 1.5) {};
+    \node[dot-point] (b) at (-1, -1) {};
+    \node[dot-point] (c) at (0, 0) {};
+    \node[dot-point] (d) at (-4, 1) {};
+    \node[dot-point] (e) at (-5, -0.5) {};
+
+    \draw[-] (a) to (b);
+    \draw[-] (b) to (c);
+    \draw[-] (d) to (e);
+    \draw[-] (d) to (c);
+    \draw[-] (c) to (e);
+
+  \end{tikzpicture}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Labels}
+
+We can put labels on each node if we like. For example:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (a) at (-1, 1.5) [label=1] {};
+    \node[dot-point] (b) at (-1, -1) [label=below:2] {};
+    \node[dot-point] (c) at (0, 0) [label=right:3] {};
+    \node[dot-point] (d) at (-4, 1) [label=4] {};
+    \node[dot-point] (e) at (-5, -0.5) [label=left:5] {};
+
+    \draw[-] (a) to (b);
+    \draw[-] (b) to (c);
+    \draw[-] (d) to (e);
+    \draw[-] (d) to (c);
+    \draw[-] (c) to (e);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+We used numbers for these labels, but there is no reason we can't use other names. For example:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (a) at (-1, 1.5) [label=Bob] {};
+    \node[dot-point] (b) at (-1, -1) [label=below:Alice] {};
+    \node[dot-point] (c) at (0, 0) [label=right:Shawna] {};
+    \node[dot-point] (d) at (-4, 1) [label=Terry] {};
+    \node[dot-point] (e) at (-5, -0.5) [label=left:Maria] {};
+
+    \draw[-] (a) to (b);
+    \draw[-] (b) to (c);
+    \draw[-] (d) to (e);
+    \draw[-] (d) to (c);
+    \draw[-] (c) to (e);
+
+  \end{tikzpicture}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Directionality}
+
+Edges can have a direction. We can indicate this by drawing the edges as arrows. For example:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (a) at (-1, 1.5) [label=1] {};
+    \node[dot-point] (b) at (-1, -1) [label=below:2] {};
+    \node[dot-point] (c) at (0, 0) [label=right:3] {};
+    \node[dot-point] (d) at (-4, 1) [label=4] {};
+    \node[dot-point] (e) at (-5, -0.5) [label=left:5] {};
+
+    \draw[->, spaced-arrows] (a) to (b);
+    \draw[->, spaced-arrows] (b) to (c);
+    \draw[->, spaced-arrows] (d) to (e);
+    \draw[<-, spaced-arrows] (d) to (c);
+    \draw[->, spaced-arrows] (c) to (e);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+In this graph, the edge between nodes 1 and 2 goes from 1 to 2. It does not go the other way around. We say \vocab{there is} an edge from 1 to 2, but \vocab{there is no edge} from 2 to 1.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Paths}
+
+A \vocab{path} through a graph is a sequence of nodes that are connected by edges. Imagine traveling through the graph, but you can only get from one node to another by traveling along the edges. A path is any path you could travel through the graph in this fashion. 
+
+For example, in the above graph, there is a path from 1 to 5 by going from 1 to 2 to 3 and then to 5. Here it is, with that path highlighted with a dotted line:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (a) at (-1, 1.5) [label=1] {};
+    \node[dot-point] (b) at (-1, -1) [label=below:2] {};
+    \node[dot-point] (c) at (0, 0) [label=3] {};
+    \node[dot-point] (d) at (-4, 1) [label=4] {};
+    \node[dot-point] (e) at (-5, -0.5) [label=5] {};
+
+    \draw[->,spaced-arrows,dotted] (a) to (b);
+    \draw[->,spaced-arrows,dotted] (b) to (c);
+    \draw[->, spaced-arrows] (d) to (e);
+    \draw[<-, spaced-arrows] (d) to (c);
+    \draw[->,spaced-arrows,dotted] (c) to (e);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+There is another path from 1 to 5. You go from 1 to 2 to 3 to 4 and then to 5. Like this:
+
+\begin{center}
+  \begin{tikzpicture}
+
+    \node[dot-point] (a) at (-1, 1.5) [label=1] {};
+    \node[dot-point] (b) at (-1, -1) [label=below:2] {};
+    \node[dot-point] (c) at (0, 0) [label=3] {};
+    \node[dot-point] (d) at (-4, 1) [label=4] {};
+    \node[dot-point] (e) at (-5, -0.5) [label=5] {};
+
+    \draw[->,spaced-arrows,dotted] (a) to (b);
+    \draw[->,spaced-arrows,dotted] (b) to (c);
+    \draw[->,spaced-arrows,dotted] (d) to (e);
+    \draw[->,spaced-arrows,dotted] (c) to (d);
+    \draw[->, spaced-arrows] (c) to (e);
+
+  \end{tikzpicture}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Trees}
+
+Trees are special kinds of graphs. If a graph has one node that all other nodes branch out from (more exactly, if there is one node and all paths go out from it), then we call it a \vocab{tree}. The source or starting node is called the \vocab{root} of the tree, and the endpoints of each branch is called a \vocab{leaf} of the tree. Here is a picture of a graph that is a tree:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (0) [label=below:0] {};
+    \node[dot-point] (1) [above=of 0, label=1] {};
+    \node[dot-point] (2) [above left=of 1, label=2] {};
+    \node[dot-point] (3) [above right=of 1, label=3] {};
+    \node[dot-point] (4) [above left=of 2, label=4] {};
+    \node[dot-point] (5) [above left=of 3, label=5] {};
+    \node[dot-point] (6) [above right=of 3, label=6] {};
+
+    \path[->, spaced-arrows] (0) edge (1);
+    \path[->, spaced-arrows] (1) edge (2);
+    \path[->, spaced-arrows] (1) edge (3);
+    \path[->, spaced-arrows] (2) edge (4);
+    \path[->, spaced-arrows] (3) edge (5);
+    \path[->, spaced-arrows] (3) edge (6);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+In this tree, node 0 is the root of the tree, and nodes 4, 5, and 6 are leaves. Notice that all paths go from the root node out to a leaf node. For example, here is one path:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (0) [label=below:0] {};
+    \node[dot-point] (1) [above=of 0, label=1] {};
+    \node[dot-point] (2) [above left=of 1, label=2] {};
+    \node[dot-point] (3) [above right=of 1, label=3] {};
+    \node[dot-point] (4) [above left=of 2, label=4] {};
+    \node[dot-point] (5) [above left=of 3, label=5] {};
+    \node[dot-point] (6) [above right=of 3, label=6] {};
+
+    \path[->,spaced-arrows,dotted] (0) edge (1);
+    \path[->,spaced-arrows,dotted] (1) edge (2);
+    \path[->, spaced-arrows] (1) edge (3);
+    \path[->,spaced-arrows,dotted] (2) edge (4);
+    \path[->, spaced-arrows] (3) edge (5);
+    \path[->, spaced-arrows] (3) edge (6);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+And here is another:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (0) [label=below:0] {};
+    \node[dot-point] (1) [above=of 0, label=1] {};
+    \node[dot-point] (2) [above left=of 1, label=2] {};
+    \node[dot-point] (3) [above right=of 1, label=3] {};
+    \node[dot-point] (4) [above left=of 2, label=4] {};
+    \node[dot-point] (5) [above left=of 3, label=5] {};
+    \node[dot-point] (6) [above right=of 3, label=6] {};
+
+    \path[->,spaced-arrows,dotted] (0) edge (1);
+    \path[->, spaced-arrows] (1) edge (2);
+    \path[->,spaced-arrows,dotted] (1) edge (3);
+    \path[->, spaced-arrows] (2) edge (4);
+    \path[->,spaced-arrows,dotted] (3) edge (5);
+    \path[->, spaced-arrows] (3) edge (6);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+There is one more path in this tree from the root to a leaf. It is this:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (0) [label=below:0] {};
+    \node[dot-point] (1) [above=of 0, label=1] {};
+    \node[dot-point] (2) [above left=of 1, label=2] {};
+    \node[dot-point] (3) [above right=of 1, label=3] {};
+    \node[dot-point] (4) [above left=of 2, label=4] {};
+    \node[dot-point] (5) [above left=of 3, label=5] {};
+    \node[dot-point] (6) [above right=of 3, label=6] {};
+
+    \path[->,spaced-arrows,dotted] (0) edge (1);
+    \path[->, spaced-arrows] (1) edge (2);
+    \path[->,spaced-arrows,dotted] (1) edge (3);
+    \path[->, spaced-arrows] (2) edge (4);
+    \path[->, spaced-arrows] (3) edge (5);
+    \path[->,spaced-arrows,dotted] (3) edge (6);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Trees can be written upside down too. Here is the same tree, just drawn upside down.
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (0) [label=above:0] {};
+    \node[dot-point] (1) [below=of 0, label=below:1] {};
+    \node[dot-point] (2) [below left=of 1, label=2] {};
+    \node[dot-point] (3) [below right=of 1, label=3] {};
+    \node[dot-point] (4) [below left=of 2, label=4] {};
+    \node[dot-point] (5) [below left=of 3, label=5] {};
+    \node[dot-point] (6) [below right=of 3, label=6] {};
+
+    \path[->, spaced-arrows] (0) edge (1);
+    \path[->, spaced-arrows] (1) edge (2);
+    \path[->, spaced-arrows] (1) edge (3);
+    \path[->, spaced-arrows] (2) edge (4);
+    \path[->, spaced-arrows] (3) edge (5);
+    \path[->, spaced-arrows] (3) edge (6);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+Drawing a tree right side up or upside down doesn't matter. It's still the same tree, no matter which way it's pointing. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Drawing convention}
+
+As a \vocab{convention}, we will \vocab{draw no arrows} on a tree. This is because it is obvious which way the edges go. They always go from the root out to the leaves.
+
+So, for example, we will draw the above tree like this:
+
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (0) [label=above:0] {};
+    \node[dot-point] (1) [below=of 0, label=below:1] {};
+    \node[dot-point] (2) [below left=of 1, label=2] {};
+    \node[dot-point] (3) [below right=of 1, label=3] {};
+    \node[dot-point] (4) [below left=of 2, label=4] {};
+    \node[dot-point] (5) [below left=of 3, label=5] {};
+    \node[dot-point] (6) [below right=of 3, label=6] {};
+
+    \path (0) edge (1);
+    \path (1) edge (2);
+    \path (1) edge (3);
+    \path (2) edge (4);
+    \path (3) edge (5);
+    \path (3) edge (6);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+And it is obvious which way the edges go. The root of the tree is at the top (node 0), and the branches grow downwards from there, so the arrows point down.
+
+We could draw the same tree the other way around:
+
+\begin{center}
+  \begin{tikzpicture}
+  
+    \node[dot-point] (0) [label=below:0] {};
+    \node[dot-point] (1) [above=of 0, label=1] {};
+    \node[dot-point] (2) [above left=of 1, label=2] {};
+    \node[dot-point] (3) [above right=of 1, label=3] {};
+    \node[dot-point] (4) [above left=of 2, label=4] {};
+    \node[dot-point] (5) [above left=of 3, label=5] {};
+    \node[dot-point] (6) [above right=of 3, label=6] {};
+
+    \path (0) edge (1);
+    \path (1) edge (2);
+    \path (1) edge (3);
+    \path (2) edge (4);
+    \path (3) edge (5);
+    \path (3) edge (6);
+
+  \end{tikzpicture}
+\end{center}
+
+\noindent
+It is still obvious which way the arrows go. When we draw the tree this way, the root is at the bottom (node 0), and the branches grow upwards, so the arrows point up.
+
+\end{document}

@@ -1,0 +1,612 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Data and sampling}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Some scenarios}
+
+Here are a few basic scenarios of statistical studies. We will use these as examples in what follows.
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Height study}
+\label{subsec:height_study}
+
+Suppose we want to know the average height of all high school students in Delaware. Obviously we cannot measure the height of every student in the state. That would take too long. So, we need to take a sample instead. To do that, we randomly select 10 high school students from each of the 3 counties in Delaware, and we measure just the heights of those students. We write down all the heights (in inches), in a table.
+
+\begin{table}[!htbp]
+  \centering
+  \begin{tabular}{| l || c |  c | c | c | c | c | c | c | c | c |}
+    \hline
+    \textbf{County} & \multicolumn{10}{l |}{\textbf{Heights}} \\ \hline
+    Kent & 67 & 62 & 56 & 55 & 53 & 52 & 73 & 73 & 59 & 52 \\ \hline
+    New Castle & 50 & 60 & 67 & 56 & 61 & 51 & 65 & 74 & 70 & 58 \\ \hline
+    Sussex & 57 & 55 & 68 & 52 & 59 & 54 & 65 & 62 & 71 & 71 \\ \hline
+  \end{tabular}
+  \caption{\label{table:heights raw data} Heights (in inches) of selected Delaware high school students}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Children study}
+\label{subsec:children_study}
+
+Suppose we want to know the proportion of households in Reno, Nevada that have children living in the house. It would take too long to knock on every door, so we need a sample. To get a sample, we randomly select 10 households from each of the town's 5 wards, and we knock on those doors only. At each household, we simply ask if there are any children living there. Then we write down the results in a table.
+
+\begin{table}[!htbp]
+  \centering
+  \begin{tabular}{| l || c |  c | c | c | c | c | c | c | c | c |}
+    \hline
+    \textbf{Ward} & \multicolumn{10}{l |}{\textbf{Household has children?}} \\ \hline
+    Ward 1 & yes & yes & no & yes & no & no & yes & yes & no & no \\ \hline
+    Ward 2 & no & yes & yes & yes & yes & no & no & yes & yes & no \\ \hline
+    Ward 3 & no & no & no & no & yes & no & yes & no & no & yes \\ \hline
+    Ward 4 & yes & no & yes & yes & no & yes & no & yes & yes & no \\ \hline
+    Ward 5 & yes & no & no & no & no & no & yes & yes & yes & yes \\ \hline
+  \end{tabular}
+  \caption{\label{table:children raw data} Households selected from Reno's wards}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{R8 Study}
+\label{subsec:r8_study}
+
+Suppose we are analysts at Audi. We want to look at all Audi R8s that were sold in New York City last year, and we want to know which colors sold and how many of each. To get a sample, we randomly select 1 Audi dealership from each of the five burroughs, and for each one, we randomly pull the sales record for ten of the R8s they sold last year. Then we write down the colors, in a table (``R'' is red, ``B'' is black, ``W'' is white, ``Y'' is yellow, and ``G'' is green).
+
+\begin{table}[!htbp]
+  \centering
+  \begin{tabular}{| l || c |  c | c | c | c | c | c | c | c | c |}
+    \hline
+    \textbf{Burrough} & \multicolumn{10}{l |}{\textbf{Color of selected R8s sold last year}} \\ \hline
+    The Bronx & R & W & B & W & W & Y & B & W & B & Y \\ \hline
+    Brooklyn & W & B & R & Y & W & B & G & W & Y & W \\ \hline
+    Manhattan & W & B & B & B & W & W & W & W & R & W \\ \hline
+    Queens & R & Y & Y & W & B & R & W & R & G & B \\ \hline
+    Staten Island & Y & B & W & W & R & B & G & Y & R & R \\ \hline
+  \end{tabular}
+  \caption{\label{table:R8 raw data} Colors of selected Audi R8s sold last year in NYC}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Candle Study}
+\label{subsec:candle_study}
+
+Suppose there is a company called Candela Bright who produces tea light candles. Candela Bright hires us to figure out the average time that their candles burn. Obviously, we can't test all of their candles, because to do so, we'd use them all up, and there would be nothing left to sell. So we need to take a sample. To do that, we randomly select 10 candles from each of their 3 production lines. Then we time how long it takes each to burn until the wax is completely used up. In a table, we write down those times (as hours with decimal places rather than hours and minutes):
+
+\begin{table}[!htbp]
+  \centering
+  \begin{tabular}{| l || c |  c | c | c | c | c | c | c | c | c |}
+    \hline
+    \textbf{Line} & \multicolumn{10}{l |}{\textbf{Time until wax is completely used up}} \\ \hline
+Line 1 & 6.75 & 6.52 & 6.16 & 7.72 & 2.39 & 8.09 & 3.27 & 4.17 & 5.48 & 8.82 \\ \hline
+Line 2 & 5.46 & 6.90 & 6.54 & 3.57 & 4.08 & 10.58 & 6.31 & 3.36 & 3.20 & 2.39 \\ \hline
+Line 3 & 8.75 & 5.56 & 2.98 & 9.87 & 2.78 & 2.50 & 10.13 & 4.84 & 5.02 & 1.59 \\ \hline
+  \end{tabular}
+  \caption{\label{table:candle raw data} Burn times for selected candles (measured in hours)}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Basic terminology}
+
+Here is some basic terminology that we use in statistics.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Population.}
+
+The entire collection of objects that we want to study is called the population. The population need not be a collection of people. It could be a collection of anything --- people, places, things, and so on.
+
+\begin{itemize}
+
+  \item In the \vocab{height study} from section \ref{subsec:height_study}, the population is all public high school students in Delaware.
+    
+  \item In the \vocab{children study} from section \ref{subsec:children_study}, the population is all households in Reno, Nevada.
+    
+  \item In the \vocab{R8 study} from section \ref{subsec:r8_study}, the population is all Audi R8s sold last year in New York City.
+  
+  \item In the \vocab{Candle study} from section \ref{subsec:candle_study}, the population is all candles produced by the Candela Bright company.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Sample.}
+
+A sample is a smaller subset of a population. We typically study the sample instead of the whole population, and we use what we learn about the \emph{sample} to make an estimate about the whole \emph{population}.
+
+\begin{itemize}
+
+  \item In the \vocab{height study}, the sample is the group of 30 students that we selected (10 from each of the 3 counties in Delaware).
+    
+  \item In the \vocab{children study}, the sample is the set of 50 households we selected (10 from each of the 5 wards in Reno, Nevada). 
+    
+  \item In the \vocab{R8 study}, the sample is the set of 50 Audi R8s that were randomly selected from the 5 dealerships.
+  
+  \item In the \vocab{Candle study}, the sample is the set of 30 candles that were randomly selected from the company's three production lines.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Data.}
+
+The information that we collect from a sample and write down is called the data. Often, data is written down in a table, but it could be written down in other ways too.
+
+\begin{itemize}
+
+  \item In the \vocab{height study}, the data is the information we wrote down in Table \ref{table:heights raw data}.
+    
+  \item In the \vocab{children study}, the data is the information we wrote down in Table \ref{table:children raw data}.
+    
+  \item In the \vocab{R8 study}, the data is the information we wrote down in Table \ref{table:R8 raw data}.
+  
+  \item In the \vocab{Candle study}, the data is the information we wrote down in Table \ref{table:candle raw data}.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Variable.}
+
+When we talk about a variable, we are referring to the type of information that we collect for each object in the sample. We typically refer to it with a capital letter like ``$X$.''
+
+\begin{itemize}
+
+  \item In the \vocab{height study}, the variable $X$ is the height of a particular high school student in Delaware.
+    
+  \item In the \vocab{children study}, the variable $X$ is whether a particular household in Reno has children living in it.
+    
+  \item In the \vocab{R8 study}, the variable $X$ is the color of a particular R8 sold in New York City last year.
+  
+  \item In the \vocab{Candle study}, the variable $X$ is the amount of time a particular Candela Bright candle burns before it uses up all of its wax.
+
+\end{itemize}
+
+These are called \emph{variables} because their values \emph{vary} across the sample. For example, not every high school student in Delaware has the same height. It varies.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Values.}
+
+The values of a variable is the full set of possible values that a variable can have.
+
+\begin{itemize}
+
+  \item In the \vocab{height study}, the values of the variable $X$ are heights (in inches). For example, there are the heights listed in the table --- 67, 62, 56, 55, and so on --- but also any other height not listed on that table would be a possible value for the variable $X$.
+    
+  \item In the \vocab{children study}, there are only two possible values of the variable $X$: ``yes'' and ``no.''
+    
+  \item In the \vocab{R8 study}, the possible values of the variable $X$ are the colors ``R'' (Red), ``W'' (White), ``B'' (Black), ``Y'' (Yellow), and ``G'' (Green).
+  
+  \item In the \vocab{Candle study}, the values of the variable $X$ are times (measured as hours with decimal places). So, any time listed in the table --- 6.75, 6.52, 6.16, 7.72, and so on --- but also any other time that a candle could burn for.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Statistic.}
+
+A statistic is a summary number that summarizes the values of a variable in a sample. It is typically the particular thing that we are interested in finding.
+
+\begin{itemize}
+
+  \item In the \vocab{height study}, the statistic we are after is the average height of students in the sample.
+    
+  \item In the \vocab{children study}, the statistic we are after is the proportion of households in the sample that have children living in them.
+
+  \item In the \vocab{R8 study}, the statistic we are after is the count/totals of each color in the sample.
+  
+  \item In the \vocab{Candle study}, the statistic we are after is the average burn time of the candles in the sample.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Parameter.}
+
+A parameter is the same as a statistic, but for the whole population. So, the statistic is the summary number we are interested in as it is present in the \emph{sample}, while the parameter is the same thing, but as it is present in the \emph{entire population}.
+
+\begin{itemize}
+
+  \item In the \vocab{height study}, the statistic we are after is the average height of all public high school students in the state of Delaware.
+    
+  \item In the \vocab{children study}, the statistic we are after is the proportion of all households in Reno that have children living in them.
+
+  \item In the \vocab{R8 study}, the statistic we are after is the count/totals of each color for all R8s sold in New York City last year.
+  
+  \item In the \vocab{Candle study}, the statistic we are after is the average burn time of all candles produced by Candela Bright.
+
+\end{itemize}
+
+In statistics, we typically do not calculate the parameter directly, because we do not collect data for the entire population. Instead, we only collect data for a sample. We calculate the statistic (for the sample), but then we use that statistic to \emph{estimate} the parameter. (We will learn techniques to do this later.)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Why sample?}
+
+With statistics, we often study samples instead of an entire population. There are various reasons why we do this. 
+
+\begin{itemize}
+
+\item The population might simply be too big. For example, measuring the height of every high school student in Delaware would just take too long.
+
+\item Our study might destroy the sample. For example, burning a candle up to see how long it lasts destroys the candle.
+
+\item It is more convenient. Samples are smaller, and that makes collecting the data, and then performing calculations with that data, much easier.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Representative samples}
+
+We study samples so that we can extrapolate from the sample to the whole population. The basic idea is this: if the sample is truly representative of the larger population, then whatever trends and other characteristics we see in the sample should also be present in the whole population (within a certain range of error).
+
+But, this requires that the sample is truly \vocab{representative}. There are a variety of ways that a sample can fail to be representative. Here are some.
+
+\begin{itemize}
+
+  \item Suppose Mickey Corp is a company that makes brake pads for cars. They have two manufacturing plants: one in Canada, and one in Ireland. Suppose Mickey Corp hires us to test how long their brake pads last (on average). We decide to take 100 brake pads, and test those as our sample. If we were to select all 100 brake pads from the manufacturing plant in Canada, our sample would not be representative, because it would include no brake pads from the plant in Ireland. This could be problematic, because for all we know, the brake pads from the plant in Canada might be very good, while the plant in Ireland might have a defect in its production line, causing it to produce lots of defective brake pads. Our test could then conclude that Mickey Corp's brake pads are very good, but this would be wrong, because half of its brake pads are actually defective (namely, all the ones from Ireland), and we simply didn't test any brake pads from that half.
+  
+  \item Suppose we want to find out the percentage of families in the United States that are home owners. To do this, we call 100 names listed in the phone book (i.e., we call 100 people with land line phones) and we ask them if they are home owners. This sample is \vocab{biased}, because we are only calling people with land lines, and people with land lines typically own their homes.
+
+\end{itemize}
+
+When analyzing a statistical report of any kind, a crucial question is this: how good is the sample? How representative is it? (Later we will learn ways to specify exactly how good a sample is.)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sampling methods}
+
+A sample is \vocab{biased} precisely if some objects have more of a chance to be selected for the sample than others. Think back to the home owners survey. By selecting participants based on having a phone, we made it more likely for home owners to be selected for the survey than non home owners. 
+
+The best way to get a representative sample is to select the objects for the sample \vocab{randomly}. This means that each object has just as much chance of being included in the sample as any other. 
+
+There are different ways to make a random selection. See the textbook for a discussion. [TO DO. Summarize.]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variation}
+
+All samples differ from each other, even if you try to take the same sample twice from a population. No matter how careful you are and no matter how precise your measurements, if you try to take the same sample twice, you will very often have some variation in your samples. There are two basic causes for this.
+
+\begin{itemize}
+
+  \item Variation in measuring techniques causes differences between samples. If you measure the same thing on two separate occasions, you will rarely get the same measurement. Sometimes we might be able to get very close measurements, but rarely can we get \emph{exactly} the same measurement both times.
+  
+  \item Variation in the objects selected causes differences between samples. If we take a sample by randomly selecting $n$ objects from a population, then we are unlikely to select the very same $n$ objects again. 
+
+\end{itemize}
+
+Later, we will learn how to measure how much two samples vary from each other.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Types of data}
+
+There are two basic types of data (i.e., two kinds of values that we can collect): qualitative data and quantitative data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Quantitative data}
+
+\emph{Quantitative data} is basically just \emph{numbers} --- that is to say, values that we can do basic mathematical calculations with. 
+  
+Let us be more exact though. Quantitative values represent discrete units, that have the same distance between them, and that are ordered in a sequence. Think of the counting numbers on a sort of number line:
+
+  \begin{center}
+    \begin{tikzpicture}
+
+      % \draw [<->] (0,0) -- (10, 0);
+      \draw [<-] (0,0) -- (0.5, 0);
+      \draw [->] (9.5, 0) -- (10, 0);
+
+      \draw (1, 0.15) -- (1, -0.15);
+      \node at (1, 0.35) {};
+  
+      \draw (2, 0.15) -- (2, -0.15);
+      \node at (2, 0.35) {\ldots};
+  
+      \draw (3, 0.15) -- (3, -0.15);
+      \node at (3, 0.35) {0};
+
+      \draw (4, 0.15) -- (4, -0.15);
+      \node at (4, 0.35) {1};
+  
+      \draw (5, 0.15) -- (5, -0.15);
+      \node at (5, 0.35) {2};
+
+      \draw (6, 0.15) -- (6, -0.15);
+      \node at (6, 0.35) {3};
+
+      \draw (7, 0.15) -- (7, -0.15);
+      \node at (7, 0.35) {4};
+
+      \draw (8, 0.15) -- (8, -0.15);
+      \node at (8, 0.35) {\ldots};
+
+      \draw (9, 0.15) -- (9, -0.15);
+      \node at (9, 0.35) {};
+
+    \end{tikzpicture}
+  \end{center}
+
+The numbers are discrete units: there is ``$0$,'' ``$1$,'' ``$2$,'' and so on. They are arranged in a sequence: numbers farther on the left of the line are less than numbers farther to the right on the line. And there is the same distance between each number: the distance between $2$ and $3$, for example, is the same as the distance between $5$ and $6$.
+
+If the data for a parameter or variable comes from a set of values that are ordered in this way, then these values are quantitative. Quantitative data is often easy to spot because you can do mathematical calculations with the values. You can add and subtract the values together, and so on.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Qualitative data}
+
+\emph{Qualitative data} is also sometimes called \emph{categorical} data or \emph{non-quantitative} data. It is any data that is not quantitative. 
+  
+Think of the colors of Audi R8s. The set of possible values here are white, black, red, blue, brown, and so on. But these ``values'' are not arranged in a sequence of ``greater than'' or ``less than.'' It makes no sense to say that red is greater than or equal to blue, for example. Also, we cannot do arithmetic on these values. It makes no sense to subtract one from the other. So colors are qualitative.
+  
+Some data looks like quantitative data, but it is not. For example, suppose we want to know the ranks of all officers in the Air Force. We will have ranks like ``captain,'' ``colonel,'' ``general,'' and so on. These ranks are ordered. A captain is lower in rank than a colonel, and a colonel is lower in rank than a general. However, it makes no sense to put these ranks on a number line. They can be put in a hierarchy, but not a number line. There is no sense in which there is the same ``distance'' between each rank (it is not even clear how we should measure the ``distance'' between the ranks), and it makes no sense to add one rank to another, or divide one rank by another.
+
+Qualitative data is sometimes easy to spot because it can only be described with words. For example, colors like white, red, and so on are just words. They are not numerical. Ranks like colonel, captain, and so on are also just words, and are not numerical. 
+  
+However, sometimes numbers are used as the \emph{names} or \emph{labels} of qualitative values, without there being any intended numerical meaning. For example, employees might be given a long number as an employee ID, but this does not mean that we should think of such IDs as numbers. They are simply unique identifiers, and it probably makes no sense to try and add or subtract employee IDs from each other, and it probably makes no sense to try to find an ``average'' employee ID. 
+  
+If it doesn't make sense to do math on the values, it is probably qualitative data, rather than quantitative data, even if the labels \emph{look like} numbers.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discrete vs continuous values}
+
+There are two types of quantitative data: the values can either be discrete, or they can be continuous (but not both).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Discrete values}
+
+\emph{Discrete values} occur in evenly spaced steps on a number line. That is to say, each value has the same sized gap between the next value. 
+
+As an example, consider the whole numbers: i.e., the counting numbers $0$, $1$, $2$, and so on. These values are called ``whole'' because they are not divided up into fractions. Look at the counting numbers again:
+  
+  \begin{center}
+    \begin{tikzpicture}
+
+      % \draw [<->] (0,0) -- (10, 0);
+      \draw [<-] (0,0) -- (0.5, 0);
+      \draw [->] (9.5, 0) -- (10, 0);
+
+      \draw (1, 0.15) -- (1, -0.15);
+      \node at (1, 0.35) {};
+  
+      \draw (2, 0.15) -- (2, -0.15);
+      \node at (2, 0.35) {\ldots};
+  
+      \draw (3, 0.15) -- (3, -0.15);
+      \node at (3, 0.35) {0};
+
+      \draw (4, 0.15) -- (4, -0.15);
+      \node at (4, 0.35) {1};
+  
+      \draw (5, 0.15) -- (5, -0.15);
+      \node at (5, 0.35) {2};
+
+      \draw (6, 0.15) -- (6, -0.15);
+      \node at (6, 0.35) {3};
+
+      \draw (7, 0.15) -- (7, -0.15);
+      \node at (7, 0.35) {4};
+
+      \draw (8, 0.15) -- (8, -0.15);
+      \node at (8, 0.35) {\ldots};
+
+      \draw (9, 0.15) -- (9, -0.15);
+      \node at (9, 0.35) {};
+
+    \end{tikzpicture}
+  \end{center}
+  
+If you want to count through the whole numbers, then to get from $1$ to $2$, you have to jump from the tick mark labeled ``$1$'' to the tick mark labeled ``$2$.'' And notice that you skip over all the fractions in between. So to count through the whole numbers, you go through them in steps, so to speak, because you jump from one to the other, and you don't pass through the infinite number of points on the line in between them. Whole numbers are thus \emph{discrete} values. 
+
+Think of it this way: if you put a dot for each discrete value on a number line, there will be evenly sized gaps between each dot.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Continuous values}
+
+\emph{Continuous values} are the opposite of discrete. Continuous values have no gaps between them. It is just one continuous stream of values. So if we take the number line above, and include not just $1$ and $2$, but \emph{all} the values in between, then we have continuous values. 
+
+  \begin{center}
+    \begin{tikzpicture}
+
+      \draw [<->] (0,0) -- (10, 0);
+
+      \draw (1, 0.15) -- (1, -0.15);
+      \node at (1, 0.35) {};
+  
+      \draw (2, 0.15) -- (2, -0.15);
+      \node at (2, 0.35) {\ldots};
+  
+      \draw (3, 0.15) -- (3, -0.15);
+      \node at (3, 0.35) {0};
+
+      \draw (4, 0.15) -- (4, -0.15);
+      \node at (4, 0.35) {1};
+  
+      \draw (5, 0.15) -- (5, -0.15);
+      \node at (5, 0.35) {2};
+
+      \draw (6, 0.15) -- (6, -0.15);
+      \node at (6, 0.35) {3};
+
+      \draw (7, 0.15) -- (7, -0.15);
+      \node at (7, 0.35) {4};
+
+      \draw (8, 0.15) -- (8, -0.15);
+      \node at (8, 0.35) {\ldots};
+
+      \draw (9, 0.15) -- (9, -0.15);
+      \node at (9, 0.35) {};
+
+    \end{tikzpicture}
+  \end{center}
+
+Think of it this way: if you put a dot on a number line for each continuous value, then you will have no gaps. There will be so many dots (infinitely many of them!) that you'll really just draw a continuous line between each number, as we see in the picture here. That's why continuous values are called \emph{continuous}.
+
+Continuous values are often easy to spot because they include fractions or decimal values. If your values include not just whole numbers, but everything in between, then these values should be treated as continuous data.
+
+However, fractions or decimal places do not always mean that you are dealing with continuous data. Think about the units of the U.S. dollar. Dollars can be broken down into fractions, but ultimately, they can only be broken down into 100 parts, namely 100 cents. So unless you are calculating fractions of a cent, you are really working with discrete data. So be careful, and use good judgment. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Levels of measurement}
+
+When we have a set of values, we really want to calculate representative summary numbers (i.e., statistics) for those values. We call this \vocab{measuring} the data (or measuring the values). So another way to think of a statistic is as a measurement of a whole set of values. 
+
+However, if the data is not very ordered, it is hard to calculate summary values. Conversely, the more ordered it is, the easier it is to calculate summary values. So, the more ordered the values are, the more we can measure them.
+
+This means that there are different \emph{levels} of ``measurability.'' The lowest level is where the data is not very measurable (because it is not very ordered), and the highest level is where the data is very measurable (because it is very ordered). 
+
+There are four different such levels of measurement. We name each level by the kind of scale or ordering we can put the values into.
+
+\begin{itemize}
+
+  \item \vocab{Nominal scale}. This is the lowest level of measurability. Think of it as level zero. This applies when values cannot be ordered at all. The most we can do is count how many times the values occur. Think of the colors of sold Audi R8s last year. We cannot arrange these colors into ``greater than'' or ``less than.'' But we can count how many times any one color occurs. We can count that white occurs on our list, say, 458 times. In sum, if we cannot put the values into an ordering, then we are working on a nominal scale.
+  
+  \item \vocab{Ordinal scale}. This is the next level of measurability. Think of it as level one. This level applies when we can put the values into an order or hierarchy. The ranks of officers in the Air Force is a good example. We can we count how many times (say) ``colonel'' occurs in our data, but beyond that, we can also put the values into a hierarchy. However, we cannot measure the distance between the ranks, because there is no clear sense how far the step from one rank to the other is (is it 5 units from colonel to general? 3 units? It makes no sense to talk about the distance between the ranks). So, if we can put the values into a hierarchy, but we cannot measure the distance between them, then we are working with an ordinal scale.
+  
+  \item \vocab{Interval scale}. This is the next highest level of measurability. Think of it is level two. This level applies when. we can put the values into an order, and we can measure the distance between them. However, there is no starting point to the ordering. The ordering goes indefinitely in both directions. An example is Farenheit or Celcius temperatures. There is no absolute bottom value for these scales. What this means is that we can measure how far any two values are \emph{from each other}, but we cannot measure how far all of the values are from some absolute bottom value. If you can put the values into an order, and there is an established distance between each value, then we are working with an interval scale. [TO DO: ratios don't make sense in an interval scale.]
+  
+  \item \vocab{Ratio scale}. This is the highest level of measurability. Think of it as level three. This level is just like the interval scale, but there is an absolute reference value that all the other values should be understood in reference to. For example, the scores that all the students in a class get on a test belong on a ratio scale, because there is a fixed reference point: 100\%. Any other scores are understood relative to that. The kelvin temperature scale is another example, because it has an absolute bottom value (the so-called ``absolute zero'' temperature), and all other values on the kelvin scale are understood with respect to that. If we have a fixed reference value like this, then we can compare the values not only to each other, but also to the fixed reference point. Hence, with the scores on a test, we can tell not only how well one student did with respect to another (Sally got 10 more percentage points than Bob), but we can also say how well they did with respect to 100\% (Sally got 90\%).
+
+\end{itemize}
+
+Note that these levels are nested. Any ratio scale can be described as a nominal scale. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Frequency}
+
+One of the most basic ways to summarize data is to count how many times each value occurs in our data. For example, we can take the colors of all Audi R8s that were purchased last year, and we can count up how many times each color occurs. Then we can put those counts in a table, for instance:
+
+\begin{center}
+  \begin{tabular}{| c | c |}
+    \hline
+    \textbf{Color} & \textbf{Count} \\
+    \hline
+    White & 478 \\
+    \hline
+    Black & 342 \\
+    \hline
+    Yellow & 123 \\
+    \hline
+    Red & 34 \\
+    \hline
+    \ldots & \ldots \\
+    \hline
+  \end{tabular}
+\end{center}
+
+These counts are called \vocab{frequency counts}. They are also called \vocab{frequencies} for short, where a ``frequency'' is just the number of times the value occurs in the data set.
+
+We can add the total number of colors to the table (and relabel ``Count'' to ``Frequency''), if we like:
+
+\begin{center}
+  \begin{tabular}{| c | c |}
+    \hline
+    \textbf{Color} & \textbf{Frequency} \\
+    \hline
+    White & 478 \\
+    \hline
+    Black & 342 \\
+    \hline
+    Yellow & 123 \\
+    \hline
+    Red & 34 \\
+    \hline
+    \ldots & \ldots \\
+    \hline
+    \textbf{Total} & 2,567 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+We can divide each count by the total number to find the \vocab{relative frequency}:
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    \textbf{Color} & \textbf{Frequency} & \textbf{Relative frequency} \\
+    \hline
+    White & 478 & 478 / 2,567 = 0.19 or 19\% \\
+    \hline
+    Black & 342 & 342 / 2,567 = 0.13 or 13\% \\
+    \hline
+    Yellow & 123 & 123 / 2,567 = 0.05 or 5\% \\
+    \hline
+    Red & 34 & 34 / 2,567 = 0.01 or 1\% \\
+    \hline
+    \ldots & \ldots & \ldots \\
+    \hline
+    \textbf{Total} & 2,567 & \\
+    \hline
+  \end{tabular}
+\end{center}
+
+Sometimes the values are ordered into a hierarchy, in such a way that higher values include the others. For example, suppose we calculate the frequencies of students who earned at least 70\%, at least 80\%, and at least 90\% of the 100 possible percentage points:
+
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+    \hline
+    \textbf{Percentage earned} & \textbf{Frequency} & \textbf{Relative frequency} \\
+    \hline
+    at least 90\% & 3 & 3 / 11 = 0.27 or 27\% \\
+    \hline
+    at least 80\% & 6 & 6 / 11 = 0.55 or 55\% \\
+    \hline
+    at least 70\% & 2 & 2 / 11 = 0.18 or 18\% \\
+    \hline
+    \textbf{Total} & 11& \\
+    \hline
+  \end{tabular}
+\end{center}
+
+We can add up the relative frequencies in another column so that we keep a running total as we go down the rows. This is called a \vocab{cumulative relative frequency}:
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c |}
+    \hline
+    \textbf{Percent.~earned} & \textbf{Freq.} & \textbf{Rel.~frequency} & \textbf{Cum.~Rel.~frequency} \\
+    \hline
+    at least 90\% & 3 & 3 / 11 = 0.27 or 27\% & 27\%\\
+    \hline
+    at least 80\% & 6 & 6 / 11 = 0.55 or 55\% & 27 + 55 = 82\%\\
+    \hline
+    at least 70\% & 2 & 2 / 11 = 0.18 or 18\% & 82 + 18 = 100\%\\
+    \hline
+    \textbf{Total} & 11& \\
+    \hline
+  \end{tabular}
+\end{center}
+
+Of course, the last row should add up to 100\%!
+
+A cumulative relative frequency is useful when it makes sense for the lower rows to include the values from higher rows. In this table, it does make sense. 27\% of the class earned at least 90\% of the total 100\%, but 82\% earned at least 80\%, because those who scored 90\% also scored at least 80\% too. 
+
+
+\end{document}

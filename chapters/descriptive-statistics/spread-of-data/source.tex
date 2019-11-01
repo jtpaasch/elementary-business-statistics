@@ -1,0 +1,648 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The spread of the data}
+
+Here we look at another kind of \vocab{statistic} (i.e., a summary number). Here we look at \vocab{variance}, \vocab{standard deviation}, and \vocab{z-scores}, which tell us how spread out the values in a data set are.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The concept of spread}
+
+The mean of a set of values is the amount that all would have if they shared equally. But obviously this is an idea number. The following points are important to keep in mind:
+
+\begin{itemize}
+
+  \item Most of the time, all the observations don't have the same value. Some are bigger, some are smaller.
+
+  \item As values in a data set get farther apart, they can still have the same mean as if they were closer together.
+  
+  \item So the mean doesn't tell you how far out the values are spread.  
+
+\end{itemize}
+
+
+\paragraph{Example 1.}
+
+Consider this data set (a sample):
+
+\begin{equation*}
+  3, 4, 5, 6
+\end{equation*}
+
+\noindent
+What is the mean? It is 4.5, which is right in the middle of the 4 values, i.e., it is right between 4 and 5:
+
+\begin{equation*}
+  \samplemean{x} = \frac{3 + 4 + 5 + 6}{4} = 4.5
+\end{equation*}
+
+\noindent
+Notice how close these values are to the mean. If we put these values on a number line, we can see that the dots are pretty close to the mean:
+  
+  \begin{center}
+    \begin{tikzpicture}
+
+      \draw [<->] (0,0) -- (11, 0);
+
+      \draw (1, 0.15) -- (1, -0.15);
+      \node at (1, 0.35) {};
+  
+      \draw (2, 0.15) -- (2, -0.15);
+      \node at (2, 0.35) {1};
+  
+      \draw (3, 0.15) -- (3, -0.15);
+      \node at (3, 0.35) {2};
+
+      \draw (4, 0.15) -- (4, -0.15);
+      \node at (4, 0.35) {3};
+  
+      \draw (5, 0.15) -- (5, -0.15);
+      \node at (5, 0.35) {4};
+
+      \draw (6, 0.15) -- (6, -0.15);
+      \node at (6, 0.35) {5};
+
+      \draw (7, 0.15) -- (7, -0.15);
+      \node at (7, 0.35) {6};
+
+      \draw (8, 0.15) -- (8, -0.15);
+      \node at (8, 0.35) {7};
+
+      \draw (9, 0.15) -- (9, -0.15);
+      \node at (9, 0.35) {8};
+
+      \draw (10, 0.15) -- (10, -0.15);
+      \node at (10, 0.35) {};
+
+      \draw (5.5, 0.75) -- (5.5, -0.75);
+      \node at (5.5, -1) {Mean (4.5)};
+
+      \node at (4, 0) [circle,fill,inner sep=2pt] {};
+      \node at (5, 0) [circle,fill,inner sep=2pt] {};
+      \node at (6, 0) [circle,fill,inner sep=2pt] {};
+      \node at (7, 0) [circle,fill,inner sep=2pt] {};
+
+    \end{tikzpicture}
+  \end{center}
+
+
+\paragraph{Example 2.}
+
+Now consider this sample data set:
+
+\begin{equation*}
+  2, 3, 6, 7
+\end{equation*}
+
+\noindent
+What's the mean? It's again 4.5, which is right in the middle of all the values:
+
+\begin{equation*}
+  \samplemean{x} = \frac{2 + 3 + 6 + 7}{4} = 4.5
+\end{equation*}
+
+\noindent
+But how far away are the values from the mean? If we put these values on a number line, we can see that the values are farther away from the mean than they were in the first example:
+
+  \begin{center}
+    \begin{tikzpicture}
+
+      \draw [<->] (0,0) -- (11, 0);
+
+      \draw (1, 0.15) -- (1, -0.15);
+      \node at (1, 0.35) {};
+  
+      \draw (2, 0.15) -- (2, -0.15);
+      \node at (2, 0.35) {1};
+  
+      \draw (3, 0.15) -- (3, -0.15);
+      \node at (3, 0.35) {2};
+
+      \draw (4, 0.15) -- (4, -0.15);
+      \node at (4, 0.35) {3};
+  
+      \draw (5, 0.15) -- (5, -0.15);
+      \node at (5, 0.35) {4};
+
+      \draw (6, 0.15) -- (6, -0.15);
+      \node at (6, 0.35) {5};
+
+      \draw (7, 0.15) -- (7, -0.15);
+      \node at (7, 0.35) {6};
+
+      \draw (8, 0.15) -- (8, -0.15);
+      \node at (8, 0.35) {7};
+
+      \draw (9, 0.15) -- (9, -0.15);
+      \node at (9, 0.35) {8};
+
+      \draw (10, 0.15) -- (10, -0.15);
+      \node at (10, 0.35) {};
+
+      \draw (5.5, 0.75) -- (5.5, -0.75);
+      \node at (5.5, -1) {Mean (4.5)};
+
+      \node at (3, 0) [circle,fill,inner sep=2pt] {};
+      \node at (4, 0) [circle,fill,inner sep=2pt] {};
+      \node at (7, 0) [circle,fill,inner sep=2pt] {};
+      \node at (8, 0) [circle,fill,inner sep=2pt] {};
+
+    \end{tikzpicture}
+  \end{center}
+ 
+\noindent
+
+\paragraph{Example 3.}
+
+Now consider this sample data set:
+
+\begin{equation*}
+  1, 2, 7, 8
+\end{equation*}
+
+\noindent
+What's the mean? It's still 4.5, which again is right in the middle of all the values:
+
+\begin{equation*}
+  \samplemean{x} = \frac{1 + 2 + 7 + 8}{4} = 4.5
+\end{equation*}
+
+\noindent
+But here the values are even farther away from the mean than they were in the previous example. If we put these values on a number line, we can see this clearly:
+
+  \begin{center}
+    \begin{tikzpicture}
+
+      \draw [<->] (0,0) -- (11, 0);
+
+      \draw (1, 0.15) -- (1, -0.15);
+      \node at (1, 0.35) {};
+  
+      \draw (2, 0.15) -- (2, -0.15);
+      \node at (2, 0.35) {1};
+  
+      \draw (3, 0.15) -- (3, -0.15);
+      \node at (3, 0.35) {2};
+
+      \draw (4, 0.15) -- (4, -0.15);
+      \node at (4, 0.35) {3};
+  
+      \draw (5, 0.15) -- (5, -0.15);
+      \node at (5, 0.35) {4};
+
+      \draw (6, 0.15) -- (6, -0.15);
+      \node at (6, 0.35) {5};
+
+      \draw (7, 0.15) -- (7, -0.15);
+      \node at (7, 0.35) {6};
+
+      \draw (8, 0.15) -- (8, -0.15);
+      \node at (8, 0.35) {7};
+
+      \draw (9, 0.15) -- (9, -0.15);
+      \node at (9, 0.35) {8};
+
+      \draw (10, 0.15) -- (10, -0.15);
+      \node at (10, 0.35) {};
+
+      \draw (5.5, 0.75) -- (5.5, -0.75);
+      \node at (5.5, -1) {Mean (4.5)};
+
+      \node at (2, 0) [circle,fill,inner sep=2pt] {};
+      \node at (3, 0) [circle,fill,inner sep=2pt] {};
+      \node at (8, 0) [circle,fill,inner sep=2pt] {};
+      \node at (9, 0) [circle,fill,inner sep=2pt] {};
+
+    \end{tikzpicture}
+  \end{center}
+
+
+\subsection{Why we need the spread}
+
+So different data sets can have the same mean, even though their values may be spread out differently. For this reason, we need a distinct measure to indicate how far out the values are spread. 
+
+There are three closely related standard statistics that we use to measure the spread of data. The first is called the \vocab{variance}, the second is called the \vocab{standard deviation}, and the third is called \vocab{z-scores}. First though, let us talk about what ``a deviation'' is.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What is a deviation?}
+
+Take any observation in a data set. How far does it deviate from the mean? We can calculate this by taking that observation's value --- whatever it might be, call it $x$ --- and then subtracting the mean from it. This tells us how far away from the mean $x$ is.
+
+\begin{equation*}
+  deviation = x - mean
+\end{equation*}
+
+\noindent
+We have two kinds of means though. One mean, $\populationmean{}$, is the mean of an entire population. So the formula for an observation's deviation in a population is this:
+
+\begin{equation*}
+  deviation_{population} = x - \populationmean{}
+\end{equation*}
+
+\noindent
+The other mean, $\samplemean{x}$, is the mean of a sample. The formula for an observation's deviation in a sample is thus this:
+
+\begin{equation*}
+  deviation_{sample} = x - \samplemean{x}
+\end{equation*}
+
+
+\paragraph{Examples.}
+
+Take the data set from Example 1 above. The sample data set is this:
+
+\begin{equation*}
+  3, 4, 5, 6
+\end{equation*}
+
+\noindent
+The mean $\samplemean{x}$ is 4.5. Given that, how far does the first observation deviate from the mean? What is its deviation? To find that, we take its value (which is 3) and subtract from it the sample mean (which is 4.5), and that gives us -1.5:
+
+\begin{equation*}
+  deviation_{sample} = x - \samplemean{x} = 3 - 4.5 = -1.5
+\end{equation*}
+
+\noindent
+Notice that the value is negative. This makes sense, because the observation's value is smaller than the mean. The negative sign tells us that it deviates lower than the mean, rather than higher. 
+
+Now take the fourth observation. What is its deviation, i.e., how far does it deviate from the sample mean? To find that, we take its value (which is 6) and subtract from it the sample mean (which is 4.5), and that gives us 1.5:
+
+\begin{equation*}
+  deviation_{sample} = x - \samplemean{x} = 6 - 4.5 = 1.5
+\end{equation*}
+
+\noindent
+Notice that the deviation is positive. This makes sense, because the observation's value is larger than the mean, so the sign is positive. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A deviation squared}
+
+In statistics, when we want to look at a bunch of deviations, we square the deviations (i.e., we multiply each deviation by itself). Let's call this the squared deviation, or the deviation$^{2}$:
+
+\begin{equation*}
+  deviation^{2}_{sample} = (x - \samplemean{x})^{2}
+\end{equation*}
+
+\noindent
+Or for a population:
+
+\begin{equation*}
+  deviation^{2}_{population} = (x - \populationmean{})^{2}
+\end{equation*}
+
+
+\paragraph{Examples.}
+
+For example, take the deviation we computed a moment ago: -1.5. To compute the squared deviation, we compute the deviation just as before, but then we square the result:
+
+\begin{equation*}
+  deviation^{2}_{sample} = (x - \samplemean{x})^{2} = (3 - 4.5)^{2} = (-1.5)^{2} = 2.25
+\end{equation*}
+
+The second deviation we computed a moment ago was 1.5. To compute the squared deviation, we compute it just as before, but we square the result:
+
+\begin{equation*}
+  deviation^{2}_{sample} = (x - \samplemean{x})^{2} = (6 - 4.5)^{2} = (1.5)^{2} = 2.25
+\end{equation*}
+
+
+\paragraph{What does squaring do to numbers?}
+
+What happens when we square numbers? There are two things to notice.
+
+First, squaring exaggerates values. When you square little values, they only get a little bigger. For example, look at these squares:
+
+\begin{align*}
+  1^{2} &= 1 \\
+  1.25^{2} &= 1.5625 \\
+  1.5^{2} &= 2.25 \\
+  1.75^{2} &= 3.0625 \\
+  2^{2} &= 4 \\
+  2.5^{2} &= 6.25
+\end{align*}
+
+\noindent
+Notice how the values do get bigger by squaring them, but they don't get much bigger. Now look at what happens when we square some bigger numbers:
+
+\begin{align*}
+  3^{2} &= 9 \\
+  4^{2} &= 16 \\
+  5^{2} &= 25 \\
+  6^{2} &= 36 \\
+  7^{2} &= 49 \\
+  8^{2} &= 64
+\end{align*}
+
+\noindent
+The numbers are starting to get a lot bigger. The difference between $2$ and $2^{2}$ is just $2$, but the difference between $8$ and $8^{2}$ is 56. 
+
+So squaring numbers exaggerates the differences. Squaring makes little numbers only a little bigger, but it makes big numbers a whole lot bigger.
+
+One other thing to notice is that squaring always makes numbers positive. Look at what happens when we square these negative numbers:
+
+\begin{align*}
+  -1^{2} &= 1 \\
+  -1.25^{2} &= 1.5625 \\
+  -1.5^{2} &= 2.25 \\
+  -1.75^{2} &= 3.0625 \\
+  -2^{2} &= 4 \\
+  -2.5^{2} &= 6.25
+\end{align*}
+
+\noindent
+Notice that these squares are the same as the positive versions above. The square of -1.25 is the same as the square of 1.25 (both come out to 1.5625). It is as if we just ignore the negative or positive sign altogether. 
+
+
+\paragraph{Why square the deviations?}
+
+So, when we square numbers, we exaggerate the differences, and we ignore positive and negative signs and convert everything to positive numbers. These things help us understand deviations better.
+
+\begin{itemize}
+
+  \item By squaring the deviations, we exaggerate them, and this helps us see which deviations are small and which are big. Little deviations aren't affected much by squaring, but big deviations are affected a lot, so they are a lot more obvious.
+
+  \item By squaring the values, we convert the deviations into positive values. In affect, we stop caring about whether the deviations are below or above the mean. All we really care about is \emph{how much} they deviate from the mean. We'll return to this point in a moment.
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variance}
+
+Now that we have talked about a deviation and squaring deviations, let us turn to the variance. The \vocab{variance} is the mean (average) of squared deviations. 
+
+Think about the parts of that definition:
+
+\begin{itemize}
+
+  \item What is a mean (average)? As we said earlier, the mean is how much every observation would have if they shared the total amount equally. 
+
+  \item What are we averaging? The squared deviations. I.e., all the deviations squared so that they are exaggerated and all positive.
+  
+\end{itemize}
+
+\noindent
+So the variance is how much of the deviations (exaggerated and made positive) each observation would get, if they shared the total amount of (exaggerated) deviation equally.
+
+
+\paragraph{Symbols}
+
+There are also symbols for the variance, just like there are for the population and sample mean.
+
+\begin{itemize}
+
+  \item The variance for a population is usually abbreviated as a squared Greek lower case letter sigma, like this: $\sigma^{2}$.
+  
+  \item The standard deviation for a sample is usually abbreviated simply as a squared, italicized ``s,'' like this: $s^{2}$. 
+  
+\end{itemize}
+
+
+\paragraph{Computing the variance}
+
+To find the variance, we compute the deviations of all the observations in our data set, then we square each one, and then we find the average of those values.
+
+Suppose we have $n$ observations in our data set, and suppose we compute the squared deviation for each observation. To represent each squared deviation 1 through $n$, let us write $d^{2}$, and let us add a subscript for the number of the observation, like this: 
+
+\begin{equation*}
+  d^{2}_{1}, d^{2}_{2}, \ldots, d^{2}_{n}
+\end{equation*}
+
+\noindent
+So $d^{2}_{1}$ represents the squared deviation for the first observation, $d^{2}_{2}$ represents the squared deviation for the second observation, and $d^{2}_{n}$ represents the squared deviation for the $nth$ observation.
+
+Then, to compute the average (mean) of all those, we add them all together, and we divide by the number of observations $n$:
+
+\begin{equation*}
+  variance = \frac{d^{2}_{1} + d^{2}_{2} + \ldots + d^{2}_{n}}{n}
+\end{equation*}
+
+\noindent
+For brevity, we can write this in a sigma notation, like this:
+
+\begin{equation*}
+  variance = \frac{\sum\limits_{i=1}^{n} d^{2}_{i} }{n}
+\end{equation*}
+
+\noindent
+That formula is the formula for computing the variance of a population. Let's make that explicit in the formula, by referring to it with the formal symbol for population variance (namely $\sigma^{2}$), and we'll use $N$ to refer to the number of objects in the population:
+
+\begin{equation*}
+  \sigma^{2} = \frac{\sum\limits_{i=1}^{n} d^{2}_{i} }{N}
+\end{equation*}
+
+\noindent
+What about a sample? To compute the variance for a sample, we divide not by the total number of items in the sample $n$. Rather, we divide by $n - 1$ (one less than $n$). So here's the formula for the variance of a sample:
+
+\begin{equation*}
+  s^{2} = \frac{\sum\limits_{i=1}^{n} d^{2}_{i} }{n - 1}
+\end{equation*}
+
+\noindent
+Why do we divide by $n - 1$ instead of $n$? There are mathematical reasons for it, which have to do with the fact that a sample is really just an estimate. We won't worry about that here.
+
+
+\paragraph{Examples.}
+
+Take the data set from Example 1 above:
+
+\begin{equation*}
+  3, 4, 5, 6
+\end{equation*}
+
+\noindent
+The mean is 4.5. Let us calculate the variance for this sample:
+
+\begin{align*}
+  s^{2} = \frac{\sum\limits_{i=1}^{n} d^{2}_{i} }{n - 1} = \\
+  \frac{(3 - 4.5)^{2} + (4 - 4.5)^{2} + (5 - 4.5)^{2} + (6 - 4.5)^{2}}{4 - 1} = \\
+  \frac{2.25 + 0.25 + 0.25 + 2.25}{3} = \\
+  1.6667
+\end{align*}
+
+\noindent
+Now take the data set from Example 3 above:
+
+\begin{equation*}
+  1, 2, 7, 8
+\end{equation*}
+
+\noindent
+This has the same mean, namely 4.5. But let us calculate the variance:
+
+\begin{align*}
+  s^{2} = \frac{\sum\limits_{i=1}^{n} d^{2}_{i} }{n - 1} = \\
+  \frac{(1 - 4.5)^{2} + (2 - 4.5)^{2} + (7 - 4.5)^{2} + (8 - 4.5)^{2}}{4 - 1} = \\
+  \frac{12.25 + 6.25 + 6.25 + 12.25}{3} = \\
+  12.3334
+\end{align*}
+
+\noindent
+Notice that the variance for this latter data set is much bigger than the first data set, even though both have the same mean. This is what we expect. Even though both data sets have the same mean, the variance for the first one is less than the variance for the latter one, because the first one's values are much closer to the mean (they don't deviate as much), while the latter one's values are a lot farther away from the mean (they deviate quite a bit). 
+
+
+\paragraph{Positive values}
+
+As we said, the variance is the average (mean) of the squared deviations. Recall that squaring converts all the values into positive numbers. This makes it so that we don't care about whether the deviations are below or above the mean. It means that all we take into account is how much deviation there is.
+
+To see this point more clearly, think about what the average would look like if we didn't have all positive values. For example, here are the squared deviations for the first data set above (3, 4, 5, and 6):
+
+\begin{equation*}
+  2.25, 0.25, 0.25, 2.25
+\end{equation*}
+
+\noindent
+When we add these up, we get 5:
+
+\begin{equation*}
+  2.25 + 0.25 + 0.25 + 2.25 = 5
+\end{equation*}
+
+\noindent
+So this is the total amount of deviation there is in the data set. Now, we can divide that by $n - 1$ (which is 4 - 1, or 3), to estimate how much each deviation each observation would have if they shared their deviations equally:
+
+\begin{equation*}
+  \frac{5}{3} = 1.6667
+\end{equation*}
+
+\noindent
+But now let us run a thought experiment. The first two observations in our data set deviate \emph{below} the mean. So suppose we make the first two squared deviations negative:
+
+\begin{equation*}
+  -2.25, -0.25, 0.25, 2.25
+\end{equation*}
+
+\noindent
+What happens when we add these all up?
+
+\begin{equation*}
+  -2.25 + -0.25 + 0.25 + 2.25 = 0
+\end{equation*}
+
+\noindent
+We get zero! The negative values cancel out the positive values. And if there's no (zero) deviation to share, then there will be no variance either. But this is obviously wrong. There \emph{is} variance in the data set. This highlights that negative values function to cancel out other values when computing an average. 
+
+In this case (when calculating variance), we don't want values canceled out. We really are interested in all of the deviation, whether the deviation is a deviation below the mean or above it. So it is a good thing that we square the deviations, to remove the negative signs. With all of the values positive, we really are focusing on how much deviation there is in total, irrespective of whether the deviation is below or above the mean.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Standard deviation}
+
+The standard deviation is just the square root of the variance. 
+
+
+\paragraph{Why the square root?}
+
+Recall that the variance is the average of \emph{squared} deviations, and squared deviations are \emph{exaggerated}. So the variance is an exaggerated number.
+
+To remove the exaggeration, we can reverse the squaring, i.e., we can take the square root of the variance.
+
+
+\paragraph{Symbols}
+
+The standard deviation is often written as ``STDEV'' for short. But there are also symbols for it too, just like there are for the population and sample mean.
+
+\begin{itemize}
+
+  \item The standard deviation for a population is usually abbreviated as a Greek lower case letter sigma, like this: $\sigma$.
+  
+  \item The standard deviation for a sample is usually abbreviated simply as an italicized ``s,'' like this: $s$. 
+  
+\end{itemize}
+
+
+\paragraph{Calculating the standard deviation}
+
+To calculate the standard deviation for a population, find the population variance, and take the square root of that:
+
+\begin{equation*}
+  \sigma = \sqrt{\sigma^{2}}
+\end{equation*}
+
+\noindent
+Or, if we replace $\sigma^{2}$ with the formula for population variance, we get:
+
+\begin{equation*}
+  \sigma = \sqrt{\frac{\sum\limits_{i=1}^{n} d^{2}_{i} }{N}}
+\end{equation*}
+
+\noindent
+To calculate the standard deviation for a sample, find the sample variance, and take the square root of that:
+
+\begin{equation*}
+  s = \sqrt{s^{2}}
+\end{equation*}
+
+\noindent
+Or, if we replace $s^{2}$ with the formula for sample variance, we get:
+
+\begin{equation*}
+  s = \sqrt{\frac{\sum\limits_{i=1}^{n} d^{2}_{i} }{n - 1}}
+\end{equation*}
+
+
+\paragraph{Standard deviation as a measure of distance}
+
+Once we calculate the standard deviation for a data set, we can then take any observation in that data set, and we can say how many standard deviations it is away from the mean. 
+
+To calculate it, compute the deviation of an observation --- i.e., subtract the mean from the value of the observation --- and then divide that by the standard deviation.
+
+For an observation $x$ from a sample, the number of sample standard deviations ($s^{2}$'s) that $x$ is from the mean ($\samplemean{x}$) is calculated like this:
+
+\begin{equation*}
+  num~of~s^{2}\text{'s}~from~mean = \frac{x - \samplemean{x}}{s^{2}}
+\end{equation*}
+
+\noindent
+For an observation $x$ from a population, the number of population standard deviations ($\sigma^{2}$'s) that $x$ is from the mean ($\populationmean{}$) is calculated like this:
+
+\begin{equation*}
+  num~of~\sigma^{2}\text{'s}~from~mean = \frac{x - \populationmean{}}{\sigma^{2}}
+\end{equation*}
+
+\noindent
+For example, suppose a sample has a mean of 2 (so $\samplemean{x} = 2$), and a standard deviation of 0.5 (so $s^{2} = 0.5$). Now suppose there is an observation with a value of 5. How many standard deviations from the mean is that observation? 
+
+\begin{equation*}
+  num~of~s^{2}\text{'s}~from~mean = \frac{x - \samplemean{x}}{s^{2}} = \frac{5 - 2}{0.5} = \frac{3}{0.5} = 6
+\end{equation*}
+
+\noindent
+The answer is 6, because the observation (which is 5) is 3 units away from the mean (which is 2), and there are six 0.5's in 3. So the observation is 6 standard deviations away from the mean.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Z-scores}
+
+The \vocab{z-score} (also called the \vocab{coeffecient of variation}, is just the standard deviation normalized onto a scale of 0 to 100. To calculate it: 
+
+\begin{itemize}
+
+  \item Take the standard deviation $\samplestdev{}$, and divide it by the mean $\samplemean{x}$. This gives us the standard deviation as a portion of the mean. So the result is not some absolute number like 3 or 10.035 (which may or may not be far away from the mean). Rather, it is a proportion of the mean, so that the result is something like .5 of the mean, or .734 of the mean.
+  
+  \item Multiply the result by 100. This takes that proportion, and turns it into a percentage. So .5 of the mean becomes 50\% of the mean.
+  
+\end{itemize}
+
+\noindent
+Here is the full formula (the z-score, or ``CV,'' short for ``coefficient of variation''):
+
+\begin{equation*}
+  \text{z-score } = \frac{\samplestdev{}}{\samplemean{x}} * 100
+\end{equation*}
+
+
+\end{document}
