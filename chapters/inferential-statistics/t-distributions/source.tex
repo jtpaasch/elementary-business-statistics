@@ -1,0 +1,108 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{T-distributions}
+
+In previous examples, we constructed confidence intervals by adding/subtracting a predetermined number of STDEVs to our sample mean. However, to compute 1 or 2 STDEVs, we needed to know the population's standard deviation $\populationstdev$ (or we needed a big enough sample so we could use the sample's STDEV as an estimate).
+
+But we do not always know the population's STDEV (and we have a small sample). When we are in this situation, we have to estimate it using a special distribution, called a \vocab{Student's t-distribution}.
+
+The t-distribution looks a lot like a standard normal curve, but it is slightly fatter. The reason it is fatter is because it is meant to correct for a little bit of error. But apart from that, you can think of the t-distribution as pretty much a mimic of the normal curve.
+
+To say that a random variable has a t-distribution, we sometimes write it like this:
+
+\begin{equation*}
+  T \sim t_{df}
+\end{equation*}
+
+\noindent
+``$T$'' here is just the random variable in question (like $\RandVar/$, but we've used a ``T'' instead of an ``X''), and ``$df$'' refers to the degrees of freedom, which we'll talk about next.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Looking up a t-score}
+
+To find the value for a particular z-score, we look it up in a table. For t-scores, we do the same. In the back of your textbook, there is a t-score table, starting on p.~608. To look up a t-score, you need to know two things: 
+
+\begin{enumerate}
+  \item The \vocab{degrees of freedom} for your sample size. We abbreviate degrees of freedom as a lowercase ``v,'' like this: $\DegFreedom/$, or sometimes as a lowercase ``df,'' like this: $df$. To find the degrees of freedom for your sample size, take $\samplesize/ - 1$. So, if your sample size is 10, the degrees of freedom is 9: 
+  
+  \begin{equation*}
+    \DegFreedom/ = \samplesize/ - 1 \text{ or }df = \samplesize/ - 1 \hskip 1cm = \hskip 1cm 10 - 1 = 9
+  \end{equation*}
+
+  \item The \vocab{value of $\frac{\alpha}{2}$}. For example, if you want a 95\% confidence interval, then $\alpha$ is 0.05, and hence $\frac{\alpha}{2} = 0.025$.
+
+\end{enumerate}
+
+\noindent
+Once you know $\DegFreedom/$ and $\frac{\alpha}{2}$, you go to the t-table in the back of your textbook. Go down the left column until you find the $\DegFreedom/$ value you are looking for, then go across the top column to the value of $\frac{\alpha}{2}$ that you need. The number where these two columns intersect is the t-score you want.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constructing a confidence interval with t-scores}
+
+To construct a confidence interval with a t-score, you follow the same procedure as for z-score confidence intervals, except you use the STDEV of the sample (i.e., use $\samplestdev$ instead of $\populationstdev$), and use a t-score instead of a z-score.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The formula}
+
+The formula for a t-score confidence interval is the same as a z-score confidence interval, except for these differences:
+
+\begin{itemize}
+  \item We use the t-score (which we here abbreviate as $\tscore/$), instead of the z-score (which we abbreviated as $Z_{\frac{\alpha}{2}}$).
+  \item We use the sample STDEV (which we abbreviate as $\samplestdev$) in place of the population STDEV (which we abbreviate as $\populationstdev$).
+\end{itemize}
+
+\noindent
+So, the formula is this:
+
+\begin{equation*}
+  \samplemean{x} - \tscore/(\frac{\samplestdev}{\sqrt{\samplesize/}}) < \populationmean < \samplemean{x} + \tscore/(\frac{\samplestdev}{\sqrt{\samplesize/}})
+\end{equation*}
+
+\noindent
+That is how it is written in many textbooks and other references. This says that the population mean (i.e., $\populationmean$), is between the sample mean (i.e., $\samplemean{x}$), plus or minus the t-score (i.e., $\tscore/$) multiplied by the sampling standard deviation (i.e., $\frac{\samplestdev}{\sqrt{\samplesize/}}$).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example}
+
+Suppose we take a sample of 15 high school students in Delaware, we measure their heights, and we find that the mean of our sample is 67.85, and the STDEV for the sample is 8.23 inches. 
+
+How do we construct a 95\% confidence interval that estimates the population mean? To answer this, follow these steps:
+
+\begin{enumerate}
+
+  \item Find the degree of freedom $\DegFreedom/$. The sample size $\samplesize/$ is 15, so $\DegFreedom/$ is 14.
+
+  \item The $\StdErr/$ for the sampling distribution is $\frac{\samplestdev}{\sqrt{\samplesize/}}$, so $\frac{8.23}{\sqrt{15}} = 2.12$.
+
+  \item Since we want a 95\% level of confidence, $\alpha$ is 5\%, or 0.05. Hence, $\frac{\alpha}{2} = 0.025$. 
+
+  \item If we look in the t-table, for $\DegFreedom/ = 14$ and $\frac{\alpha}{2} = 0.025$, we see that the t-score we want is 2.145.
+
+  \item Therefore, we can find our interval by adding and subtracting $2.145 * 2.12 = 4.55$ from each side of the sample mean 67.85: (67.85 - 4.55, 67.85 + 4.55) = (63.3, 72.4). 
+
+\end{enumerate}
+
+\noindent
+And now we can state our confidence interval:
+
+\begin{quote}
+  The \textbf{95\% confidence interval} for this population is $\mathbf{67.85 \pm 4.55}$, \\
+  i.e., \textbf{(63.3, 72.4)}. \\
+
+  In words: We estimate with 95\% confidence that the true mean height for all high school students in Delaware is between 63.3 and 72.4 inches.
+\end{quote}
+
+
+\end{document}

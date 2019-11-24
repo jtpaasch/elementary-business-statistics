@@ -20,13 +20,7 @@
 % \usepgfplotslibrary{external}
 % \tikzexternalize
 
-\newtheorem{example}{Example}
-\numberwithin{example}{section}
-\newtheorem{remark}{Remark}
-\numberwithin{remark}{section}
-\newtheorem{note}{Note}
-\numberwithin{note}{section}
-
+\newcommand{\blank}{\underline{\hspace{1cm}}}
 \newcommand\vocab[1]{\textbf{#1}}
 \newcommand\popnum{N}
 \newcommand\samplenum{n}
@@ -47,11 +41,20 @@
 \def\PDFtext/{$\PDF/$}
 \newcommand\Pdf[1]{\mathsf{Pdf(#1)}}
 \newcommand\Probability[1]{P(#1)}
+\newcommand\ContProb[1]{f(#1)}
 \newcommand\Binom[1]{b(#1)}
 \def\CDF/{\mathsf{Cdf}}
 \def\CDFtext/{$\CDF/$}
 \newcommand\Cdf[1]{\mathsf{Cdf(#1)}}
-
+\def\samplesize/{n}
+\def\CLT/{\textsc{CLT}}
+\def\SamplingRandVar/{\overline{X}}
+\def\SamplingRandVarVal/{\overline{x}}
+\def\SamplingMean/{\mu_{\overline{x}}}
+\def\StdErr/{\mathsf{STDERR}}
+\def\SamplingSTDEV/{\frac{\populationstdev}{\sqrt{\samplesize/}}}
+\def\DegFreedom/{\mathbf{v}}
+\def\tscore/{\mathbf{t_{\DegFreedom/, \alpha}}}
 
 \begin{document}
 
@@ -101,9 +104,20 @@ Last updated \today.
 \subfile{chapters/probability/discrete-random-variables/source}
 \subfile{chapters/probability/discrete-pdfs/source}
 \subfile{chapters/probability/binomial/source}
+\subfile{chapters/probability/poisson/source}
 
-\subfile{chapters/probability/from-discrete-to-continuous/source}
 \subfile{chapters/probability/probability-as-area/source}
 \subfile{chapters/probability/continuous-uniform-distributions/source}
+\subfile{chapters/probability/exponential-distribution/source}
+
+\subfile{chapters/probability/normal-distribution/source}
+
+\part{Inferential statistics}
+
+\subfile{chapters/inferential-statistics/introduction/source}
+\subfile{chapters/inferential-statistics/sampling-distributions/source}
+\subfile{chapters/inferential-statistics/how-sampling-distributions-work/source}
+\subfile{chapters/inferential-statistics/confidence-intervals/source}
+\subfile{chapters/inferential-statistics/t-distributions/source}
 
 \end{document}

@@ -19,9 +19,9 @@ Those examples involve discrete outcomes. But we can have a uniform distribution
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A worked example}
+\section{An example}
 
-Suppose we measure how long it takes for a bus to travel from one point to another. Suppose we measure 10 separate rides, and we find that the times (in minutes) are these:
+Suppose we measure how long it takes the drivers for a ride sharing company to give rides from one point to another. Suppose we measure 10 separate (randomly selected) rides, and we find that the times (in minutes) are these:
 
 \begin{center}
   \begin{tabular}{|| l | l || l | l |}
@@ -35,7 +35,11 @@ Suppose we measure how long it takes for a bus to travel from one point to anoth
   \end{tabular}
 \end{center}
 
-Now, what is the probability of each of these outcomes? Well, we could consider each of these values as a unique outcome, and count up how often each occurs. That is, we could make a frequency table:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The wrong way to think about it}
+
+What is the probability of each of the above outcomes? It might be tempting to consider each of those values as a unique outcome, and count up how often each one occurs. That is, we could make a frequency table:
 
 \begin{center}
   \begin{tabular}{|| l | l || l | l |}
@@ -53,77 +57,67 @@ Each one of these outcomes occurs only once. And since there are 10 observations
 
 But, this is not correct. Notice that each outcome happens only once. That tells us something. It tells us that each outcome seems just as likely as any of others. In other words, we are working with a \vocab{uniform} distribution here.
 
-Now, why should each outcome be equally likely? A hint comes from the decimal points in the values. Each outcome is a very specific measurement of time. 2.346 seconds, or 4.649 seconds, for example. 
+Furthermore, why should each outcome be equally likely? A hint comes from the decimal points in the values. Each outcome is a very specific measurement of time. 2.346 seconds, or 4.649 seconds, for example. 
 
 What this tells us is that we are working with a continuous scale of time. And that means that, beyond the 10 particular time measurements we collected from our observations, there are infinitely more points of time between each of the ones that we recorded.
 
-So counting up the outcomes in a frequency table is misleading (if not just plain incorrect). A frequency table suggests that the reported outcomes are the only possible options. But that's not true in this case. There are infinitely many other points of time that we could have observed.
+So counting up the outcomes in a frequency table is incorrect. A frequency table reports all the possible outcomes and how many times each one occurred. In the frequency table above, there are only 10 outcomes listed. But that's not correct. There are infinitely many other points of time that we could have observed, and we have omitted all those values from the frequency table.
 
-So really, we are looking at a huge number of possible times. And that means that the probability of each of our observed outcomes is \emph{not} one over 10, or .1.
+So really, we are looking at a huge number of possible times. And that means that the probability of each of our observed outcomes is \emph{not} one over 10, or 0.1.
 
-So how do we calculate the probability of any particular outcome here?
 
-Well, what we can do is find the range of possible values. To do that, we get the min and the max observed values and treat them as the top and bottom boundaries of our measurements. Then we say that the possible outcomes are anything that can happen in between (and including) them.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constructing the \PDFtext/}
 
-In our observations, the lowest time we recorded is 2.346, and the highest time is 7.233. How many values are there between these two numbers? Well, we can calculate the distance betwen a lower point $a$ and a higher point $b$ by subtracting $a$ from $b$:
+We said that the \PDFtext/ tells us how to draw the line for a continuous distribution. In our case, the distribution is uniform (every possibility is just as likely), so the line should be a straight, horizontal line.
+
+The \PDFtext/ should thus tell us the height of the line. For each possible outcome, the height will be the same, since each outcome is equally likely. The formula for the height is this:
+
+\begin{equation*}
+  \Probability{\RandVarVal/} = \frac{1}{\text{range of outcomes}}
+\end{equation*}
+
+\noindent
+The probability of one out of six possible outcomes is one over six (or one-sixth), since there is a range of six possible outcomes. The probability of one out of 100 possible outcomes is one over a hundred (or one-hundredth), since there is a range of one hundred possible outcomes. In this case, we have a continuous range of values, so the probability will be one over the size of that range.
+
+How do we find the size of the range of possible outcomes? We get the min and the max observed values and treat those as the top and bottom boundaries of our range. Then we say that the possible outcomes are anything that can happen in between (and including) them.
+
+In our observations, the lowest time we recorded is 2.346, and the highest time is 7.233. How many values are there between these two numbers? We can calculate the distance between a lower point $a$ and a higher point $b$ by subtracting $a$ from $b$:
 
 \begin{equation*}
   \text{distance} = b - a
 \end{equation*}
 
+\noindent
 In this case then, the distance between the lowest and highest points is this:
 
 \begin{equation*}
   \text{distance} = b - a = 7.233 - 2.346 = 4.887
 \end{equation*}
 
+\noindent
 So, we have a span of 4.887 minutes.
 
-The probability of any one particular value in that span happening is thus one over 4.887:
+If we plug that in to our \PDFtext/ formula above, we get one over 4.887:
 
 \begin{equation*}
   P(x) = \frac{1}{4.887} = 0.205
 \end{equation*} 
 
-See what we did there? We find the range or distance between the highest and lowest point (using $b$ - $a$), and then the probability of any one outcome is 1 over that distance. Hence, the probability of any particular outcome in a uniform distribution is this:
+\noindent
+See what we did there? We find the range or distance between the highest and lowest point (using $b$ - $a$), and then the probability of any one outcome is $1$ over that distance. Hence, the probability of any particular outcome in a continuous uniform distribution is this:
 
 \begin{equation*}
-  P(x) = \frac{1}{b - a}
+  \Probability{\RandVarVal/} = \frac{1}{b - a}
 \end{equation*} 
-
-Notice that we are calculating the probability of an event falling in a \emph{range}. That is because we are working with continuous values, not discrete values. We cannot compute the probability of any particular outcome, since that is one over infinity, which is zero. Instead, we have to calculate the probability of a value falling in a range. And that's what we did here.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Plotting it}
 
-Let's draw a polygon plot for a uniform distirbution. How do we do this for discrete values? Well, the probability goes on the y-axis, and the possible outcomes go on the x-axis. For example, when we drew a polygon for flipping a coin before, it looked like this:
-
-\begin{center}
-  \begin{tikzpicture}
-
-    \draw[->] (0, 0) -- (0, 4);
-    \draw (-0.1, 1) -- (0.1, 1);
-    \node (ytick1) at (0, 1) [label=left:{0.25}] {};
-    \draw (-0.1, 2) -- (0.1, 2);
-    \node (ytick2) at (0, 2) [label=left:{.5}] {};
-    \draw (-0.1, 3) -- (0.1, 3);
-    \node (ytick3) at (0, 3) [label=left:{0.75}] {};
-
-    \draw[->] (0, 0) -- (7, 0);
-    \node (xtick1) at (2, 0) [label=below:{heads}] {};
-    \node (xtick3) at (4, 0) [label=below:{tails}] {};
-
-    \draw[fill=lightgray] (0.5, 2) -- (5.5, 2) -- (5.5, 0) -- (0.5, 0) -- (0.5, 2);
-    \draw (3, 2) -- (3, 0);
-
-  \end{tikzpicture}
-\end{center}
-
-The height is the probability, and the width is however much space is taken up the possible outcomes.
-
-We can follow the same techniques for a continuous uniform distribution. The height is the probability, and the width is however much space is needed for the range of values. Like this:
+Let's draw a polygon plot for a continuous uniform distribution. The height is the probability, and the width is however much space is needed for the range of values. Like this:
 
 \begin{center}
   \begin{tikzpicture}
@@ -147,6 +141,7 @@ We can follow the same techniques for a continuous uniform distribution. The hei
   \end{tikzpicture}
 \end{center}
 
+\noindent
 In our case, the probability is 0.205, and $a$ and $b$ are 2.346 and 7.233, respectively:
 
 \begin{center}
@@ -195,12 +190,14 @@ How do we calculate the area of a rectangle? We multiply the width by the height
   \text{area} = \text{base} * \text{height}
 \end{equation*}
 
+\noindent
 In our case, the base is $b - a$, or $7.233 - 2.346$, which is 4.887, and the height is $\frac{1}{b - a}$, which is $\frac{1}{4.887}$, which is 0.205. So the area of the rectangle is this:
 
 \begin{equation*}
   \text{area} = 4.887 * 0.205 = 1
 \end{equation*}
 
+\noindent
 Indeed, we can see that the total area of the rectangle is 1 (plus or minus some minute decimal places, for rounding errors).
 
 
@@ -208,7 +205,7 @@ Indeed, we can see that the total area of the rectangle is 1 (plus or minus some
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Portions of the rectangle}
 
-What is the probability that the next bus ride will take 5 minutes or less? How do we calculate that?
+What is the probability that the next ride will take 5 minutes or less? How do we calculate that?
 
 We draw a line at the 5 minute mark on the plot, and we calculate the area of everything less than that in the rectangle:
 
