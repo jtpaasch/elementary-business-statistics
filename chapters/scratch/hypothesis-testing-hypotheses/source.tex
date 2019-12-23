@@ -1,0 +1,195 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Hypothesis testing and hypotheses}
+
+
+To do a hypothesis test (with one sample), we take two steps.
+
+  1. We form a hypothesis about a population parameter. For example, we might hypothesize that the average salary of employees at McCallister Logistics this year is \$55,000.
+
+  2. Then we take a sample from the population (i.e., we take a sample of the salaries of McCallister Logistics employees), and we use that data to determine if the hypothesis is correct.
+
+\noindent
+So the basic idea is pretty straightforward. However, we perform the above two steps in a particular way. I turn to that next.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Formulating the hypothesis(es)}
+
+First, we formulate the hypothesis we want to test in a specific way. We actually formulate \emph{two} hypotheses, which compete which each other.
+
+The first hypothesis says that the claim we want want to test is false. It basically says, ``you're wrong.'' We call this the \vocab{null hypothesis}, or the \vocab{status quo}.
+
+The second hypothesis says that the claim we want to test is true. It basically says, ``you're right.'' We call this the \vocab{alternative hypothesis}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The strategy}
+
+When we do the test, we assume that the null hypothesis is the correct one. In other words, we assume that we're wrong about the claim we really want to test. 
+
+Then, we assume that, if we want to overthrow the null hypothesis (the status quo), we need very strong evidence that the null hypothesis is wrong. (We call this the \vocab{tyranny of the status quo}.)
+
+Then, when we take the sample and collect the evidence, we end up with two possible outcomes:
+
+\begin{itemize}
+  \item It may be that the data doesn't provide enough evidence to overthrow the null hypothesis. In that case, we must conclude that the alternative hypothesis is false (or at least, that it is unconfirmed). 
+  \item On the other hand,  the data might provide enough evidence to overthrow teh null hypothesis. In that case, we can conclude that the alternative hypothesis is true. 
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Formulating the conclusion}
+
+When we reach our conclusion, we don't formulate our final decision in terms of the alternative hypothesis. So we don't say, ``the alternative hypothesis is confirmed/unconfirmed.''
+
+Intsead, we formulate our final decision in terms of the null hypothesis. So we say, ``cannot accept/reject the null hypothesis.''
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notation for the two hypotheses}
+
+We state the null and alterantive hypothesis using some mathematical conventions. First, we use special names for the two hypothesis:
+
+\begin{itemize}
+  \item For the null hypothesis, we write: $\NullHyp/$.
+  \item For the alternative hypothesis, we write: $\AltHyp/$.
+\end{itemize}
+
+\noindent
+Next, we state the null hypotheses as a mathematical equation that has roughly this form:
+
+\begin{quote}
+  A population parameter $P$ is equal to/greater than or equal to/less than or equal to a value $x$.
+\end{quote}
+
+\noindent
+Notice three things about that formulation:
+
+\begin{enumerate}
+  \item We pick a population parameter $P$. So, we are always formulating a hypothesis about some particular parameter of the population. For example, we are trying to guess what the \emph{mean} is, or what a \emph{proportion} is, or what the \emph{median} is, or what some other population parameter $P$ is.
+
+  \item We guess a particular value for $P$. So, if $P$ is the average (mean) salary of all employees at McCallister Logistics, then to formulate a hypothesis, we have to state some value for this. For example, \$55,000, or maybe \$57,000, or some other monetary value.
+
+  \item Lastly, we must say that the population parameter $P$ is (i) \emph{equal to}, or (ii) \emph{greater than or equal to}, or (iii) \emph{less than or equal to}, our guessed value. In symbols, that's $=$, $\geq$, and $\leq$. 
+
+\end{enumerate}
+
+\noindent
+So, more exactly, we always state $\NullHyp/$ in one of these three ways:
+
+\begin{align*}
+  P = x \\
+  P \geq x \\
+  P \leq x
+\end{align*}
+
+\noindent
+Then, we state the alternative hypothesis, $\AltHyp/$, as the opposite of that! Hence, if $\NullHyp/$ has the form $P = x$, then $\AltHyp/$ has the form $P \not = x$. If $\NullHyp/$ has the form $P \geq x$, then $\AltHyp/$ has the form $P < x$. And if $\NullHyp/$ has the form $P \leq x$, then $\AltHyp/$ has the form $P > x$. Like this:
+
+\begin{align*}
+  \NullHyp/: P = x \hskip 1cm \AltHyp/: P \not = x \\
+  \NullHyp/: P \geq x \hskip 1cm \AltHyp/: P < x \\
+  \NullHyp/: P \leq x \hskip 1cm \AltHyp/: P > x \\
+\end{align*}
+
+\noindent
+Notice that the equal sign is always apart of the \emph{null hypothesis}, and never the \emph{alternative hypothesis}. We never say in the alternative hypothesis that $P = x$, or that $P \geq x$, or that $P \leq x$. (This is just a convention. There is no reason that it couldn't be the other way around. It's just that statistics community has decided to do it this way.)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 1}
+
+Suppose we think the average salary of McCallister employees this year is higher than last year, where last year the average salary was \$55,000. How do we formulate $\NullHyp/$ and $\AltHyp/$?
+
+The claim we want to assert here is that the average (mean) salary is greater than \$55,000. So, we know some things:
+
+\begin{itemize}
+  \item The random variable $\RandVar/$ is the salary of an employee.
+  \item The possible values of $\RandVar/$ are dollar amounts.
+  \item The population parameter $P$ that we are interested in is the average, i.e., the \emph{mean} salary. So $\populationmean$.
+  \item The value $x$ that we are hypothesizing is \$55,000.
+  \item And we are saying that $P$ is \emph{greater than} that value.
+\end{itemize}
+
+So, we can formulate $\AltHyp/$:
+
+\begin{equation*}
+  \AltHyp/: \populationmean > \$55,000
+\end{equation*}
+
+\noindent
+Once we have that, we can formulate the null hypothesis $\NullHyp/$, since it's just the opposite:
+
+\begin{equation*}
+  \NullHyp/: \populationmean \leq \$55,000
+\end{equation*}
+
+\noindent
+So there we have it. Our null and alternative hypotheses:
+
+\begin{align*}
+  \NullHyp/: \populationmean \leq \$55,000 \\
+  \AltHyp/: \populationmean > \$55,000
+\end{align*}
+
+\noindent
+The status quo says that the average salary is \$55,000 or less. We could then take a sample, and try to get enough evidence to overthrow the status quo. If the evidence is strong enough to overthrow the status quo, then we can conclude ``cannot accept $\NullHyp/$.'' If the evidence is not strong enough, we would conclude ``cannot reject $\NullHyp/$.''
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 2}
+
+Suppose an online education program claims that graduates of their course are making on average \$120,000 a year, within 5 years of graduating. We think they are lying, and this is just a marketing ploy. How do we formulate $\NullHyp/$ and $\AltHyp/$?
+
+Here's what we know:
+
+\begin{itemize}
+  \item The random variable $\RandVar/$ is the salary of a graduate 5 years after graduating.
+  \item The values that $\RandVar/$ can take on are monetary values.
+  \item The population parameter $P$ that we are interested in is the average, i.e., the mean $\populationmean$.
+  \item The value $x$ that we are hypothesizing is \$120,000.
+  \item And we are saying that $P$ is \emph{not equal} to that value.
+\end{itemize}
+
+\noindent
+So there we have it. Our null and alternative hypotheses:
+
+\begin{align*}
+  \NullHyp/: \populationmean = \$120,000 \\
+  \AltHyp/: \populationmean \not = \$120,000
+\end{align*}
+
+\noindent
+The status quo says that the average salary of a graduate in 5 years \emph{is} \$120,000. We can take a sample, and try to get enough evidence to overthrow the status quo. If the evidence is strong enough to overthrow the status quo, then we can conclude ``cannot accept $\NullHyp/$.'' If the evidence is not strong enough, we would conclude ``cannot reject $\NullHyp/$.''
+
+Note that we could also have formulated our hypothesis pair like this:
+
+\begin{align*}
+  \NullHyp/: \populationmean \geq \$120,000 \\
+  \AltHyp/: \populationmean < \$120,000
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 3}
+
+Suppose we want to show that the average volume of a container of Jimmy's Organic Goat Milk Shampoo is exactly 8 ounces. Try to formulate the alternative hypothesis $\AltHyp/$ for this claim. It's kind of tricky.
+
+The problem is that, we are trying to make an alternative hypothesis which says that a parameter $P$ is \emph{exactly} some value $x$. In other words, we're trying to use an equals sign, as in $P = x$, in the alternative hypothesis. But we said above that the equal sign always goes in the null hypothesis.
+
+So how do we do this? We can let $P = x$ be our null hypothesis, and then try to overthrow it. If $P$ is indeed not equal to $x$, then the evidence should force us to conclude that we cannot accept the null hypothesis. In this example, we would let $\NullHyp/$ be $\populationmean = 8$, and $\AltHyp/$ be $\populationmean \not = 8$.
+
+
+\end{document}

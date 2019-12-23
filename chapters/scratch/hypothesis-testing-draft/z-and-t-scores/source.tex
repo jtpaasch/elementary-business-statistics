@@ -1,0 +1,157 @@
+\documentclass[../../../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Z/T-scores for sampling distributions}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calculating z-scores}
+
+A z-score tells us how many standard deviations away from the mean some value is. Suppose we take a sample and calculate its mean. That sample mean falls somewhere in a sampling distribution. And since sampling distributions are normal, we can calculate the z-score for any sample mean too. The z-score for a sample mean tells us how many standard deviations that sample mean is from the distribution's center.
+
+To calculate the z-score for a sample mean $\samplemean{x}$, first we want to know how far away the sample mean is from the population's center. To find that, we simply take the sample mean and subtract the population mean from it:
+
+\begin{equation*}
+  \text{distance from mean} = \samplemean{x} - \populationmean
+\end{equation*}
+
+\noindent
+Next, we want to know how many standard deviations there are in this value. So, we need to divide our result by the standard deviation of the distribution.
+
+What is the standard deviation for a sampling distribution? Recall that the standard deviation for sampling distributions is called the ``standard error,'' or $\StdErr/$ for short. The formula to compute the $\StdErr/$ for any sampling distribution is this:
+
+\begin{equation*}
+  \StdErr/ = \frac{\populationstdev}{\sqrt{\samplesize/}}
+\end{equation*}
+
+\noindent
+So, to compute the z-score for a sample mean, we simply take its distance from the mean, and we divide it by the standard error. To put it all together:
+
+\begin{equation*}
+  \text{z-score} = \frac{\samplemean{x} - \populationmean}{\frac{\populationstdev}{\sqrt{\samplesize/}}}
+\end{equation*}
+
+\noindent
+Now, sometimes we do not know the population mean $\populationmean$, because we are in the midst of preparing for a test or something, so we replace that with (say) the hypothesized population mean $\HypPopMean/$ from a hypothesis test:
+
+\begin{equation*}
+  \text{z-score} = \frac{\samplemean{x} - \HypPopMean/}{\frac{\populationstdev}{\sqrt{\samplesize/}}}
+\end{equation*}
+
+\noindent
+The calculated z-score is sometimes written as $Z_{c}$. So, we could write the formula out like this:
+
+\begin{equation*}
+  Z_{c} = \frac{\samplemean{x} - \HypPopMean/}{\frac{\populationstdev}{\sqrt{\samplesize/}}}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example}
+
+For example, if the hypothesized population mean is 5.3, the population standard deviation $\populationstdev$ is 1.2, and the sample size $\samplesize/$ is 40, then the z-score for a sample mean $\samplemean{x}$ of 7.45 is:
+
+\begin{equation*}
+  Z_{c} = \frac{7.45 - 5.3}{\frac{1.2}{\sqrt{40}}} = 11.33
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calculating the sample mean}
+
+If we know the z-score, but not the sample mean $\samplemean{x}$, we can use simple algebra to solve for $\samplemean{x}$. First, move $\frac{\sigma}{\sqrt{\samplesize/}}$ to the left side:
+
+\begin{equation*}
+  \frac{\sigma}{\sqrt{n}} * Z_{c} = \frac{\samplemean{x} - \HypPopMean/}{\cancel{\frac{\populationstdev}{\sqrt{\samplesize/}}}}
+\end{equation*}
+
+\noindent
+Then, move $\HypPopMean/$ to the left side:
+
+\begin{equation*}
+  (\frac{\populationstdev}{\sqrt{\samplesize/}} * Z_{c}) + \HypPopMean/ = \samplemean{x} - \cancel{\HypPopMean/}
+\end{equation*}
+
+\noindent
+And there we have it:
+
+\begin{equation*}
+  (\frac{\populationstdev}{\sqrt{\samplesize/}} * Z_{c}) + \HypPopMean/ = \samplemean{x}
+\end{equation*}
+
+\noindent
+For easier readability, flip it around, so that $\samplemean{x}$ is on the left:
+
+\begin{equation*}
+  \samplemean{x} = (\frac{\populationstdev}{\sqrt{\samplesize/}} * Z_{c}) + \HypPopMean/
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example}
+
+For example, if the hypothesized population mean is 5.3, the population standard deviation $\populationstdev$ is 1.2, and the sample size $\samplesize/$ is 40, then the sample mean that sits right at the z-score for 1.96 is this:
+
+\begin{equation*}
+  \samplemean{x} = (\frac{1.2}{\sqrt{40}} * 1.96) + 5.3 = 5.67
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calculating t-scores}
+
+If the sample size is large, or if we know the population standard deviation, then we can use the z-distribution, as we did before. But if we do not know the population standard deviation, or if the sample size is low, then we need to use the t-distribution.
+
+To calculate the t-score for an arbitrary sample mean, we use pretty much the same formula as for z-scores. The only difference is that we use the sample's standard deviation (which we write as $\samplestdev$) instead of the population's standard deviation (which we write as $populationstdev$):
+
+\begin{equation*}
+  \text{t-score} = \frac{\samplemean{x} - \HypPopMean/}{\frac{\samplestdev}{\sqrt{\samplesize/}}}
+\end{equation*}
+
+\noindent
+Similar to z-scores, we sometimes refer to calculated t-scores like this: $t_{c}$. So we could rewrite the formula like this:
+
+\begin{equation*}
+  t_{c} = \frac{\samplemean{x} - \HypPopMean/}{\frac{\samplestdev}{\sqrt{\samplesize/}}}
+\end{equation*}
+
+\noindent
+As with z-scores, if we know the calculated t-score, but we don't know the value of the sample mean that falls right where that t-score is, we can simply rearrange the equation like we did with z-scores. The final result is this:
+
+\begin{equation*}
+  \samplemean{x} = (\frac{\samplestdev}{\sqrt{\samplesize/}} * t_{c}) + \HypPopMean/
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Some useful scores}
+
+Useful z-scores to know for different $\alpha$ levels are here:
+
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+    \textbf{$\alpha$ area} & \textbf{z-score} \\ \hline
+    0.1 (10\%) & 1.28 \\ \hline
+    0.05 (5\%) & 1.645 \\ \hline
+    0.025 (2.5\%) & 1.96 \\ \hline
+    0.01 (1\%) & 2.33 \\ \hline
+    0.005 (0.5\%) & 2.58 \\ \hline
+  \end{tabular}
+\end{center}
+
+\noindent
+These are the same for t-distributions, if the degrees of freedom is infinity. For example, if you look in your textbook, find the t-table at the back, and go to the bottom of table. The last row is for infinity degrees of freedom. What are each of the values there? They should be the same as the z-scores we just wrote down. 
+
+
+
+
+\end{document}

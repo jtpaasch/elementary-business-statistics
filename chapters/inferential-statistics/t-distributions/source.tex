@@ -19,7 +19,11 @@ To say that a random variable has a t-distribution, we sometimes write it like t
 \end{equation*}
 
 \noindent
-``$T$'' here is just the random variable in question (like $\RandVar/$, but we've used a ``T'' instead of an ``X''), and ``$df$'' refers to the degrees of freedom, which we'll talk about next.
+``$T$'' here is just the random variable in question (like $\RandVar/$, but we've used a ``T'' instead of an ``X''), and ``$df$'' refers to the degrees of freedom, which we'll talk more about in a moment.
+
+There is actually a \emph{separate} t-distribution for each degree of freedom. For 1 degree of freedom, there is a t-distribution, which is squatter and fatter than a normal standard normal z-curve. For 2 degrees of freedom, there is a slightly different t-distribution, which is slightly taller and skinnier than the t-distribution for 1 degree of freedom. The t-distribution for 3 degrees of freedom is slightly taller and skinnier than the one for 2 degrees of freedom. And so on, for 4 degrees of freedom, 5 degrees of freedom, etc. 
+
+As these t-disributions get taller and skinnier, they start to get closer and closer to standard z-curves. In fact, at 100 degrees of freedom or so, t- and z-distributions are indistinguishable. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,17 +39,17 @@ To find the value for a particular z-score, we look it up in a table. For t-scor
     \DegFreedom/ = \samplesize/ - 1 \text{ or }df = \samplesize/ - 1 \hskip 1cm = \hskip 1cm 10 - 1 = 9
   \end{equation*}
 
-  \item The \vocab{value of $\frac{\alpha}{2}$}. For example, if you want a 95\% confidence interval, then $\alpha$ is 0.05, and hence $\frac{\alpha}{2} = 0.025$.
+  \item The \vocab{value of $\alpha$ or $\frac{\alpha}{2}$}. For example, if you want a 95\% confidence interval, then $\alpha$ is 0.05, and $\frac{\alpha}{2} = 0.025$.
 
 \end{enumerate}
 
 \noindent
-Once you know $\DegFreedom/$ and $\frac{\alpha}{2}$, you go to the t-table in the back of your textbook. Go down the left column until you find the $\DegFreedom/$ value you are looking for, then go across the top column to the value of $\frac{\alpha}{2}$ that you need. The number where these two columns intersect is the t-score you want.
+Once you know $\DegFreedom/$ and $\alpha$ or $\frac{\alpha}{2}$, you go to the t-table in the back of your textbook. Go down the left column until you find the $\DegFreedom/$ value you are looking for, then go across the top column to the value of $\alpha$ or $\frac{\alpha}{2}$ that you need. The number where these two columns intersect is the t-score you want.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Constructing a confidence interval with t-scores}
+\section{Confidence intervals with t-scores}
 
 To construct a confidence interval with a t-score, you follow the same procedure as for z-score confidence intervals, except you use the STDEV of the sample (i.e., use $\samplestdev$ instead of $\populationstdev$), and use a t-score instead of a z-score.
 
@@ -65,7 +69,7 @@ The formula for a t-score confidence interval is the same as a z-score confidenc
 So, the formula is this:
 
 \begin{equation*}
-  \samplemean{x} - \tscore/(\frac{\samplestdev}{\sqrt{\samplesize/}}) < \populationmean < \samplemean{x} + \tscore/(\frac{\samplestdev}{\sqrt{\samplesize/}})
+  \samplemean{x} - (\tscore/ * \frac{\samplestdev}{\sqrt{\samplesize/}}) < \populationmean < \samplemean{x} + (\tscore/ * \frac{\samplestdev}{\sqrt{\samplesize/}})
 \end{equation*}
 
 \noindent

@@ -334,7 +334,7 @@ Some examples:
 We can summarize the above calculations with the following formula:
 
 \begin{equation*}
-  \samplemean{x} + \text{z-score}(\StdErr/) < \populationmean < \samplemean{x} + \text{z-score}(\StdErr/)
+  \samplemean{x} + (\text{z-score} * \StdErr/) < \populationmean < \samplemean{x} + (\text{z-score}* \StdErr/)
 \end{equation*}
 
 \noindent
@@ -343,7 +343,7 @@ This says that the population mean (i.e., $\populationmean$) is between the samp
 Since the $\StdErr/$ for the sampling distribution is defined as $\frac{\populationstdev}{\sqrt{\samplesize/}}$, and since the z-score we care about can be written as $Z_{\frac{\alpha}{2}}$, we can substitute those in to get this:
 
 \begin{equation*}
-  \samplemean{x} - Z_{\frac{\alpha}{2}}(\frac{\populationstdev}{\sqrt{\samplesize/}}) < \populationmean < \samplemean{x} + Z_{\frac{\alpha}{2}}(\frac{\populationstdev}{\sqrt{\samplesize/}})
+  \samplemean{x} - (Z_{\frac{\alpha}{2}} * \frac{\populationstdev}{\sqrt{\samplesize/}}) < \populationmean < \samplemean{x} + (Z_{\frac{\alpha}{2}} * \frac{\populationstdev}{\sqrt{\samplesize/}})
 \end{equation*}
 
 \noindent
@@ -391,7 +391,7 @@ Here are some common z-scores that correspond to common confidence intervals:
   \item 68\% = 1
   \item 90\% = 1.645
   \item 95\% = 1.96
-  \item 99\% = 2.56
+  \item 99\% = 2.58
 \end{itemize}
 
 \noindent
