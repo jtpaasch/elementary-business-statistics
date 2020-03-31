@@ -38,7 +38,7 @@ A \vocab{binomial probability distribution} (or a ``binomial distribution'' for 
   \item There are $\numTrials/$ trials of the experiment.
   \item Each run of the experiment is independent (so sampling must be done with replacement).
   \item There are only two possible outcomes for each trial: either ``success'' or ``failure'' (no outcome is neutral). So, the probability of success (call it $\success/$) for a trial and the probability of failure (call it $\failure/$) for a trial should add up to 1 (100\%). Whatever the probability of success is (namely, $\success/$), the probability of failure ($\failure/$) is $1 - p$.
-  \item The values that $\RandVarVal/$ can take on (namely, the number of successful trials) is distrete.
+  \item The values that $\RandVarVal/$ can take on (namely, the number of successful trials) is discrete.
 \end{itemize}
 
 
@@ -54,7 +54,7 @@ Let's calculate all the outcomes by hand.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Zero successes}
 
-First, let's consider the case where we have 0 successes. How many ways are there to get zero successes in 3 trials? There is only 1 way: namely, if we flip tails every time. Here it is as a (one-rowed) table:
+First, let's consider the case where we have 0 successes. How many ways are there to get zero successes in 3 trials? There is only 1 way: namely, if we flip tails every time. Here it is as a table (I write ``F'' to indicate ``Failure''):
 
 \begin{center}
   \begin{tabular}{| c | c | c | c |}
@@ -130,14 +130,14 @@ In other words, this is $\failure/$ raised to the power of however many failures
 So, we could say that we calculate the probability like this:
 
 \begin{equation*}
-  \Pdf{x = 0} = q^{text{num failures}}
+  \Pdf{x = 0} = q^{\text{num failures}}
 \end{equation*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{One success}
 
-Now, let's consider the case where we have 1 success. There are three different ways we can get one success: either we get heads on the first trial, or in the second trial, or in the third trial. Here they are:
+Now, let's consider the case where we have 1 success. There are three different ways we can get one success: either we get heads on the first trial, or in the second trial, or in the third trial. Here they are (I write ``S'' for ``Success''):
 
 \begin{center}
   \begin{tabular}{| c | c | c | c |}
@@ -182,7 +182,7 @@ What is the total probability for each row? We just multiply the probabilities t
 \noindent
 But there's something new here that wasn't present in the last case, when we were calculating the probability of getting 0 successes in 3 trials. In this case, there's not just one row here. There are three rows. In other words, there is not just one way to get a single success. There are actually 3 ways. 
 
-In the last case, when we calculated the probability of getting 0 successes out of 3 trials, we saw that there was only one way to get that result. But here there are 3 ways. So the total probability of getting one success out of 3 trials is 3 times greater. In other words, we need to multiply the probability of one row by the number of rows.
+In the last case, when we calculated the probability of getting 0 successes out of 3 trials, we saw that there was only one way to get that result. But here there are 3 ways. So the total probability of getting one success out of 3 trials is 3 times greater. In other words, we need to multiply the probability of success by the number of rows.
 
 So, the total probability of getting 1 success out of 3 trials is this:
 
@@ -267,13 +267,13 @@ So the same formula works for the third row too. We can thus use this formula to
 But then we have 3 rows. So we have to multiply that by 3:
 
 \begin{equation*}
-    3 * p^{\text{num success}} * q^{\text{num failures}}
+    3 * (p^{\text{num success}} * q^{\text{num failures}})
 \end{equation*}
 
 What's 3? It's the number of combinations. So, we can rewrite the formula like this:
 
 \begin{equation*}
-    \text{num combinations } * p^{\text{num success}} * q^{\text{num failures}}
+    \text{num combinations } * (p^{\text{num success}} * q^{\text{num failures}})
 \end{equation*}
 
 
@@ -286,7 +286,6 @@ Now, let's consider the case where we have 2 success. There are three different 
   \begin{tabular}{| c | c | c | c |}
     \hline
       \textbf{Trial} & \textbf{1} & \textbf{2} & \textbf{3} \\ \hline
-    Trial & 1 & 2 & 3 \\ \hline
   Outcome & S & S & F \\ \hline
   Outcome & F & S & S \\ \hline
   Outcome & S & F & S \\ \hline
@@ -399,7 +398,7 @@ So the formula works for the third row too.
 And of course, there are three rows here, so if we multiply it by the number of rows/combinations, we get:
 
 \begin{equation*}
-    \text{num combinations } * p^{\text{num success}} * q^{\text{num failures}}
+    \text{num combinations } * (p^{\text{num success}} * q^{\text{num failures}})
 \end{equation*}
 
 So the formula works here too.
@@ -408,13 +407,12 @@ So the formula works here too.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Three successes}
 
-Finally, et's consider the case where we get 3 successes. How many ways are there to get 3 successes in 3 trials? There is only 1 way: namely, if we flip heads every time. Here it is as a table:
+Finally, let's consider the case where we get 3 successes. How many ways are there to get 3 successes in 3 trials? There is only 1 way: namely, if we flip heads every time. Here it is:
 
 \begin{center}
   \begin{tabular}{| c | c | c | c |}
     \hline
       \textbf{Trial} & \textbf{1} & \textbf{2} & \textbf{3} \\ \hline
-    Trial & 1 & 2 & 3 \\ \hline
   Outcome & S & S & S \\ \hline
   \end{tabular}
 \end{center}
@@ -451,7 +449,7 @@ What is the total probability for this row? Again, we multiply the probabilities
 The formula we've got is this:
 
 \begin{equation*}
-    \text{num combinations } * p^{\text{num success}} * q^{\text{num failures}}
+    \text{num combinations } * (p^{\text{num success}} * q^{\text{num failures}})
 \end{equation*}
 
 Does this work here too? Yes it does. We have three successes:
@@ -481,13 +479,13 @@ Which is the same as:
 Finally, we have one row, so we could say:
 
 \begin{equation*}
-    1 * p^{\text{num success}} * q^{\text{num failures}}
+    1 * (p^{\text{num success}} * q^{\text{num failures}})
 \end{equation*}
 
 And that's the same as:
 
 \begin{equation*}
-    \text{num combinations } * p^{\text{num success}} * q^{\text{num failures}}
+    \text{num combinations } * (p^{\text{num success}} * q^{\text{num failures}})
 \end{equation*}
 
 So the formula works here too.
@@ -510,7 +508,7 @@ Let's put all these results together in a table. We put the number of the trial 
 \end{center}
 
 \noindent
-Let's rewrite this with the probabilities:
+Let's rewrite this with the probabilities in the final column:
 
 \begin{center}
   \begin{tabular}{| c | c | c | c | c |}
@@ -561,18 +559,18 @@ If you think about it, this makes sense. The probability of getting 1 or 2 succe
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The formula}
 
-Earlier, we figured out that the formula is this:
+Earlier, we figured out that the formula for an outcome is this:
 
 \begin{equation*}
-    \text{num combinations } * p^{\text{num success}} * q^{\text{num failures}}
+    \text{num combinations } * (p^{\text{num success}} * q^{\text{num failures}})
 \end{equation*}
 
 Let's replace the English words ``num combinations,'' ``num success,'' and ``num failures'' with something more exact.
 
 \begin{itemize}
-  \item What's the ``num success''? Well, it's $\RandVarVal/$. So the equation is: $\text{num combinations } * p^{\RandVarVal/} * q^{\text{num failures}}$
-  \item What's the ``num failures''? It's however many of $\numTrials/$ are left after we get the successes $\RandVarVal/$. So it's $n - \RandVarVal/$. Hence, the equation is: $\text{num combinations } * p^{\RandVarVal/} * q^{n - \RandVarVal/}$.
-  \item What's the ``num combinations''? Well, it's the number of successes $\RandVarVal/$ out of the number of trials $\numTrials/$. So it's $\combs{\RandVarVal/}{n}$. Hence, the equation is: $\combs{\RandVarVal/}{n} * p^{\RandVarVal/} * q^{n - \RandVarVal/}$.
+  \item What's the ``num success''? Well, it's $\RandVarVal/$, i.e., the outcome we're looking for. So the equation is: $\text{num combinations } * (p^{\RandVarVal/} * q^{\text{num failures}})$
+  \item What's the ``num failures''? It's however many of $\numTrials/$ are left after we get the successes $\RandVarVal/$. So it's $n - \RandVarVal/$. Hence, the equation is: $\text{num combinations } * (p^{\RandVarVal/} * q^{n - \RandVarVal/}$).
+  \item What's the ``num combinations''? Well, it's the number of successes $\RandVarVal/$ out of the number of trials $\numTrials/$. So it's $\combs{\RandVarVal/}{n}$. Hence, the equation is: $\combs{\RandVarVal/}{n} * (p^{\RandVarVal/} * q^{n - \RandVarVal/})$.
 \end{itemize}
 
 \noindent
@@ -585,10 +583,10 @@ And with that, we have the fully general formula to calculate the probability fo
 Hence, we can write the full formula like this:
 
 \begin{equation*}
-    \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * p^{\RandVarVal/} * q^{n - \RandVarVal/}
+    \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * (p^{\RandVarVal/} * q^{n - \RandVarVal/})
 \end{equation*}
 
-Notice that you need to know $\success/$, $\failure/$, $\numTrials/$, and $x$. If you know those values, you can plug them in to this formula, and you'll get the probability you want. 
+Notice that you need to know $\success/$, $\failure/$, $\numTrials/$, and $x$ (actually, you only need $\success/$, $\numTrials/$, and $x$, since you can compute $\failure/$ from $\success/$, since $\failure/ = 1 - \success/$). If you know those values, you can plug them in to this formula, and you'll get the probability you want. 
 
 Of course, you \emph{could} construct the tables yourself as we did here, but this formula is often much quicker. Building the table is useful if you want to check your work, and it's especially useful when you want to make sure you understand the experiment.
 
@@ -599,7 +597,7 @@ Of course, you \emph{could} construct the tables yourself as we did here, but th
 
 Suppose we have a bag of 5 marbles. 3 are red, 1 is blue, and 1 is green. Let the experiment be pulling a marble out of the bag (and then replacing it). Let ``success'' be pulling out a red marble. 
 
-Now, let there be 4 trials. What is the binomial distribution this?
+Now, let there be 4 trials. What is the binomial distribution for this experiment?
 
 Here is what we know:
 
@@ -608,7 +606,7 @@ Here is what we know:
   \item $\numTrials/$ is 4. We want to run 4 trials (we want to draw 4 marbles, with replacement).
 \end{itemize}
 
-We need to know $\success/$ and $\failure/$, so we need to calculate them.
+We also need to know $\success/$ and $\failure/$, so we need to calculate them.
 
 \begin{itemize}
   \item $\success/$ is drawing a red marble, and 3 of the 5 marbles are red. So $\success/ = \frac{3}{5} = 0.6$.
@@ -648,7 +646,7 @@ Let's rewrite the table, with $\success/$ and $\failure/$ values instead of ``S'
 The formula gives us the same result:
 
 \begin{equation*}
-  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * p^{\RandVarVal/} * q^{n - \RandVarVal/} = 1 * 0.6^{0} * 0.4^{4} = 0.0256
+  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * (p^{\RandVarVal/} * q^{n - \RandVarVal/}) = 1 * (0.6^{0} * 0.4^{4}) = 0.0256
 \end{equation*}
 
 
@@ -695,7 +693,7 @@ And if we multiply 0.0384 by the number of rows/combinations (which is 4), we ge
 The formula gives us the same result:
 
 \begin{equation*}
-  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * p^{\RandVarVal/} * q^{n - \RandVarVal/} = 1 * 0.6^{0} * 0.4^{4} = 0.1536
+  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * (p^{\RandVarVal/} * q^{n - \RandVarVal/}) = 4 * (0.6^{1} * 0.4^{3}) = 0.1536
 \end{equation*}
 
 
@@ -746,7 +744,7 @@ And if we multiply 0.0576 by the number of rows/combinations (which is 6), we ge
 The formula gives us the same result:
 
 \begin{equation*}
-  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * p^{\RandVarVal/} * q^{n - \RandVarVal/} = 1 * 0.6^{0} * 0.4^{4} = 0.3456
+  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * (p^{\RandVarVal/} * q^{n - \RandVarVal/}) = 6 * (0.6^{2} * 0.4^{2}) = 0.3456
 \end{equation*}
 
 
@@ -791,7 +789,7 @@ And if we multiply that by the number of rows/combinations (which is 4), we get:
 The formula gives us the same result:
 
 \begin{equation*}
-  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * p^{\RandVarVal/} * q^{n - \RandVarVal/} = 1 * 0.6^{0} * 0.4^{4} = 0.3456
+  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * (p^{\RandVarVal/} * q^{n - \RandVarVal/}) = 4 * (0.6^{3} * 0.4^{1}) = 0.3456
 \end{equation*}
 
 
@@ -831,7 +829,7 @@ And if we multiply 0.1296 by the number of rows/combinations (which is 1), we ge
 The formula gives us the same result:
 
 \begin{equation*}
-  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * p^{\RandVarVal/} * q^{n - \RandVarVal/} = 1 * 0.6^{0} * 0.4^{4} = 0.1296
+  \Binom{\RandVarVal/} = \combs{\RandVarVal/}{n} * (p^{\RandVarVal/} * q^{n - \RandVarVal/}) = 1 * (0.6^{4} * 0.4^{0}) = 0.1296
 \end{equation*}
 
 
@@ -914,15 +912,15 @@ But of course, the chances of getting 1, 2, or 3 successes is still higher than 
 
 Alice is a specialist in renegotiating contracts. Looking back over the last 10 of her clients, we see that she has succeed at renegotiating a lower cost for her clients in 7 out of those 10 cases.
 
-Let the experiment be that Alice renegotiates a contract, let ``success'' be that she succeeds at negotiating a lower cost for he client, let there be 7 trials. What is the binomial distribution for this?
+Let the experiment be that Alice renegotiates a contract, let ``success'' be that she succeeds at negotiating a lower cost for her client, let there be 7 trials. What is the binomial distribution for this?
 
 Here are the values we need:
 
 \begin{itemize}
-  \item The $\RandVar/$ is getting a lower cost for her client.
+  \item $\RandVar/$ is getting a lower cost for her client.
   \item The values that $\RandVarVal/$ can take on are 0 through 7 (since she can succeed 0 through 7 times in 7 trials).
-  \item The probability $\success/$ that she will succeed on any one trial is 7 out of 10, or .7.
-  \item The probability $\failure/$ that she will fail is $1 - \success/$, or $1 - .7 = .3$.
+  \item The probability $\success/$ that she will succeed on any one trial is 7 out of 10, or 0.7.
+  \item The probability $\failure/$ that she will fail is $1 - \success/$, or $1 - 0.7 = 0.3$.
 \end{itemize}
 
 \noindent
@@ -944,7 +942,7 @@ Let's build the binomial \PDFtext/ function/table:
 \end{center}
 
 \noindent
-Let's rewrite this with the probabilities:
+If we use the formula $\Binom{\RandVarVal/}$ to compute the probability for each row, we can rewrite the table, with probabilities in the far right column:
 
 \begin{center}
   \begin{tabular}{| c | c | c | c | c |}
@@ -967,9 +965,6 @@ Notice that the probabilities all add up to 1 (modulo some rounding errors):
 \begin{equation*}
     0.0002 + 0.0036 + 0.025 + 0.0972 + 0.2269 + 0.3177 + 0.2471 + 0.0824 = 1
 \end{equation*}
-
-\noindent.
-Let's graph it:
 
 \noindent
 Let's plot it. See Figure \ref{plot:example-3}.
@@ -994,7 +989,7 @@ Let's plot it. See Figure \ref{plot:example-3}.
   \caption{\label{plot:example-3} $\Probability{\RandVarVal/}$}
 \end{figure}
 
-Where are the probabilities distributed? We can see that most of the probability is chunked over towards the right. And this makes sense, since Alice has a pretty good success rate, so the probability of getting more successes on the trials should be higher than getting fewer successes.
+Where are the probabilities distributed? As with every binomial distribution, most of the probability is chunked into the middle. But also, we can see that it's skewed a little, over towards the right. This makes sense, since Alice has a pretty good success rate, so the probability of getting more successes on the trials should be higher than getting fewer successes.
 
 
 \end{document}
